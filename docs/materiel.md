@@ -40,8 +40,8 @@ nav_order: 1
 
 | Nom                              | Modèle   | Version     | Quantité | Image    | Description |
 |:---------------------------------|:---------|:------------|:---------|:---------|:------------|
-| Philips Hue Bridge 2.0           | BSB002   |1934129020   |  1       | <img src="https://tinyurl.com/y63o6vvw" width="100"/>     |      todo       |
-| Ampoule Hue White E27            | LWB006   |5.127.126420 |  2       | <img src="https://tinyurl.com/y2z75gj2" width="100"/>     |     todo        |
+|  OSRAM Smart+                    | BSB002   | 1.04.12     |  2       | <img src="https://tinyurl.com/y63o6vvw" width="100"/>     |      todo       |
+| FIBARO Wall Plug Type E          | LWB006   | ?           |  1       | <img src="https://tinyurl.com/y2z75gj2" width="100"/>     |     todo        |
 
 
 ### Aspirateur
