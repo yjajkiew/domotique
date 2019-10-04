@@ -1,2 +1,14 @@
 #theme: jekyll-theme-leap-day
 remote_theme: pmarsceill/just-the-docs
+
+title: Domotique | yann.me | Description de mon installation
+description: Description de mon installation domotique
+
+# Enable or disable the site search
+search_enabled: true
+
+# Footer content appears at the bottom of every page's main content
+footer_content: "Copyright &copy; 2019 Yann Jajkiewicz."
+
+# Color scheme currently only supports "dark" or nil (default)
+color_scheme: nil
