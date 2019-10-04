@@ -1,19 +1,25 @@
-Matériel
+---
+layout: default
+title: Matériel
+nav_order: 1
+---
+
+## Matériel
 
 
-Lumières
+### Lumières
 
 
-Prises
+### Prises
 
 
-Divers
+### Divers
  - z-wave
  - aspirateur
  - volets
  - connexoon
 
-Infrastructure réseau
+### Infrastructure réseau
  - rack
  - multiprises
  - panel
@@ -21,7 +27,7 @@ Infrastructure réseau
 
 
 
-A venir
+### A venir
  - caméras IPs
  - switch PoE
  - arduino avec shield GSM
