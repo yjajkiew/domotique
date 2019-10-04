@@ -22,6 +22,12 @@ nav_order: 1
 | OSRAM Smart+                     | 4058075036239    | 1.04.12     |  2       | <img src="https://tinyurl.com/y63o6vvw" width="100"/>  |      todo       |
 | FIBARO Wall Plug Type E          | FGWPE-102 ZW5 EU |   ?         |  1       | <img src="https://tinyurl.com/y2z75gj2" width="100"/>     |     todo        |
 
+| Nom                              | Modèle           | Version     | Quantité | Image    | Description |
+|:---------------------------------|:-----------------|:------------|:---------|:---------|:------------|
+|  OSRAM Smart+                    | 4058075036239    | 1.04.12     |  2       | <img src="https://tinyurl.com/y63o6vvw" width="100"/>     |      todo       |
+| FIBARO Wall Plug Type E          | FGWPE-102 ZW5 EU | ?           |  1       | <img src="https://tinyurl.com/y2z75gj2" width="100"/>     |     todo        |
+
+
 #### - ZigBee
 | Nom                              | Modèle           | Version     | Quantité | Image    | Description |
 |:---------------------------------|:-----------------|:------------|:---------|:---------|:------------|
@@ -38,10 +44,6 @@ nav_order: 1
 - Garage door
 - Connexoon
 
-| Nom                              | Modèle   | Version     | Quantité | Image    | Description |
-|:---------------------------------|:---------|:------------|:---------|:---------|:------------|
-|  OSRAM Smart+                    | BSB002   | 1.04.12     |  2       | <img src="https://tinyurl.com/y63o6vvw" width="100"/>     |      todo       |
-| FIBARO Wall Plug Type E          | LWB006   | ?           |  1       | <img src="https://tinyurl.com/y2z75gj2" width="100"/>     |     todo        |
 
 
 ### Aspirateur
