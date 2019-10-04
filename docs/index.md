@@ -1,3 +1,8 @@
+---
+layout: default
+title: Accueil
+---
+
 ## Domotique yann.me
 
 Visiter domotique.yann.me pour obtenir la documentation de ma domotique installée à la maison.
