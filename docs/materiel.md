@@ -9,7 +9,7 @@ nav_order: 1
 
 ### Lumières
 
-#### ZigBee
+#### - ZigBee
 
 | Nom                              | Modèle   | Version     | Quantité | Image    | Description |
 |:---------------------------------|:---------|:------------|:---------|:---------|:------------|
@@ -18,12 +18,12 @@ nav_order: 1
 
 ### Prises
 
-#### ZigBee
+#### - ZigBee
 | Nom                              | Modèle           | Version     | Quantité | Image    | Description |
 |:---------------------------------|:-----------------|:------------|:---------|:---------|:------------|
 | OSRAM Smart+                     | 4058075036239    | 1.04.12    |  2       | <img src="https://images-na.ssl-images-amazon.com/images/I/814E2Ko1mDL._AC_SL1500_.jpg" width="100"/>  |      todo       |
 
-#### Z-Wave
+#### - Z-Wave
 | Nom                              | Modèle           | Version     | Quantité | Image    | Description |
 |:---------------------------------|:-----------------|:------------|:---------|:---------|:------------|
 | FIBARO Wall Plug Type E          | FGWPE-102 ZW5 EU |   ?         |  1       | <img src="https://dfxqtqxztmxwe.cloudfront.net/images/dynamic/Domotique/articles/Fibaro/FIBAWALLPLUGE/Fibaro-Wall-Plug-Type-E_P_600.jpg" width="100"/>     |     todo        |
