@@ -24,9 +24,6 @@ nav_order: 1
 
 
 ### Volets/Garage
-- Somfy IO
-- Garage door
-- Connexoon
 
 | Nom                              | Modèle         | Version     | Quantité | Image    | Description |
 |:---------------------------------|:---------------|:------------|:---------|:---------|:------------|
@@ -42,6 +39,7 @@ nav_order: 1
 | Nom                              | Modèle   | Version     | Quantité | Image    | Description |
 |:---------------------------------|:---------|:------------|:---------|:---------|:------------|
 | Xiaomi Mi Robot Vacuum           |SDJQR02RR |3.3.9_003468 |  1       | <img src="https://tinyurl.com/yxtftgue" width="100"/>     |      todo       |
+| [Housolution bande magnétique](https://amzn.to/30RqY01)     | 4 mètres |             |  1       | <img src="https://tinyurl.com/y3ngumng" width="100"/>     |      todo       |
 
 
 ### Divers
@@ -49,13 +47,22 @@ nav_order: 1
  - raspberry pi
 
 ### Infrastructure réseau
- - rack
  - multiprises
  - panel
  - switch
  - netgear R7000
  - netgear D6400
  - livebox 3
+
+| Nom                              | Modèle         | Version     | Quantité | Image    | Description |
+|:---------------------------------|:---------------|:------------|:---------|:---------|:------------|
+| [RackMatic Rack Serveur](https://amzn.to/2VjvMdM)           |  19" 9U        | |  1       | <img src="https://tinyurl.com/y2tloshc" width="100"/>     |      todo       |
+| Somfy commande SMOOVE Origin IO  |                | |  2       | <img src="https://tinyurl.com/y6pjmqv4" width="100"/>     |     todo        |
+| Somfy commande SMOOVE RS 100 IO  |                | |  1       | <img src="https://tinyurl.com/y62jkbnk" width="100"/>     |     todo        |
+| Porte de garage Rollixo IO       |                | |  1       |                                                           |     todo        |
+| Somfy Connexoon                  | 03660849507169 | |  1       | <img src="https://tinyurl.com/y36vzd7n" width="100"/>     |     todo        |
+
+
 
 
 
