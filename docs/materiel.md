@@ -28,10 +28,20 @@ nav_order: 1
 - Garage door
 - Connexoon
 
+| Nom                              | Modèle         | Version     | Quantité | Image    | Description |
+|:---------------------------------|:---------------|:------------|:---------|:---------|:------------|
+| Somfy moteur volet IO            |                | |  3       | <img src="https://tinyurl.com/y4lagxb7" width="100"/>     |      todo       |
+| Somfy commande SMOOVE Origin IO  |                | |  2       | <img src="https://tinyurl.com/y6pjmqv4" width="100"/>     |     todo        |
+| Somfy commande SMOOVE RS 100 IO  |                | |  1       | <img src="https://tinyurl.com/y62jkbnk" width="100"/>     |     todo        |
+| Somfy Connexoon                  | 03660849507169 | |  1       | <img src="https://tinyurl.com/y36vzd7n" width="100"/>     |     todo        |
 
 
 ### Aspirateur
-- Xiaomi Mi Robot v1
+
+| Nom                              | Modèle   | Version     | Quantité | Image    | Description |
+|:---------------------------------|:---------|:------------|:---------|:---------|:------------|
+| Xiaomi Mi Robot Vacuum           |SDJQR02RR |3.3.9_003468 |  1       | <img src="https://tinyurl.com/yxtftgue" width="100"/>     |      todo       |
+
 
 ### Divers
  - z-wave
