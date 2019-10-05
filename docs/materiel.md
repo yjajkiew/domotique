@@ -27,7 +27,7 @@ nav_order: 1
 
 | Nom                              | Modèle         | Version     | Quantité | Image    | Description |
 |:---------------------------------|:---------------|:------------|:---------|:---------|:------------|
-| Somfy moteur volet IO            |                | |  3       | <img src="https://tinyurl.com/y4lagxb7" width="100"/>     |      todo       |
+| Somfy moteur volet IO            |                | |  3       |                                                           |      todo       |
 | Somfy commande SMOOVE Origin IO  |                | |  2       | <img src="https://tinyurl.com/y6pjmqv4" width="100"/>     |     todo        |
 | Somfy commande SMOOVE RS 100 IO  |                | |  1       | <img src="https://tinyurl.com/y62jkbnk" width="100"/>     |     todo        |
 | Porte de garage Rollixo IO       |                | |  1       |                                                           |     todo        |
