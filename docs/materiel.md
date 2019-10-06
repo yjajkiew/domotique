@@ -21,7 +21,7 @@ nav_order: 1
 
 | Nom                              | Modèle           | Quantité | Image    | Description |
 |:---------------------------------|:-----------------|:---------|:---------|:------------|
-|  [OSRAM Smart+](https://amzn.to/2AONgoW)                    | 4058075036239    |  2       | <img src="https://tinyurl.com/y63o6vvw" width="100"/>     | Protocol ZigBee compatible et intégrable avec le bridge Philips Hue<br/>Me permet de piloter des lampes d'appoint |
+|  [OSRAM Smart+](https://amzn.to/2AONgoW)                    | 4058075036239    |  2       | <img src="https://tinyurl.com/y63o6vvw" width="100"/>     | Protocol ZigBee compatible et intégrable avec le bridge Philips Hue<br/>Me permet de piloter des lampes d'appoint (guirlande, lumière d'ambiance) |
 | [FIBARO Wall Plug Type E](https://amzn.to/2nqW69i)  | FGWPE-102 ZW5 EU |  1       | <img src="https://tinyurl.com/y2z75gj2" width="100"/>     | Protocole Z-Wave avec consommation d'énergie<br/>Me permet de détecter la fin d'un cycle sur ma machine à laver pour recevoir une notification   |
 
 
