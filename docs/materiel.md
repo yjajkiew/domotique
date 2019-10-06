@@ -4,17 +4,20 @@ title: Matériel
 nav_order: 1
 ---
 
-## Matériel
+# Matériel
+{: .no_toc }
 
+1. TOC
+{:toc}
 
-### Lumières
+## Lumières
 
 | Nom                              | Modèle   | Quantité | Image    | Description |
 |:---------------------------------|:---------|:---------|:---------|:------------|
 | [Philips Hue Bridge 2.0](https://amzn.to/31RES3R)    | BSB002   |  1       | <img src="https://tinyurl.com/y4lagxb7" width="100"/>     |      todo       |
 | [Ampoule Hue White E27](https://tinyurl.com/yykjqsmh)   | LWB006   |  2       | <img src="https://tinyurl.com/y6yfvx2e" width="100"/>     |   Lampe d'appoint dans le salon<br/>Lampe table de chevet de la chambre    |
 
-### Prises
+## Prises
 
 | Nom                              | Modèle           | Quantité | Image    | Description |
 |:---------------------------------|:-----------------|:---------|:---------|:------------|
@@ -23,7 +26,7 @@ nav_order: 1
 
 
 
-### Volets/Garage
+## Volets/Garage
 
 | Nom                              | Modèle         | Quantité | Image    | Description |
 |:---------------------------------|:---------------|:---------|:---------|:------------|
@@ -34,7 +37,7 @@ nav_order: 1
 | [Somfy Connexoon](https://amzn.to/31Re3g6)    | 03660849507169 |  1       | <img src="https://tinyurl.com/y36vzd7n" width="100"/>     |     Permet de contrôler les volets et la porte de garage        |
 
 
-### Aspirateur
+## Aspirateur
 
 | Nom                              | Modèle   | Quantité | Image    | Description |
 |:---------------------------------|:---------|:---------|:---------|:------------|
@@ -42,11 +45,11 @@ nav_order: 1
 | [Housolution bande magnétique](https://amzn.to/30RqY01)     | 4 mètres |  1       | <img src="https://tinyurl.com/y3ngumng" width="100"/>     |  Bande magnétique pour créer des "virtual wall" pour l'aspirateur  |
 
 
-### Divers
+## Divers
  - z-wave
  - raspberry pi
 
-### Infrastructure réseau
+## Infrastructure réseau
 
 | Nom                              | Modèle         | Quantité | Image    | Description |
 |:---------------------------------|:---------------|:---------|:---------|:------------|
@@ -64,7 +67,7 @@ nav_order: 1
 
 
 
-### A venir
+## A venir
  - mini PC fanless
  - caméras IPs
  - switch PoE
