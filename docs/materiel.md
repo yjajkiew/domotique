@@ -54,7 +54,7 @@ nav_order: 1
 | Nom                              | Modèle         | Quantité | Image    | Description |
 |:---------------------------------|:---------------|:---------|:---------|:------------|
 | [RackMatic Rack Serveur](https://amzn.to/2VjvMdM)           |  19" 9U        |  1       | <img src="https://tinyurl.com/y2tloshc" width="100"/>     |      todo       |
-| [Perel Bloc 8 Prises](https://amzn.to/2LTs47z)  |                |  1       | <img src="https://tinyurl.com/yxntelnn" width="100"/>     |     todo        |
+| [Perel Bloc 8 Prises](https://amzn.to/2LTs47z)  |   19" 1U       |  1       | <img src="https://tinyurl.com/yxntelnn" width="100"/>     |     todo        |
 | [Lindy Panneau de Brassage](https://amzn.to/2pPJVDJ)  |  24 Ports Cat.6 STP  |  1       | <img src="https://tinyurl.com/yyvgp3wp" width="100"/>     |     todo        |
 | [D-Link Switch 24 ports Gigabit](https://amzn.to/2pRkcLd)   |  DGS-1100-24   |  1       | <img src="https://tinyurl.com/y37wsdg2" width="100"/>    |     todo        |
 | [Netgear R7000](https://amzn.to/2OpGw94)   |  AC1900   |  1       | <img src="https://tinyurl.com/yyujzgkt" width="100"/>    |     - Routeur principal<br/>- Connecté à la LiveBox pour recevoir et propager internet <br/>- WiFi sur une partie de la maison        |
