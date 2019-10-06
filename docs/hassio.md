@@ -4,13 +4,17 @@ title: Hassio
 nav_order: 3
 ---
 
-## Hassio - Home Assistant
+# Hassio - Home Assistant
+{: .no_toc }
 
-### Add-ons
+1. TOC
+{:toc}
+
+## Add-ons
 
 
-### Configurations
+## Configurations
 
 
-### Automations
+## Automations
 
