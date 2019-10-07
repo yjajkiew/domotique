@@ -71,10 +71,10 @@ nav_order: 1
 
 
 ## A venir
- - mini PC fanless
- - caméras IPs
- - switch PoE
- - arduino avec shield GSM
- - têtes thermostatiques
- - NAS rack
- - onduleur
+ - **mini PC fanless** : plus robuste que la carte SD d'un raspberry qui peut crasher
+ - **caméras IPs** : pour la terrasse et le garage, les caméras devront être PoE pour rationnaliser les câbles
+ - **switch PoE** : permettra d'alimenter les caméras IPs
+ - **arduino avec shield GSM** : pour envoyer des SMS en cas de coupure d'internet
+ - **têtes thermostatiques** : contrôle des radiateurs, à creuser
+ - **NAS rack** : permettra le stockage et l'archivage
+ - **onduleur** : pour assurer la continuité de service des éléments réseaux et hassio malgré une coupure de courant
