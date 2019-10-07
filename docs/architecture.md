@@ -15,3 +15,5 @@ nav_order: 2
 <a href="assets/domotique_architecture_logique.jpg" target="_blank"><img src="assets/domotique_architecture_logique.jpg" /></a>
 
 ## Architecture physique et infrastructure réseau
+
+<a href="assets/domotique_architecture_physique.jpg" target="_blank"><img src="assets/domotique_architecture_physique.jpg" /></a>
