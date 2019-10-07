@@ -5,7 +5,7 @@ title: Accueil
 
 ## Domotique yann.me
 
-<img src="assets/domotique_architecture_logique.jpg" />
+<a href="assets/domotique_architecture_logique.jpg" target="_blank"><img src="assets/domotique_architecture_logique.jpg" /></a>
 
 
 ### Support or Contact
