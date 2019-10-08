@@ -4,6 +4,10 @@ remote_theme: pmarsceill/just-the-docs
 title: Domotique yann.me
 description: Description de mon installation domotique
 
+aux_links:
+  "Mon site":
+    - "https://yann.me"
+
 # Enable or disable the site search
 search_enabled: true
 
