@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: table_wrappers
 title: Changelog
 nav_order: 10
 ---
