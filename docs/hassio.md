@@ -31,9 +31,18 @@ La documentation officielle en fonction de votre matériel est disponible ici : 
 
 ## Accès depuis l'extérieur
 
+### Solution #1 : déclenchement de ports par la box internet
+
+
+ - **avantages**:
+
+### Solution #2 : tunnel SSH
+
+
 
 
 ## Supervision
+
 
 
 ## Backups
