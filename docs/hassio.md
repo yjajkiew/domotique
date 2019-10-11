@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Hassio
+title: Hassio - Home Assistant
 nav_order: 3
 ---
 
@@ -31,14 +31,27 @@ La documentation officielle en fonction de votre matériel est disponible ici : 
 
 ## Accès depuis l'extérieur
 
+Il est vital que je puisse accéder à Home Assistant en dehors de mon réseau domestique. 
+
+Pour cela il y a deux solutions possibles que je détaille ci-dessous et que j'ai pu tester. Pour ma part j'ai préféré conserver la [solution #2](#solution-2--tunnel-ssh) pour m'affranchir des limitations de la box internet et d'avoir quelque chose de pérenne même en cas de changement de FAI. 
+
 ### Solution #1 : déclenchement de ports par la box internet
 
 
- - **avantages**:
+ - **avantages**: 
+   - à la portée de tous
+   - robuste
+ - **inconvénients**:
+   - dépendant de la configuration de la box internet donc la configuration est à refaire en cas de changement de FAI
+   - dépendant des limitations de la box internet (par exemple sur la LiveBox 3 de Orange l'accès par l'adresse IP internet public ne fonctionne pas à l'intérieur du réseau domestique)
 
 ### Solution #2 : tunnel SSH
 
-
+ - **avantages**: 
+   - facilite la mise en place d'un nom de domaine et d'un certificat SSL
+   - solution indépendante de la box internet (configuration et limitations)
+ - **inconvénients**:
+   - nécessite d'avoir un serveur distant et d'avoir des compétences techniques plus fournies
 
 
 ## Supervision
