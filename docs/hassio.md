@@ -70,6 +70,12 @@ Pour cela il y a deux solutions possibles que je détaille ci-dessous et que j'a
 
 ## Automations
 
+### Notifications quand on arrive à la maison
+
+### Ouverture et fermeture des volets
+
+### Allumer et éteindre le sèche serviette
+
 ### Réveil lumineux
 
 
@@ -160,7 +166,7 @@ wakeup_week_day_panel:
     service: light.turn_off
 ```
 
-
+### Notification quand il faut sortir les poubelles
 
 
 
