@@ -31,3 +31,5 @@ Les soir  et week-end je fais de la [photographie](https://instagram.com/yann.me
 Site web : https://yann.me
 
 Contact : contact@yann.me
+
+{% if page.comments %} TEST {% endif %}
