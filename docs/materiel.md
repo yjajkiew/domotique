@@ -2,6 +2,7 @@
 layout: default
 title: Matériel
 nav_order: 1
+comments: true
 ---
 
 # Matériel
@@ -78,3 +79,6 @@ nav_order: 1
  - **têtes thermostatiques** : contrôle des radiateurs, à creuser
  - **NAS rack** : permettra le stockage et l'archivage
  - **onduleur** : pour assurer la continuité de service des éléments réseaux et hassio malgré une coupure de courant
+ 
+ 
+ {% include comments.md %}
