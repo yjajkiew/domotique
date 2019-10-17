@@ -2,6 +2,7 @@
 layout: default
 title: Changelog
 nav_order: 10
+comments: false
 ---
 
 # Changelog
@@ -10,3 +11,6 @@ nav_order: 10
 | Date         | Modification      |
 |:-------------|:------------------|
 | 08/10/2019   | Initialisation des pages et de la structure. Premier jet des pages accueil, matériel et architecture.      |
+
+
+{% include comments.md %}
