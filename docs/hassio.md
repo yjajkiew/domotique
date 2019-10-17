@@ -2,6 +2,7 @@
 layout: default
 title: Hassio - Home Assistant
 nav_order: 3
+comments: true
 ---
 
 # Hassio - Home Assistant
@@ -169,4 +170,4 @@ wakeup_week_day_panel:
 ### Notification quand il faut sortir les poubelles
 
 
-
+{% include comments.md %}
