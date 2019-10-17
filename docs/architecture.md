@@ -2,6 +2,7 @@
 layout: default
 title: Architecture
 nav_order: 2
+comments: true
 ---
 
 # Architecture
@@ -37,3 +38,5 @@ Le schéma suivant décrit succintement le [matériel](/materiel) et les interco
 *Les éléments en opacité réduite sont des éléments à venir qui ne sont pas encore achetés, installés ou automatisés. Cela me permet de mettre en perspective la roadmap des prochains sujets.*
 
 <a href="assets/domotique_architecture_physique.jpg" target="_blank"><img src="assets/domotique_architecture_physique.jpg" /></a>
+
+{% include comments.md %}
