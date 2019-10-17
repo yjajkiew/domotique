@@ -1,6 +1,7 @@
 ---
 layout: home
 title: Accueil
+comments: true
 ---
 
 # Documentation de mon installation domotique
