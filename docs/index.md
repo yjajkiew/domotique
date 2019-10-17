@@ -33,5 +33,5 @@ Site web : https://yann.me
 Contact : contact@yann.me
 
 {% if page.comments %} 
-  {% include disqus.html %}
+{% include disqus.html %}
 {% endif %}
