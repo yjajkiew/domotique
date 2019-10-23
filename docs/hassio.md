@@ -57,7 +57,7 @@ Le problème de cette solution avec une Livebox c'est que lorsque vous êtes dan
 
 Cette solution permet de s'affranchir des limitations de la box internet et de mettre à profit l'utilisateur d'un serveur virtuel hébergé dans le cloud que vous possédez peut être déjà :
 
-<img src="/assets/hassio-internet-2.PNG" />
+<img src="/assets/hassio-internet-3.PNG" />
 
 Bien entendu pour communiquer avec le serveur le raspberry passe bien par internet et donc le routeur principal et la box internet, mais dans l'idée il s'affranchit des limites de NAT, firewall et autre puisque le tunnel SSH connecte directement le port de Home Assistant vers un port du serveur, qui peut alors être réutilisé comme source de reverse proxy pour l'exposer sur internet avec nginx et un certificat SSL.
 
@@ -68,9 +68,10 @@ Bien entendu pour communiquer avec le serveur le raspberry passe bien par intern
    - nécessite d'avoir un serveur distant et d'avoir des compétences techniques plus fournies
 
 **Astuces** :
- - désactiver la fonction monitoring de autossh et utiliser plutôt les options ServerAliveInterval et ServerAliveCountMax 
- - activer le monitoring côté client (serveur distant) pour libérer le port en cas d'interruption de la connexion SSH (dans mon cas en cas de coupure de courant autossh ne pouvait pas couper correctement la connexion ainsi le port restait alors ouvert et utilisé sur le serveur distant, au redémarrage autossh ne pouvait donc plus se connecter au port du serveur distant puisqu'il restait bloqué) > http://go2linux.garron.me/linux/2011/02/limit-idle-ssh-sessions-time-avoid-unattended-ones-clientaliveinterval-clientalivecoun/
+ - désactiver la fonction monitoring de autossh et utiliser plutôt les options ServerAliveInterval et ServerAliveCountMax pour maintenir la connexion active entre home assistant et le serveur distant
+ - activer le monitoring côté client (serveur distant) pour libérer le port en cas d'interruption de la connexion SSH (dans mon cas en cas de coupure de courant autossh ne pouvait pas couper correctement la connexion ainsi le port restait ouvert à tort sur le serveur distant, au redémarrage autossh ne pouvait donc plus se connecter au port du serveur distant puisqu'il restait bloqué) > http://go2linux.garron.me/linux/2011/02/limit-idle-ssh-sessions-time-avoid-unattended-ones-clientaliveinterval-clientalivecoun/
  - utiliser une adresse IP différente sur le serveur distant pour décorréler l'IP du reverse proxy de Home Assistant de vos sites publiques et éviter un discovery via un reverse IP lookup)
+ - pour les configurations nginx et certificat SSL la documentation de Home Assistannt fournit tout ce qu'il faut : https://www.home-assistant.io/docs/ecosystem/nginx_subdomain/
 
 
 ## Supervision
