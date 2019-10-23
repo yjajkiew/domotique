@@ -11,6 +11,24 @@ comments: true
 1. TOC
 {:toc}
 
+## Principes
+
+J'ai posé les principes suivants pour construire et maintenir ma solution domotique. S'ils ne sont pas stricts ils constituent des guidelines qui peuvent vous aider à comprendre les choix que j'ai pu faire :
+
+ - **Utiliser les standards Web et IoT** : privilégier les standards W3C, HTML5, API REST, Z-Wave, ZigBee, MQTT etc.
+ - **Privilégier l'existant au custom** : 
+   - privilégier les addons, composants et intégrations de Home Assistant/Hass.io 
+   - privilégier les devices du marché plutôt que de construire des capteurs maison *(e.g. capteur de température Z-Wave VS construction et programmation d'un capteur sous arduino)*
+ - **Approche Best of breed** : incorporer du matériel ou une technologie qui répondent à mes besoins
+ - **Fallback obligatoire** : étant donné qu'on est sur installation "maison" sans garantie de fonctionnement il me semble vital d'avoir des solutions de contournement pour que mes appareils puissent toujours fonctionner *(mes volets doivent toujours être utilisable même si Home Assistant tombe, mon sèche serviette doit toujours être allumable manuellement si Home Assistant tombe, etc.)*
+ - **Ne pas installer d'éléments de sécurité "durs"** :
+   - Je m'interdis : serrure connectée, alarme qui repose sur cette solution domotique, etc.
+   - J'autorise les éléments de prévention : caméras, notifications et alertes, etc.
+ 
+Ces principes me permettent d'assurer la cohérence de ma solution domotique au global, son bon fonctionnement, son évolutivité,  et son maintien *(je n'ai pas envie de passer mes soirées à débuguer ma maison connectée*).
+
+
+
 ## Vision macro
 
 Le schéma suivant décrit succintement le [matériel](/materiel) et les interconnexions pour assurer ma domotique :
