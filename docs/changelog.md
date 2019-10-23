@@ -10,6 +10,7 @@ comments: false
 
 | Date         | Modification      |
 |:-------------|:------------------|
+| 23/10/2019   | Hassio : Exposition sur internet + backup      |
 | 08/10/2019   | Initialisation des pages et de la structure. Premier jet des pages accueil, matériel et architecture.      |
 
 
