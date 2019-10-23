@@ -103,7 +103,7 @@ Bien entendu pour communiquer avec le serveur le raspberry passe bien par intern
 
 ## Backups
 
-Une des premières choses que j'ai mis en place lorsque j'ai commencé à avoir une configuration stable c'est de mettre en place un système de backup déporté. Par chance il existe un addon [Hass.io Google Drive Backup](https://github.com/sabeechen/hassio-google-drive-backup) qui fait exactement ce que je souhaitais à savoir faire un backup complet (configurations home assistant, base de données, logs,...) journalier et l'envoie sur mon Google Drive.
+Une des premières choses que j'ai mis en place lorsque j'ai commencé à avoir une configuration stable c'est de mettre en place un système de backup déporté. Par chance il existe un addon [Hass.io Google Drive Backup](https://github.com/sabeechen/hassio-google-drive-backup) qui fait exactement ce que je souhaitais à savoir faire un backup complet (configurations home assistant, base de données, logs, network mesh de mon contrôleur Z-Wave,...) journalier et l'envoie sur mon Google Drive.
 
 Son installation est simple via Hassio, ma configuration est la suivante :
 
@@ -113,14 +113,21 @@ Son installation est simple via Hassio, ma configuration est la suivante :
   "max_snapshots_in_google_drive": 10,
   "days_between_snapshots": 1,
   "use_ssl": false,
-  "snapshot_time_of_day": "00:00",
-  "send_error_reports": true
+  "snapshot_time_of_day": "00:00"
 }
 ```
 
-Ainsi en cas de problèmes ou de réinstallation je peux restaurer un de ces backups.
+*Remarque : cet addon contient également une option "snapshot_password" qui m'intéresse mais qui ne malheureusement ne fonctionne pas avec les secrets contrairement à ce qui est indiqué dans la documentation.*
+
+Ainsi en cas de problèmes ou de réinstallation je peux restaurer un de ces backups directement via l'interface d'un Home Assistant tout frais.
 
 ## Configurations
+
+### Général
+
+
+### Sensors : capteurs et services
+
 
 
 ## Dashboards
