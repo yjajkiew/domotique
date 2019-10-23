@@ -46,12 +46,13 @@ Le problème de cette solution avec une Livebox c'est que lorsque vous êtes dan
 
 <img src="/assets/hassio-internet-2.PNG" />
 
- - **avantages**: 
-   - à la portée de tous
-   - robuste
- - **inconvénients**:
-   - dépendant de la configuration de la box internet donc la configuration est à refaire en cas de changement de FAI
-   - dépendant des limitations de la box internet ***(par exemple sur la LiveBox 3 de Orange l'accès par l'adresse IP internet public ne fonctionne pas à l'intérieur du réseau domestique)***
+**Avantages**: 
+ - à la portée de tous
+ - robuste
+ 
+**Inconvénients**:
+ - dépendant de la configuration de la box internet donc la configuration est à refaire en cas de changement de FAI
+ - dépendant des limitations de la box internet ***(par exemple sur la LiveBox 3 de Orange l'accès par l'adresse IP internet public ne fonctionne pas à l'intérieur du réseau domestique)***
 
 ### Solution #2 : tunnel SSH
 
@@ -61,11 +62,12 @@ Cette solution permet de s'affranchir des limitations de la box internet et de m
 
 Bien entendu pour communiquer avec le serveur le raspberry passe bien par internet et donc le routeur principal et la box internet, mais dans l'idée il s'affranchit des limites de NAT, firewall et autre puisque le tunnel SSH connecte directement le port de Home Assistant vers un port du serveur, qui peut alors être réutilisé comme source de reverse proxy pour l'exposer sur internet avec nginx et un certificat SSL.
 
- - **avantages**: 
-   - facilite la mise en place d'un nom de domaine et d'un certificat SSL
-   - solution indépendante de la box internet (configuration et limitations)
- - **inconvénients**:
-   - nécessite d'avoir un serveur distant et d'avoir des compétences techniques plus fournies
+**Avantages**: 
+ - facilite la mise en place d'un nom de domaine et d'un certificat SSL
+ - solution indépendante de la box internet (configuration et limitations)
+ 
+**Inconvénients**:
+ - nécessite d'avoir un serveur distant et d'avoir des compétences techniques plus fournies
 
 **Astuces** :
  - il existe l'outil [autossh](https://linux.die.net/man/1/autossh) qui permet de créer des tunnels SSH persistent qui se reconstruisent en cas de fail
@@ -92,7 +94,7 @@ Bien entendu pour communiquer avec le serveur le raspberry passe bien par intern
 }
  ```
  
- ***L'option -f permet de continuer à essayer de créer le tunnel SSH même en cas de fail, pratique en cas de coupure de courant. Les options vnNT permettent d'interdire l'utilisation du tty.***
+*L'option -f permet de continuer à essayer de créer le tunnel SSH même en cas de fail, pratique en cas de coupure de courant. Les options vnNT permettent d'interdire l'utilisation du tty.*
 
 
 ## Supervision
