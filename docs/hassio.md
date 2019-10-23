@@ -75,7 +75,7 @@ Bien entendu pour communiquer avec le serveur le raspberry passe bien par intern
  - désactiver la fonction monitoring de autossh et utiliser plutôt les options ServerAliveInterval et ServerAliveCountMax pour maintenir la connexion active entre home assistant et le serveur distant
  - activer le monitoring côté client (serveur distant) pour libérer le port en cas d'interruption de la connexion SSH (dans mon cas en cas de coupure de courant autossh ne pouvait pas couper correctement la connexion ainsi le port restait ouvert à tort sur le serveur distant, au redémarrage autossh ne pouvait donc plus se connecter au port du serveur distant puisqu'il restait bloqué) > [voir tutoriel](http://go2linux.garron.me/linux/2011/02/limit-idle-ssh-sessions-time-avoid-unattended-ones-clientaliveinterval-clientalivecoun/)
  - utiliser une adresse IP différente sur le serveur distant pour décorréler l'IP du reverse proxy de Home Assistant de vos sites publiques et éviter un discovery via un reverse IP lookup)
- - pour les configurations nginx et certificat SSL la documentation de Home Assistannt fournit tout ce qu'il faut : [voir documentation](https://www.home-assistant.io/docs/ecosystem/nginx_subdomain/)
+ - pour les configurations nginx et certificat SSL la documentation de Home Assistant fournit tout ce qu'il faut : [voir documentation](https://www.home-assistant.io/docs/ecosystem/nginx_subdomain/)
  - ma configuration autossh est la suivante
  
  ```
@@ -94,7 +94,7 @@ Bien entendu pour communiquer avec le serveur le raspberry passe bien par intern
 }
  ```
  
-*L'option -f permet de continuer à essayer de créer le tunnel SSH même en cas de fail, pratique en cas de coupure de courant. Les options vnNT permettent d'interdire l'utilisation du tty.*
+*L'option -f permet de continuer à essayer de créer le tunnel SSH même en cas de fail, pratique en cas de coupure de courant et en reprise où home assistant a démarré mais la livebox n'a pas encore récupéré la synchronisation internet. Les options vnNT permettent d'interdire l'utilisation du tty.*
 
 
 ## Supervision
