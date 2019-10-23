@@ -68,10 +68,31 @@ Bien entendu pour communiquer avec le serveur le raspberry passe bien par intern
    - nécessite d'avoir un serveur distant et d'avoir des compétences techniques plus fournies
 
 **Astuces** :
+ - il existe l'outil [autossh](https://linux.die.net/man/1/autossh) qui permet de créer des tunnels SSH persistent qui se reconstruisent en cas de fail
+ - encore mieux il existe un [addon Hassio AutoSSH](https://github.com/pjcarly/hassio-addons) qu'il suffit d'installer et configurer pour que cela fasse partie intégrante de votre Hassio : [voir tutoriel](https://carly.be/expose-home-assistant-through-ssh-tunnel/)
  - désactiver la fonction monitoring de autossh et utiliser plutôt les options ServerAliveInterval et ServerAliveCountMax pour maintenir la connexion active entre home assistant et le serveur distant
- - activer le monitoring côté client (serveur distant) pour libérer le port en cas d'interruption de la connexion SSH (dans mon cas en cas de coupure de courant autossh ne pouvait pas couper correctement la connexion ainsi le port restait ouvert à tort sur le serveur distant, au redémarrage autossh ne pouvait donc plus se connecter au port du serveur distant puisqu'il restait bloqué) > http://go2linux.garron.me/linux/2011/02/limit-idle-ssh-sessions-time-avoid-unattended-ones-clientaliveinterval-clientalivecoun/
+ - activer le monitoring côté client (serveur distant) pour libérer le port en cas d'interruption de la connexion SSH (dans mon cas en cas de coupure de courant autossh ne pouvait pas couper correctement la connexion ainsi le port restait ouvert à tort sur le serveur distant, au redémarrage autossh ne pouvait donc plus se connecter au port du serveur distant puisqu'il restait bloqué) > [voir tutoriel](http://go2linux.garron.me/linux/2011/02/limit-idle-ssh-sessions-time-avoid-unattended-ones-clientaliveinterval-clientalivecoun/)
  - utiliser une adresse IP différente sur le serveur distant pour décorréler l'IP du reverse proxy de Home Assistant de vos sites publiques et éviter un discovery via un reverse IP lookup)
- - pour les configurations nginx et certificat SSL la documentation de Home Assistannt fournit tout ce qu'il faut : https://www.home-assistant.io/docs/ecosystem/nginx_subdomain/
+ - pour les configurations nginx et certificat SSL la documentation de Home Assistannt fournit tout ce qu'il faut : [voir documentation](https://www.home-assistant.io/docs/ecosystem/nginx_subdomain/)
+ - ma configuration autossh est la suivante
+ 
+ ```
+ {
+  "hostname": "mondomainessh",
+  "ssh_port": "22",
+  "username": "homeassistant",
+  "remote_forwarding": [
+    "12300:localhosts:8123"
+  ],
+  "local_forwarding": [
+    ""
+  ],
+  "other_ssh_options": "-fvnNT -o \"ServerAliveInterval 30\" -o \"ServerAliveCountMax 3\"",
+  "monitor_port": "0"
+}
+ ```
+ 
+ ***L'option -f permet de continuer à essayer de créer le tunnel SSH même en cas de fail, pratique en cas de coupure de courant. Les options vnNT permettent d'interdire l'utilisation du tty.***
 
 
 ## Supervision
