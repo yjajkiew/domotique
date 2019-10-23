@@ -38,15 +38,27 @@ Pour cela il y a deux solutions possibles que je détaille ci-dessous et que j'a
 
 ### Solution #1 : déclenchement de ports par la box internet
 
+Cette solution est la plus simple à mettre en place puisqu'il suffit de configurer sa box internet (et autres routeurs derrière) pour rediriger les ports d'entrée vers le périphérique qui héberge Home Assistant :
+
+<img src="/assets/hassio-internet-1.PNG" />
+
+Le problème de cette solution avec une Livebox c'est que lorsque vous êtes dans votre réseau domestique, donc sur votre smartphone en wifi chez vous, vous ne pouvez pas accéder à l'IP publique de votre livebox : les accès sont refusés. Ceci oblige alors, si vous souhaitez conserver la même URL que vous soyez à l'extérieur ou à l'intérieur, de passer par un tier de type serveur virtual hébergé dans le cloud :
+<img src="/assets/hassio-internet-2.PNG" />
 
  - **avantages**: 
    - à la portée de tous
    - robuste
  - **inconvénients**:
    - dépendant de la configuration de la box internet donc la configuration est à refaire en cas de changement de FAI
-   - dépendant des limitations de la box internet (par exemple sur la LiveBox 3 de Orange l'accès par l'adresse IP internet public ne fonctionne pas à l'intérieur du réseau domestique)
+   - dépendant des limitations de la box internet ***(par exemple sur la LiveBox 3 de Orange l'accès par l'adresse IP internet public ne fonctionne pas à l'intérieur du réseau domestique)***
 
 ### Solution #2 : tunnel SSH
+
+Cette solution permet de s'affranchir des limitations de la box internet et de mettre à profit l'utilisateur d'un serveur virtuel hébergé dans le cloud que vous possédez peut être déjà :
+
+<img src="/assets/hassio-internet-2.PNG" />
+
+Bien entendu pour communiquer avec le serveur le raspberry passe bien par internet et donc le routeur principal et la box internet, mais dans l'idée il s'affranchit des limites de NAT, firewall et autre puisque le tunnel SSH connecte directement le port de Home Assistant vers un port du serveur, qui peut alors être réutilisé comme source de reverse proxy pour l'exposer sur internet avec nginx et un certificat SSL.
 
  - **avantages**: 
    - facilite la mise en place d'un nom de domaine et d'un certificat SSL
