@@ -43,6 +43,7 @@ Cette solution est la plus simple à mettre en place puisqu'il suffit de configu
 <img src="/assets/hassio-internet-1.PNG" />
 
 Le problème de cette solution avec une Livebox c'est que lorsque vous êtes dans votre réseau domestique, donc sur votre smartphone en wifi chez vous, vous ne pouvez pas accéder à l'IP publique de votre livebox : les accès sont refusés. Ceci oblige alors, si vous souhaitez conserver la même URL que vous soyez à l'extérieur ou à l'intérieur, de passer par un tier de type serveur virtual hébergé dans le cloud :
+
 <img src="/assets/hassio-internet-2.PNG" />
 
  - **avantages**: 
