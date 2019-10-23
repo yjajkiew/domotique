@@ -8,8 +8,14 @@ comments: true
 # Matériel
 {: .no_toc }
 
+Bien que j'attache une importance à l'homogénéité des solutions et de la cohérence de l'écosystème au global il est à noter que ce matériel a été acquis au fur et à mesure, et donc avec des besoins et des contextes souvent différents. Le matériel ci-dessous a été acheté de manière incrémentale au fil des années et pas forcément pensé autour d'une solution cible finale.
+
+Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa simplicité d'installation et d'utilisation lorsque j'étais en appartement et que je ne souhaitais pas pousser plus loin la domotique chez moi. J'ai ensuite ajouté des prises électriques OSRAM sur le protocol ZigBee parce qu'elles s'intégraient avec le bridge Philips Hue. Ensuite j'ai eu des besoins et un environnement différent qui m'a poussé à partir sur des prises électriques Z-Wave. Les deux systèmes co-habitent ensemble, sans aucun soucis, de par cet historique.
+
 1. TOC
 {:toc}
+
+
 
 ## Lumières
 
@@ -18,7 +24,7 @@ comments: true
 | [Philips Hue Bridge 2.0](https://amzn.to/31RES3R)    | BSB002   |  1       | <img src="https://tinyurl.com/y4lagxb7" width="100"/>     |      todo       |
 | [Ampoule Hue White E27](https://tinyurl.com/yykjqsmh)   | LWB006   |  2       | <img src="https://tinyurl.com/y6yfvx2e" width="100"/>     |   Lampe d'appoint dans le salon<br/>Lampe table de chevet de la chambre    |
 
-## Prises
+## Prises électriques
 
 | Nom                              | Modèle           | Quantité | Image    | Description |
 |:---------------------------------|:-----------------|:---------|:---------|:------------|
