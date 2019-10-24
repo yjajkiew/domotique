@@ -6,6 +6,8 @@ comments: true
 
 # Mon installation domotique avec Home Assistant
 
+<img src="/assets/domotique-yann-logo.png" />
+
 Que vous soyez développeur senior ou geek avertis qui n'a jamais souhaité domotiser sa maison ou son appartement ? 
 
 La domotique installée chez moi est historiquement le fruit de quelques années avec l'aggrégation de solutions diverses pour répondre à des besoins dans des contextes et environnements différents. C'est ainsi que j'ai commencé par des lumières connectées avec Philips Hue, système simple à mettre en place et qui ne demande aucun travaux ni maintenance informatique.
