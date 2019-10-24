@@ -18,7 +18,6 @@ J'ai donc vu cette maison comme le terrain de jeu idéal pour la domotique et j'
 
 <br/>
 <hr>
-<br/>
 
 <a href="/architecture"><img src="assets/domotique_architecture_logique.jpg" /></a>
 
@@ -26,7 +25,6 @@ J'ai donc vu cette maison comme le terrain de jeu idéal pour la domotique et j'
 
 <br/>
 <hr>
-<br/>
 
 ## Qui suis-je ?
 
@@ -38,7 +36,6 @@ Les soir  et week-end je fais de la [photographie](https://instagram.com/yann.me
 
 <br/>
 <hr>
-<br/>
 
 ## Support or Contact
 
