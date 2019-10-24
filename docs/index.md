@@ -17,12 +17,16 @@ J'ai donc vu cette maison comme le terrain de jeu idéal pour la domotique et j'
 *J'ai mis en bas de certaines pages la possibilité de laisser des commentaires afin d'échanger et s'entraider au besoin.*
 
 <br/>
+<hr>
+<br/>
+
+<a href="/architecture"><img src="assets/domotique_architecture_logique.jpg" /></a>
 
 **Technologies et composants majeurs** : home assistant, hassio, raspberry pi, philips hue, osram, zigbee, aeotec, z-wave, fibaro, somfy, connexoon
 
 <br/>
-
-<a href="/architecture"><img src="assets/domotique_architecture_logique.jpg" /></a>
+<hr>
+<br/>
 
 ## Qui suis-je ?
 
@@ -31,6 +35,10 @@ Le jour je suis architecte de solutions chez Capgemini, travail dans lequel j'ai
 Les soir  et week-end je fais de la [photographie](https://instagram.com/yann.me), un peu de guitare, je rénove ma maison... et en ce moment vous l'aurez bien compris je m'amuse à la domotiser !
 
 <p align="center"><img src="assets/profil.jpg" width="200" style="border-radius: 50%;" /></p>
+
+<br/>
+<hr>
+<br/>
 
 ## Support or Contact
 
