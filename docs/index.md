@@ -6,7 +6,7 @@ comments: true
 
 # Mon installation domotique avec Home Assistant
 
-<img src="/assets/domotique-yann-logo.png" />
+<p align="center"><img src="/assets/domotique-yann-logo.png" /></p>
 
 Que vous soyez développeur senior ou geek avertis qui n'a jamais souhaité domotiser sa maison ou son appartement ? 
 
