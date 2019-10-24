@@ -176,11 +176,11 @@ sensor:
     sensors:
       sensors_count: # need to automate calling homeassistant.update_entity periodically
         friendly_name: "Sensors count"
-        value_template: "`{`{ states.sensor|list|length `}`}"
+        value_template: "{{ states.sensor|list|length }}"
         icon_template: mdi:eye
       lights_count:
         friendly_name: "Lights count"
-        value_template: "\{{ states.light|list|length }\}"
+        value_template: "{{ states.light|list|length }}"
         icon_template: mdi:lightbulb
         entity_id: group.all_lights
       devices_count:
@@ -286,6 +286,7 @@ wakeup_week_day_panel:
 
 ***Fichier automations.yaml***
 ```yaml
+{% raw %}
 - id: '1570629369029'
   alias: Bedroom wake-up light
   trigger:
@@ -342,6 +343,7 @@ wakeup_week_day_panel:
   - data:
       entity_id: light.chambre
     service: light.turn_off
+{% endraw %}
 ```
 
 ### Notification quand il faut sortir les poubelles
