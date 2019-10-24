@@ -4,19 +4,25 @@ title: Accueil
 comments: true
 ---
 
-# Documentation de mon installation domotique
+# Mon installation domotique avec Home Assistant
 
-L'année 2019 fut une période marquante puisque j'ai acheté une maison. Celle-ci est assez particulière puisqu'elle est à rénover et qu'elle est très grande, ce qui en fait un terrain de jeu idéal pour la domotique puisque j'ai à la fois les besoins habituels mais aussi des besoins précis tout en ayant la possibilité de réaliser de moindres travaux pour adapter certaines solutions !
+Que vous soyez développeur senior ou geek avertis qui n'a jamais souhaité domotiser sa maison ou son appartement ? 
 
-Dans cette optique j'ai donc décidé de documenter ici ma solution domotique autour de [Home Assistant](https://www.home-assistant.io) : les automatisations, les configurations, les usages, les astuces, la résilience, les prochains projets, etc.
+La domotique installée chez moi est historiquement le fruit de quelques années avec l'aggrégation de solutions diverses pour répondre à des besoins dans des contextes et environnements différents. C'est ainsi que j'ai commencé par des lumières connectées avec Philips Hue, système simple à mettre en place et qui ne demande aucun travaux ni maintenance informatique.
+
+Mais cette année, en 2019, j'ai acheté une maison et là ça a changé la donne : la possibilité de faire des travaux facilite certaines installations et la surface de vie imposante a mis en évidence des besoins que je ne possédais jusqu'alors pas vraiment *(e.g. passer de 4 volets au total dans un appartement à 6 volets juste dans le salon forcément une envie d'automatiser certaines choses me titillait !)*.
+
+J'ai donc vu cette maison comme le terrain de jeu idéal pour la domotique et j'ai donc décidé de documenter ici ma solution domotique autour de [Home Assistant](https://www.home-assistant.io) : les automatisations, les configurations, les usages, les astuces, la résilience, les prochains projets, etc.
+
+*J'ai mis en bas de certaines pages la possibilité de laisser des commentaires afin d'échanger et s'entraider au besoin.*
 
 <br/>
 
-**Techno/composants majeures** : home assistant, hassio, raspberry pi, philips hue, z-wave, fibaro
+**Technologies et composants majeurs** : home assistant, hassio, raspberry pi, philips hue, osram, zigbee, aeotec, z-wave, fibaro, somfy, connexoon
 
 <br/>
 
-<a href="assets/domotique_architecture_logique.jpg" target="_blank"><img src="assets/domotique_architecture_logique.jpg" /></a>
+<a href="/architecture"><img src="assets/domotique_architecture_logique.jpg" /></a>
 
 ## Qui suis-je ?
 
