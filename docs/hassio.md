@@ -101,7 +101,7 @@ Bien entendu pour communiquer avec le serveur le raspberry passe bien par intern
 
 J'ai mis en place des éléments natifs (installation et configuration) mais également des configurations un peu plus custom pour superviser globalement Hassio.
 
-Cette section détaille comment obtenir les données de supervision. Pour tout ce qui est visualisation rendez-vous sur la section Dashboard Monitoring.
+Cette section détaille comment obtenir les données de supervision. Pour tout ce qui est visualisation rendez-vous sur la section dédiée [Dashboard Monitoring](#monitoring).
 
 ### Supervision des ressources physiques
 
@@ -138,7 +138,67 @@ Avec Hassio vous pouvez installer en quelques clics le [Add-On Glances](https://
 
 <img src="https://raw.githubusercontent.com/hassio-addons/addon-glances/master/images/screenshot.png" />
 
+A partir de Glances il est possible de compléter les sensors de supervision décris plus haut. Dans mon cas j'ai souhaité récupérer le nombre de containers en ajoutant la configuration suivante dans le fichier configuration.yaml :
+
+```
+sensor:
+  - platform: glances
+    host: !secret glances_host
+    port: !secret glances_port
+    version: 3
+    resources:
+      - 'docker_active'
+```
+
+
 ### Configurations custom
+
+En plus des sensors décris ci-dessus j'en ai ajouté quelques-uns natifs comme le uptime, la taille de la base de données, et la taille des logs via la configuration suivante :
+
+```
+sensor:
+  # UpTime
+  - platform: uptime
+  # Filesize monitoring
+  - platform: filesize
+    file_paths:
+      - /config/home-assistant_v2.db
+      - /config/home-assistant.log
+```
+
+Je suis allé également un peu plus loin en utilisant les [templates](https://www.home-assistant.io/integrations/template/) de Home Assistant pour récupérer et calculer : le nombre de sensors, le nombre de lumières, le nombre de devices connus sur mon réseau, le nombre d'automatisations, le nombre de volets.
+
+```
+sensor:
+  # templates
+  - platform: template
+    sensors:
+      sensors_count: # need to automate calling homeassistant.update_entity periodically
+        friendly_name: "Sensors count"
+        value_template: "{{ states.sensor|list|length }}"
+        icon_template: mdi:eye
+      lights_count:
+        friendly_name: "Lights count"
+        value_template: "{{ states.light|list|length }}"
+        icon_template: mdi:lightbulb
+        entity_id: group.all_lights
+      devices_count:
+        friendly_name: "Devices count"
+        value_template: "{{states.group.all_devices.attributes.entity_id|list|length}}"
+        icon_template: mdi:robot-industrial
+        entity_id: group.all_devices
+      automations_count:
+        friendly_name: "Automations count"
+        value_template: "{{states.group.all_automations.attributes.entity_id|list|length}}"
+        icon_template: mdi:robot
+        entity_id: group.all_automations
+      covers_count:
+        friendly_name: "Covers count"
+        value_template: "{{states.group.all_covers.attributes.entity_id|list|length}}"
+        icon_template: mdi:window-closed
+        entity_id: group.all_covers
+```
+
 
 
 
