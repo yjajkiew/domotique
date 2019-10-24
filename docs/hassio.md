@@ -99,6 +99,49 @@ Bien entendu pour communiquer avec le serveur le raspberry passe bien par intern
 
 ## Supervision
 
+J'ai mis en place des éléments natifs (installation et configuration) mais également des configurations un peu plus custom pour superviser globalement Hassio.
+
+Cette section détaille comment obtenir les données de supervision. Pour tout ce qui est visualisation rendez-vous sur la section Dashboard Monitoring.
+
+### Supervision des ressources physiques
+
+Home Assistant fourni une intégration "[System Monitor](https://www.home-assistant.io/integrations/systemmonitor/)" qui permet de superviser les ressources physiques.
+Pour cela il suffit d'ajouter la configuration suivante au niveau de l'attribut sensor du fichier configuration.yaml
+
+```
+sensor:
+  # System monitor
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: processor_use
+      - type: network_in
+        arg: eth0
+      - type: network_out
+        arg: eth0
+      - type: throughput_network_in
+        arg: eth0
+      - type: throughput_network_out
+        arg: eth0
+      - type: last_boot
+```
+
+Il existe d'autres attributs mais ceux-ci me suffisent. 
+*Il est à noter que plus vous ajouterez des éléments à superviser et plus votre  base de données sera lourde car toutes les valeurs sont historisées.*
+
+
+### Glances
+
+Avec Hassio vous pouvez installer en quelques clics le [Add-On Glances](https://github.com/hassio-addons/addon-glances) qui permet d'avoir une vue d'ensemble de son système : CPU, RAM, réseau, nombre de containers,...
+
+<img src="https://raw.githubusercontent.com/hassio-addons/addon-glances/master/images/screenshot.png" />
+
+### Configurations custom
+
+
+
 
 
 ## Backups
@@ -131,6 +174,14 @@ Ainsi en cas de problèmes ou de réinstallation je peux restaurer un de ces bac
 
 
 ## Dashboards
+
+### Accueil
+
+### Devices
+
+### Electricité
+
+### Monitoring
 
 
 ## Automations
