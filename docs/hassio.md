@@ -175,11 +175,11 @@ sensor:
     sensors:
       sensors_count: # need to automate calling homeassistant.update_entity periodically
         friendly_name: "Sensors count"
-        value_template: "{{ states.sensor|list|length }}"
+        value_template: "\{\{ states.sensor|list|length \}\}"
         icon_template: mdi:eye
       lights_count:
         friendly_name: "Lights count"
-        value_template: "{{ states.light|list|length }}"
+        value_template: "\{{ states.light|list|length }}"
         icon_template: mdi:lightbulb
         entity_id: group.all_lights
       devices_count:
