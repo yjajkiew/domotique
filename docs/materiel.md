@@ -58,6 +58,14 @@ Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa 
 |:---------------------------------|:---------|:---------|:---------|:------------|
 | [Starter Kit Officiel Pi3](https://tinyurl.com/yxz7pb35)  |Modèle B |  1       | <img src="https://tinyurl.com/y4oxet5p" width="100"/>     | Orchestrateur central de ma domotique sur lequel est installé Hassio Home Assistant  |
 | [Contrôleur Z-Wave Plus<br/>Z-Stick GEN5 Aeon Labs](https://amzn.to/2pUv1fD)     | AEOEZW090-C |  1       | <img src="https://tinyurl.com/yyktqsk9" width="100"/>     | Contrôleur Z-Wave connecté sur le raspberry et utilisé par Hassio |
+| [Xiaomi MI BOX TV BOX 3](https://amzn.to/2PgAt6U)     |  |  1       | <img src="https://tinyurl.com/y3uky7ea" width="100"/>     | Box TV Android |
+
+
+
+
+
+
+
 
 ## Infrastructure réseau
 
