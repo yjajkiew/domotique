@@ -169,6 +169,7 @@ sensor:
 Je suis allé également un peu plus loin en utilisant les [templates](https://www.home-assistant.io/integrations/template/) de Home Assistant pour récupérer et calculer : le nombre de sensors, le nombre de lumières, le nombre de devices connus sur mon réseau, le nombre d'automatisations, le nombre de volets.
 
 ```
+{% raw %}
 sensor:
   # templates
   - platform: template
@@ -197,6 +198,7 @@ sensor:
         value_template: "{{states.group.all_covers.attributes.entity_id|list|length}}"
         icon_template: mdi:window-closed
         entity_id: group.all_covers
+{% endraw %}
 ```
 
 
