@@ -4,6 +4,8 @@ remote_theme: pmarsceill/just-the-docs
 title: Domotique yann.me
 description: Description de mon installation domotique
 
+logo: "/assets/domotique-yann-logo.jpg"
+
 aux_links:
   "Mon site":
     - "https://yann.me"
