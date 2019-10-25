@@ -276,15 +276,19 @@ person: # enable persons manager from UI
 ### Add-ons et composants
 
 **Configurator**
+
 [Configurator](https://www.home-assistant.io/addons/configurator/) est un outil indispensable puisqu'il permet de gérer (créer, modifier, supprimer, renommer) ses fichiers de configuration directement depuis l'interface de Home Assistant. Un éditeur YAML avec vérification de syntaxe y est directement intégré.
 
 **Log Viewer**
+
 [LogViewer](https://github.com/hassio-addons/addon-log-viewer) est un outil qui permet de visualiser en temps réel les logs directement depuis l'interface de Home Assistant.
 
 **SSH**
+
 Cet [addon SSH](https://github.com/hassio-addons/addon-ssh) permet de configurer facilement SSH sous Hassio.
 
 **AutoSSH**
+
 Cette section est détaillée plus haut sur l'[exposition sur internet via tunnel SSH](#solution-2--tunnel-ssh)
 
 **Breaking changes**
