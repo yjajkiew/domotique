@@ -315,11 +315,19 @@ breaking_changes:
 
 ### Accueil
 
+<a href="/assets/dashboard-home.jpg" target="_blank"><img src="/assets/dashboard-home.jpg" /></a>
+
 ### Devices
+
+<a href="/assets/dashboard-devices.jpg" target="_blank"><img src="/assets/dashboard-devices.jpg" /></a>
 
 ### Electricité
 
+<a href="/assets/dashboard-electricity.jpg" target="_blank"><img src="/assets/dashboard-electricity.jpg" /></a>
+
 ### Monitoring
+
+<a href="/assets/dashboard-monitoring.jpg" target="_blank"><img src="/assets/dashboard-monitoring.jpg" /></a>
 
 
 ## Automations
