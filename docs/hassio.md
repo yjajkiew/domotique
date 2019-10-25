@@ -178,6 +178,7 @@ sensor:
         friendly_name: "Sensors count"
         value_template: "{{ states.sensor|list|length }}"
         icon_template: mdi:eye
+        entity_id: sensor.time # refresh this count every minute
       lights_count:
         friendly_name: "Lights count"
         value_template: "{{ states.light|list|length }}"
