@@ -272,11 +272,21 @@ Activer la gestion des entités "personnes" depuis l'interface de configuration 
 person: # enable persons manager from UI
 ```
 
-
-
 ### Add-ons et composants
 
-**Breaking changes** :
+**Configurator**
+[Configurator](https://www.home-assistant.io/addons/configurator/) est un outil indispensable puisqu'il permet de gérer (créer, modifier, supprimer, renommer) ses fichiers de configuration directement depuis l'interface de Home Assistant. Un éditeur YAML avec vérification de syntaxe y est directement intégré.
+
+**Log Viewer**
+[LogViewer](https://github.com/hassio-addons/addon-log-viewer) est un outil qui permet de visualiser en temps réel les logs directement depuis l'interface de Home Assistant.
+
+**SSH**
+Cet [addon SSH](https://github.com/hassio-addons/addon-ssh) permet de configurer facilement SSH sous Hassio.
+
+**AutoSSH**
+Cette section est détaillée plus haut sur l'[exposition sur internet via tunnel SSH](#solution-2--tunnel-ssh)
+
+**Breaking changes**
 
 Ce composant n'est pas disponible en tant qu'Add-on Hassio installable en quelques clics, mais il est disponible via une [installation manuelle](https://developers.home-assistant.io/docs/en/creating_component_loading.html).
 
@@ -289,11 +299,14 @@ breaking_changes:
 ```
 
 
+
 ### Sensors : capteurs et services
 
 
 
 ## Dashboards
+
+### Thèmes et custom cards
 
 ### Accueil
 
