@@ -230,6 +230,64 @@ Ainsi en cas de problèmes ou de réinstallation je peux restaurer un de ces bac
 
 ### Général
 
+Avant d'entrer dans les configurations je vous invite à utiliser les [secrets](https://www.home-assistant.io/docs/configuration/secrets/) : il suffit de créer un fichier secrets.yaml dans le dossier config pour y mettre tous les configurations sensibles tels que les IPs et mots de passe pour ensuite les inclure dans le fichier configuration.yaml
+
+Configuration HTTP (absolument nécessaire lorsque Home Assistant est exposé derrière un reverse proxy nginx par exemple) :
+```
+http:
+  # For extra security set this to only accept connections on localhost if NGINX is on the same machine
+  # server_host: 127.0.0.1
+  # Update this line to be your domain
+  base_url: !secret base_url
+  use_x_forwarded_for: true
+  # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
+  # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
+  trusted_proxies: !secret http_trusted_proxies
+```
+
+Si dans la partie [supervision](#supervision) vous monitorez la taille de la BDD et des logs il faut autoriser la lecture de ces fichiers à travers la configuration suivante :
+```
+homeassistant:
+  whitelist_external_dirs: 
+    - '/config/'
+```
+
+Activer les logs :
+```
+# Activate logs
+logger:
+  default: info
+```
+
+Activer le sensor "updater" qui permet de prévenir lorsqu'une mise à jour est disponible :
+```
+# set hassio updater
+updater:
+  reporting: false
+  include_used_components: false
+```
+
+Activer la gestion des entités "personnes" depuis l'interface de configuration de Home Assistant :
+```
+person: # enable persons manager from UI
+```
+
+
+
+### Add-ons et composants
+
+**Breaking changes** :
+
+Ce composant n'est pas disponible en tant qu'Add-on Hassio installable en quelques clics, mais il est disponible via une [installation manuelle](https://developers.home-assistant.io/docs/en/creating_component_loading.html).
+
+[Breaking changes](https://github.com/custom-components/breaking_changes) est un module qui va permettre de comparer votre configuration par rapport à la prochaine version de Home Assistant disponible et de prévenir du nombre de "potential breaking changes". Plutôt pratique pour anticiper les mises à jour sans avoir à scruter tout le changelog à chaque release.
+
+Après installation le module est à activer en mettant ceci dans la fichier configuration.yaml :
+```
+# activate custom component "breaking changes"
+breaking_changes:
+```
+
 
 ### Sensors : capteurs et services
 
