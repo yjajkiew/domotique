@@ -7,8 +7,9 @@
   background-color: #4e6474;
 }
 
-@media (min-width: 50rem)
-.site-header {
+@media (min-width: 50rem) {
+  .site-header {
     height: 150px;
     max-height: 150px;
+  }
 }
