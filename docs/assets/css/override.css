@@ -1,0 +1,10 @@
+.side-bar {
+  background-color: #4e6474 !important;
+}
+
+@media (min-width: 50rem) {
+  .site-header {
+    height: 150px !important;
+    max-height: 150px !important;
+  }
+}
