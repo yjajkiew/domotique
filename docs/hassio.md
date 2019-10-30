@@ -273,6 +273,13 @@ Activer la gestion des entités "personnes" depuis l'interface de configuration 
 person: # enable persons manager from UI
 ```
 
+Désactiver le discovery automatique de Google Cast (à chaque démarrage Home Assistant découvre le cast de ma box android tv et émet une notification qui ne m'intéresse pas) :
+```
+discovery:
+  ignore:
+    - google_cast # ignore google cast from my android tv
+```
+
 ### Add-ons et composants
 
 **Configurator**
