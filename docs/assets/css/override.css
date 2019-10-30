@@ -1,10 +1,24 @@
+.site-logo {
+  background-position: center !important;
+}
+
 .side-bar {
   background-color: #4e6474 !important;
 }
+
+.navigation-list-link {
+  color: white !important;
+}
+.navigation-list-link.active {
+  color: white !important;
+}
+
+
 
 @media (min-width: 50rem) {
   .site-header {
     height: 150px !important;
     max-height: 150px !important;
+    border-bottom: none !important;
   }
 }
