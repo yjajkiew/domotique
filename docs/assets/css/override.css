@@ -9,11 +9,16 @@
 .page-header .d-inline-block {
   background-color: #4e6474 !important;
   padding: 10px;
-  
 }
 
-.page-header .d-inline-block a, .navigation-list-link, .navigation-list-link.active, footer.site-footer p, footer.site-footer a {
+.page-header .d-inline-block a, .navigation-list-link, .navigation-list-link.active, footer.site-footer p, footer.site-footer a, menu-button {
   color: white !important;
+}
+
+@media (min-width: 66.5rem) {
+  .side-bar {
+    width: calc((100% - 1364px) / 2 + 264px) !important;
+  }
 }
 
 @media (min-width: 50rem) {
