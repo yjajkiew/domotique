@@ -19,6 +19,10 @@
   .side-bar {
     width: calc((100% - 1364px) / 2 + 264px) !important;
   }
+  .main-content {
+    margin-left: calc((100% - 1164px) / 2 + 264px) !important;
+    max-width: 1000px !important;
+  }
 }
 
 @media (min-width: 50rem) {
