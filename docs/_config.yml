@@ -7,7 +7,7 @@ description: Description de mon installation domotique
 logo: "/assets/domotique-yann-logo.png"
 
 aux_links:
-  "Mon site":
+  "Retour au site yann.me":
     - "https://yann.me"
 
 # Enable or disable the site search
