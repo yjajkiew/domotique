@@ -15,4 +15,15 @@ comments: false
 | 08/10/2019   | Initialisation des pages et de la structure. Premier jet des pages accueil, matériel et architecture.      |
 
 
+
+# TODO list
+{: .no_toc }
+
+| Description               |
+|:-------------------------------|
+| Sortir les automatisations de la configuration Hass.io      |
+| Expliciter la résilience hass.io      |
+
+
+
 {% include comments.md %}
