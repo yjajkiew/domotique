@@ -78,7 +78,7 @@ Bien entendu pour communiquer avec le serveur le raspberry passe bien par intern
  - pour les configurations nginx et certificat SSL la documentation de Home Assistant fournit tout ce qu'il faut : [voir documentation](https://www.home-assistant.io/docs/ecosystem/nginx_subdomain/)
  - ma configuration autossh est la suivante
  
- ```
+ ```json
  {
   "hostname": "mondomainessh",
   "ssh_port": "22",
@@ -108,7 +108,7 @@ Cette section détaille comment obtenir les données de supervision. Pour tout c
 Home Assistant fourni une intégration "[System Monitor](https://www.home-assistant.io/integrations/systemmonitor/)" qui permet de superviser les ressources physiques.
 Pour cela il suffit d'ajouter la configuration suivante au niveau de l'attribut sensor du fichier configuration.yaml
 
-```
+```yaml
 sensor:
   # System monitor
   - platform: systemmonitor
@@ -140,7 +140,7 @@ Avec Hassio vous pouvez installer en quelques clics le [Add-On Glances](https://
 
 A partir de Glances il est possible de compléter les sensors de supervision décris plus haut. Dans mon cas j'ai souhaité récupérer le nombre de containers en ajoutant la configuration suivante dans le fichier configuration.yaml :
 
-```
+```yaml
 sensor:
   - platform: glances
     host: !secret glances_host
@@ -155,7 +155,7 @@ sensor:
 
 En plus des sensors décris ci-dessus j'en ai ajouté quelques-uns natifs comme le uptime, la taille de la base de données, et la taille des logs via la configuration suivante :
 
-```
+```yaml
 sensor:
   # UpTime
   - platform: uptime
@@ -168,7 +168,7 @@ sensor:
 
 Je suis allé également un peu plus loin en utilisant les [templates](https://www.home-assistant.io/integrations/template/) de Home Assistant pour récupérer et calculer : le nombre de sensors, le nombre de lumières, le nombre de devices connus sur mon réseau, le nombre d'automatisations, le nombre de volets.
 
-```
+```yaml
 {% raw %}
 sensor:
   # templates
@@ -213,7 +213,7 @@ Une des premières choses que j'ai mis en place lorsque j'ai commencé à avoir 
 
 Son installation est simple via Hassio, ma configuration est la suivante :
 
-```
+```json
 {
   "max_snapshots_in_hassio": 10,
   "max_snapshots_in_google_drive": 10,
@@ -234,7 +234,7 @@ Ainsi en cas de problèmes ou de réinstallation je peux restaurer un de ces bac
 Avant d'entrer dans les configurations je vous invite à utiliser les [secrets](https://www.home-assistant.io/docs/configuration/secrets/) : il suffit de créer un fichier secrets.yaml dans le dossier config pour y mettre tous les configurations sensibles tels que les IPs et mots de passe pour ensuite les inclure dans le fichier configuration.yaml
 
 Configuration HTTP (absolument nécessaire lorsque Home Assistant est exposé derrière un reverse proxy nginx par exemple) :
-```
+```yaml
 http:
   # For extra security set this to only accept connections on localhost if NGINX is on the same machine
   # server_host: 127.0.0.1
@@ -247,21 +247,21 @@ http:
 ```
 
 Si dans la partie [supervision](#supervision) vous monitorez la taille de la BDD et des logs il faut autoriser la lecture de ces fichiers à travers la configuration suivante :
-```
+```yaml
 homeassistant:
   whitelist_external_dirs: 
     - '/config/'
 ```
 
 Activer les logs :
-```
+```yaml
 # Activate logs
 logger:
   default: info
 ```
 
 Activer le sensor "updater" qui permet de prévenir lorsqu'une mise à jour est disponible :
-```
+```yaml
 # set hassio updater
 updater:
   reporting: false
@@ -269,12 +269,12 @@ updater:
 ```
 
 Activer la gestion des entités "personnes" depuis l'interface de configuration de Home Assistant :
-```
+```yaml
 person: # enable persons manager from UI
 ```
 
 Désactiver le discovery automatique de Google Cast (à chaque démarrage Home Assistant découvre le cast de ma box android tv et émet une notification qui ne m'intéresse pas) :
-```
+```yaml
 discovery:
   ignore:
     - google_cast # ignore google cast from my android tv
@@ -305,7 +305,7 @@ Ce composant n'est pas disponible en tant qu'Add-on Hassio installable en quelqu
 [Breaking changes](https://github.com/custom-components/breaking_changes) est un module qui va permettre de comparer votre configuration par rapport à la prochaine version de Home Assistant disponible et de prévenir du nombre de "potential breaking changes". Plutôt pratique pour anticiper les mises à jour sans avoir à scruter tout le changelog à chaque release.
 
 Après installation le module est à activer en mettant ceci dans la fichier configuration.yaml :
-```
+```yaml
 # activate custom component "breaking changes"
 breaking_changes:
 ```
