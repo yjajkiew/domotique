@@ -21,6 +21,23 @@ Pour ma part je suis parti sur **Hassio** plutôt que sur l'installation standal
 1. TOC
 {:toc}
 
+## Pourquoi choisir Home Assistant ?
+
+Lorsqu'il s'agit de domotiser son domicile le choix de l'orchestrateur est crucial puisqu'il est central : il doit pouvoir recueillir des informations venant de divers systèmes, également en commander certains, et bien entendu pouvoir fournir une interface d'utilisation simple et efficace pour restituer tout cela.
+
+Pour ma part je ne souhaitais absolument pas partir vers une solution propriétaire, quelle soit logicielle ou matérielle *(type box domotique toute prête)* pour faciliter son évolution, sa scalabilité, et surtout rester maître de sa maîtrise.
+
+Quand on regarde l'écosystème des solutions domotiques logicielles globalement les plus courantes sont Jeedom, Domotics, Jeedom, OpenHab et Home Assistant.
+
+Les éléments qui m'ont vraiment séduis chez Home Assistant sont les suivants :
+ - open source
+ - communauté active
+ - se connecte avec un grand nombre de systèmes différents nativement (pour mes besoins actuels et besoins futurs)
+ - une documentation extrêmement fournie et claire (ça c'est un point très important)
+ - la configuration est simple via YML
+ - l'interface graphique est séduisante
+ - le support natif des PWA et des push notifications
+
 ## Installation
 
 Si vous êtes passé par les pages [matériel](/materiel) ou [architecture](/architecture) vous aurez compris que j'ai installé Hassio sur mon Raspberry Pi. A terme je souhaite passer sur du matériel plus robuste avec une installation sur un mini PC fanless car sur raspberry les nombreux accès en écriture sur la carte SD ont tendance à la flinguer... Mais pour le moment ça fait très bien l'affaire puisque ça permet de réaliser mes installations et configurations, sachant que niveau performances un RPI tient très bien la route pour le moment.
