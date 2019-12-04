@@ -1,0 +1,263 @@
+- id: '1569514492243'
+  alias: Manon home notification
+  trigger:
+  - entity_id: person.manon
+    from: not_home
+    platform: state
+    to: home
+  condition: []
+  action:
+  - service: notify.firebase
+    data:
+      message: Manon est à la maison
+      target: OnePlus5_Yann
+      data:
+        icon: "/local/manon.png"
+  - service: system_log.write
+    data_template:
+      message: 'Manon home notification'
+      level: info
+    
+    
+- id: '1569577571785'
+  alias: Yann home notification
+  trigger:
+  - entity_id: person.yann
+    from: not_home
+    platform: state
+    to: home
+  condition: []
+  action:
+  - service: notify.firebase
+    data:
+      message: Yann est à la maison
+      target: OnePlus5t_Manon
+      data:
+        icon: "/local/yann.jpg"
+  - service: system_log.write
+    data_template:
+      message: 'Yann home notification'
+      level: info
+    
+    
+- id: '1569590992111'
+  alias: Update hassio notification
+  trigger:
+  - entity_id: binary_sensor.updater
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: Update Hass.io available
+      target: OnePlus5_Yann
+    service: notify.firebase
+    
+    
+- id: '1569834612357'
+  alias: Monitoring disk usage notification
+  trigger:
+  - above: '80'
+    entity_id: sensor.disk_use_percent
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      message: disk usage > 80%
+    service: notify.firebase_oneplus5_yann
+  - service: system_log.write
+    data_template:
+      message: 'Disk usage > 80%'
+      level: info
+
+    
+- id: '15706293690291'
+  alias: Bedroom wake-up light
+  trigger:
+  - minutes: /1
+    platform: time_pattern
+    seconds: 0
+  condition: # Yann is home and today is workday and time = start time set
+  - condition: state
+    entity_id: person.yann
+    state: home
+  - condition: state
+    entity_id: 'binary_sensor.workday_sensor'
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.wakeup_weekday
+    state: 'on'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M:00")) ==
+      states("input_datetime.wakeup_weekday_timestart") }}'
+  action:
+  - data:
+      brightness: 1
+    entity_id: light.chambre
+    service: light.turn_on
+  - delay: 00:00:10
+  - data:
+      brightness: 100
+      entity_id: light.chambre
+      transition: 600
+    service: light.turn_on
+    
+    
+- id: '1570629959292'
+  alias: Bedroom light auto turn off
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition: # Yann is home and today is workday and time = stop time set
+  - condition: state
+    entity_id: person.yann
+    state: home
+  - condition: state
+    entity_id: 'binary_sensor.workday_sensor'
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.wakeup_weekday
+    state: 'on'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M:00")) ==
+      states("input_datetime.wakeup_weekday_timestop") }}'
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.chambre
+  - delay:
+      seconds: 1
+  - service: light.turn_on
+    data:
+      entity_id: light.chambre
+      brightness: 100
+  - delay:
+      seconds: 1
+  - service: light.turn_off
+    data:
+      entity_id: light.chambre
+      
+- id: '15706293690293'
+  alias: Sèche serviette auto turn on
+  trigger:
+  - platform: time
+    at: 07:05:00
+  condition: # workday and (Manon or Yann is home)
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: person.yann
+        state: home
+      - condition: state
+        entity_id: person.manon
+        state: home
+  action:
+  - service: switch.turn_on
+    data:
+      entity_id: switch.fibaro_secheserviette_switch
+  - service: system_log.write
+    data_template:
+      message: 'Turn on Sèche Serviette and wait 45mn'
+      level: info
+  - delay: "00:30:00"
+  - service: switch.turn_off
+    data:
+      entity_id: switch.fibaro_secheserviette_switch
+  - service: system_log.write
+    data_template:
+      message: 'Turn off Sèche Serviette after 45mn'
+      level: info
+    
+      
+- id: '15706299592911'
+  alias: Ouverture des volets
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition: # automation enabled and time is right
+    - condition: state
+      entity_id: input_boolean.cover_automation
+      state: 'on'
+    - condition: template
+      value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_open") }}'
+  action:
+  - service: cover.open_cover
+    data:
+      entity_id: group.covers_all_open
+  - service: system_log.write
+    data_template:
+      message: 'Automatically open covers'
+      level: info
+      
+      
+- id: '15706299592912'
+  alias: Fermeture des volets
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition: # automation enabled and time is right
+    - condition: state
+      entity_id: input_boolean.cover_automation
+      state: 'on'
+    - condition: template
+      value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_close") }}'
+  action:
+  - service: cover.close_cover
+    data:
+      entity_id: group.covers_all_open
+  - service: system_log.write
+    data_template:
+      message: 'Automatically close covers'
+      level: info
+
+
+- id: '15706299592920'
+  alias: Notification poubelles
+  trigger:
+    platform: time
+    at: "18:00:00"
+  condition:
+   - condition: state
+     entity_id: calendar.poubelles
+     state: 'on'
+  action:
+  - data:
+      message: "{{ state_attr('calendar.poubelles', 'message') }}"
+      data:
+        icon: "/local/delete-circle.png"
+    service: notify.firebase
+      
+
+
+- id: '15706299592930'
+  alias: Vacuum
+  trigger:
+  - platform: time
+    at: "10:00:00"
+  condition: 
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+    - condition: template
+      value_template: "{{ not is_state('person.yann', 'home') }}"
+    - condition: template
+      value_template: "{{ not is_state('person.manon', 'home') }}"
+    - condition: template
+      value_template: '{{ ((as_timestamp(now())|int)-(as_timestamp(state_attr("vacuum.xiaomi_vacuum_cleaner", "clean_stop"))|int)|int)//(60 * 60) >= 24 }}'
+  action:
+  - service: vacuum.start
+    data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+  - service: system_log.write
+    data_template:
+      message: 'Launch vacuum cleaner'
+      level: info
