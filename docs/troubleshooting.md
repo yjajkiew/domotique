@@ -15,7 +15,7 @@ comments: true
 ## Home Assistant ne se connecte plus à Google Calendar
 
 Sans raison apparente Home Assistant n'arrivait plus à se connecter à calendrier Google.
-J'ai trouvé la solution sur github : https://github.com/home-assistant/home-assistant/issues/27210#issuecomment-538891558
+J'ai trouvé la solution sur github : [https://github.com/home-assistant/home-assistant/issues/27210#issuecomment-538891558](https://github.com/home-assistant/home-assistant/issues/27210#issuecomment-538891558)
 
 1. supprimer le fichier /config/.google.token
 2. commenter l'intégration google dans votre fichier configuration.yaml
