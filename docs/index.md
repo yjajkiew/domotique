@@ -39,7 +39,7 @@ Les soir  et week-end je fais de la [photographie](https://instagram.com/yann.me
 <br/>
 <hr>
 
-## Support or Contact
+## Support / Contact
 
 Site web : [https://yann.me](https://yann.me)
 
