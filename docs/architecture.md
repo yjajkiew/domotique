@@ -19,7 +19,7 @@ J'ai posé les principes suivants pour construire et maintenir ma solution domot
  - **Privilégier l'existant au custom** : 
    - privilégier les addons, composants et intégrations de Home Assistant/Hass.io 
    - privilégier les devices du marché plutôt que de construire des capteurs maison *(e.g. capteur de température Z-Wave VS construction et programmation d'un capteur sous arduino)*
- - **Approche Best of breed** : incorporer du matériel ou une technologie qui répondent à mes besoins
+ - **Approche Best of breed** : incorporer du matériel et des technologies qui répondent à mes besoins plutôt que du "all in one"
  - **Fallback obligatoire** : étant donné qu'on est sur installation "maison" sans garantie de fonctionnement il me semble vital d'avoir des solutions de contournement pour que mes appareils puissent toujours fonctionner *(mes volets doivent toujours être utilisable même si Home Assistant tombe, mon sèche serviette doit toujours être allumable manuellement si Home Assistant tombe, etc.)*
  - **Ne pas installer d'éléments de sécurité "durs"** :
    - Je m'interdis : serrure connectée, alarme qui repose sur cette solution domotique, etc.
