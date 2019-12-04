@@ -1,0 +1,341 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+################
+## WEB SERVER ##
+################
+
+http:
+  # For extra security set this to only accept connections on localhost if NGINX is on the same machine
+  # server_host: 127.0.0.1
+  # Update this line to be your domain
+  base_url: !secret base_url
+  use_x_forwarded_for: true
+  # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
+  # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
+  trusted_proxies: !secret http_trusted_proxies
+
+####################
+## HOME ASSISTANT ##
+####################
+
+homeassistant:
+  whitelist_external_dirs: 
+    - '/config/'
+  customize:
+    person.yann:
+      entity_picture: /local/yann.jpg
+    person.manon:
+      entity_picture: /local/manon.png
+    calendar.poubelles:
+      icon: mdi:delete-circle
+    script.seche_serviette:
+      icon: mdi:radiator
+
+# data rotation
+recorder:
+  purge_keep_days: 5
+  purge_interval: 1
+  exclude:
+    entities:
+      - sun.sun # Don't record sun data
+      - sensor.last_boot # Comes from 'systemmonitor' sensor platform
+      - sensor.date
+      - binary_sensor.updater
+      - sensor.transmission_active_torrents
+      - sensor.transmission_completed_torrents
+      - sensor.transmission_down_speed
+      - sensor.transmission_paused_torrents
+      - sensor.transmission_started_torrents
+      - sensor.transmission_status
+      - switch.transmission_turtle_mode
+      - sensor.transmission_up_speed
+
+# set hassio updater
+updater:
+  reporting: false
+  include_used_components: false
+
+# Activate logs
+logger:
+  default: info
+  
+person: # enable persons manager from UI
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+# Enable theming
+frontend:
+  themes: !include themes.yaml
+  
+breaking_changes: # activate custom component "breaking changes"
+
+discovery:
+  ignore:
+#    - google_cast # ignore google cast from my android tv > it doesn't work
+#    - glance # ignore glances as it is already defined below > it doesn't work
+
+#############
+## ZONES   ##
+#############
+zone:
+  - name: Capgemini
+    latitude: !secret zone_capgemini_latitude
+    longitude: !secret zone_capgemini_longitude
+    radius: 100
+    icon: mdi:office-building
+  - name: MorganView
+    latitude: !secret zone_morganview_latitude
+    longitude: !secret zone_morganview_longitude
+    radius: 100
+    icon: mdi:office-building
+  - name: Auneau
+    latitude: !secret zone_auneau_latitude
+    longitude: !secret zone_auneau_longitude
+    radius: 100
+    icon: mdi:account-group
+  - name: Jumois
+    latitude: !secret zone_jumois_latitude
+    longitude: !secret zone_jumois_longitude
+    radius: 100
+    icon: mdi:account-group
+    
+
+#############
+## INPUTS  ##
+#############
+
+input_boolean:
+  wakeup_weekday:
+    name: Activer alarme lumineux
+    icon: mdi:power
+  cover_automation:
+    name: Activer automatisation des volets
+    icon: mdi:window-shutter
+
+input_datetime:
+  wakeup_weekday_timestart:
+    name: Heure de début
+    has_date: false
+    has_time: true
+  wakeup_weekday_timestop:
+    name: Heure de fin
+    has_date: false
+    has_time: true
+    
+input_number:
+  cover_day_offset:
+    name: Minutes après le lever du soleil
+    icon: mdi:timer
+    min: -60
+    max: 60
+    step: 10
+  cover_night_offset:
+    name: Minutes après le coucher du soleil
+    icon: mdi:timer
+    min: -60
+    max: 60
+    step: 10
+
+#############
+## SENSORS ##
+#############
+
+zwave:
+  usb_path: /dev/serial/by-id/usb-0658_0200-if00
+  network_key: !secret zwave_network_key
+
+# Xiaomi Robot Vacuum
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret vacuum_host
+    token: !secret vacuum_token
+
+# Somfy Connexoon : doesn't work since december 2019 > now I use the "Somfy" integration component
+#tahoma:
+#  username: !secret tahoma_username
+#  password: !secret tahoma_password
+  
+# Somfy API
+somfy:
+  client_id: !secret somfy_client_id
+  client_secret: !secret somfy_client_secret
+
+# Linky
+linky:
+  - username: !secret enedis_user
+    password: !secret enedis_password
+
+# Speedtest
+speedtestdotnet:
+  scan_interval: 03:00
+  
+glances:
+  - host: !secret glances_host
+  - port: !secret glances_port
+
+# binary sensors
+binary_sensor:
+  - platform: workday # enable sensor workday to find out if holiday or not
+    country: FRA
+
+# other sensors
+sensor:
+  # time sensor
+  - platform: time_date
+    display_options:
+      - 'time'
+  # System monitor
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: processor_use
+      - type: network_in
+        arg: eth0
+      - type: network_out
+        arg: eth0
+      - type: throughput_network_in
+        arg: eth0
+      - type: throughput_network_out
+        arg: eth0
+      - type: last_boot
+  # UpTime
+  - platform: uptime
+  # Filesize monitoring
+  - platform: filesize
+    file_paths:
+      - /config/home-assistant_v2.db
+      - /config/home-assistant.log
+  # hassio version
+  - platform: version
+  # templates
+  - platform: template
+    sensors:
+      sensors_count: # needed to automate calling homeassistant.update_entity periodically
+        friendly_name: "Sensors count"
+        value_template: "{{ states.sensor|list|length }}"
+        icon_template: mdi:eye
+        entity_id: sensor.time # refresh this count every minute
+      lights_count:
+        friendly_name: "Lights count"
+        value_template: "{{ states.light|list|length }}"
+        icon_template: mdi:lightbulb
+        entity_id: group.all_lights
+      devices_count:
+        friendly_name: "Devices count"
+        value_template: "{{states.group.all_devices.attributes.entity_id|list|length}}"
+        icon_template: mdi:robot-industrial
+        entity_id: group.all_devices
+      automations_count:
+        friendly_name: "Automations count"
+        value_template: "{{states.group.all_automations.attributes.entity_id|list|length}}"
+        icon_template: mdi:robot
+        entity_id: group.all_automations
+      covers_count:
+        friendly_name: "Covers count"
+        value_template: "{{states.group.all_covers.attributes.entity_id|list|length}}"
+        icon_template: mdi:window-closed
+        entity_id: group.all_covers
+      trash_status:
+        friendly_name: "Poubelles"
+        friendly_name_template: "{{ state_attr('calendar.poubelles', 'message') }}"
+        value_template: "{{ states('calendar.poubelles') }}"
+        icon_template: mdi:delete-circle
+      period_of_day:
+        friendly_name: 'period of the day'
+        value_template: >-
+          {% if (as_timestamp(states.sun.sun.attributes.next_dusk)) - (as_timestamp(states.sun.sun.attributes.next_setting)) < 0 %}
+            dusk
+          {% elif (as_timestamp(states.sun.sun.attributes.next_rising)) - (as_timestamp(states.sun.sun.attributes.next_dawn)) < 0 %}
+            dawn
+          {% elif (states.sun.sun.attributes.elevation) < -4 %}
+            night
+          {% else %}
+            day
+          {% endif %}
+        icon_template: >-
+          {% if (as_timestamp(states.sun.sun.attributes.next_dusk)) - (as_timestamp(states.sun.sun.attributes.next_setting)) < 0 %}
+            mdi:weather-sunset-down
+          {% elif (as_timestamp(states.sun.sun.attributes.next_rising)) - (as_timestamp(states.sun.sun.attributes.next_dawn)) < 0 %}
+            mdi:weather-sunset-up
+          {% elif (states.sun.sun.attributes.elevation) < -4 %}
+            mdi:weather-night
+          {% else %}
+            mdi:weather-sunny
+          {% endif %}
+      cover_auto_open:
+        friendly_name: 'Ouverture des volets à'
+        value_template: '{{ (as_timestamp(states.sun.sun.attributes.next_rising) + (states("input_number.cover_day_offset") | int)  * 60)  | timestamp_custom("%H:%M") }}'
+        entity_id: [sun.sun, input_number.cover_day_offset]
+        icon_template: mdi:clock
+      cover_auto_close:
+        friendly_name: 'Fermeture des volets à'
+        value_template: '{{ (as_timestamp(states.sun.sun.attributes.next_setting) + (states("input_number.cover_night_offset") | int)  * 60)  | timestamp_custom("%H:%M") }}'
+        entity_id: [sun.sun, input_number.cover_night_offset]
+        icon_template: mdi:clock
+      
+      
+
+##############
+## SERVICES ##
+##############
+
+# for google calendar
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
+  
+ 
+meteo_france:
+  - city: 'Liré'
+    monitored_conditions:
+      - rain_chance
+      - freeze_chance
+      - thunder_chance
+      - snow_chance
+      - weather
+      - next_rain
+      - wind_speed
+      - temperature
+      - weather_alert
+
+# Push notifications
+notify:
+  - platform: html5
+    name: firebase
+    vapid_pub_key: !secret firebase_vapid_pub_key
+    vapid_prv_key: !secret firebase_vapid_prv_key
+    vapid_email: !secret vapid_email
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# device tracker
+device_tracker:
+# nmap : track main router
+  - platform: nmap_tracker
+    hosts: 192.168.0.1-30
+    exclude: !secret device_tracker_exclude # exclude home assistant internal ip
+    scan_options: "-F –host-timeout 10s"
+    interval_seconds: 40
+    consider_home: 0:05:00
+# netgear : track devices (more reliable than nmap but changing state is not working)
+#  - platform: netgear
+#    password: !secret netgear_password
+#    accesspoints: !secret netgear_accesspoints # routeur AP salon
+#    interval_seconds: 60
+#    consider_home: 0:05
+
+# transmission client
+transmission:
+  host: !secret transmission_host
+  port: !secret transmission_port
+  username: !secret transmission_username
+  password: !secret transmission_password
+  scan_interval: 60
+  
