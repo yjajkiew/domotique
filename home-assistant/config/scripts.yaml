@@ -1,0 +1,10 @@
+# launch "sèche serviette" for 30mn
+seche_serviette:
+  sequence:
+  - service: switch.turn_on
+    data:
+      entity_id: switch.fibaro_secheserviette_switch
+  - delay: '00:30:00'
+  - service: switch.turn_off
+    data:
+      entity_id: switch.fibaro_secheserviette_switch
