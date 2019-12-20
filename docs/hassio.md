@@ -21,6 +21,25 @@ Pour ma part je suis parti sur **Hassio** plutôt que sur l'installation standal
 1. TOC
 {:toc}
 
+
+## Dashboards
+
+### Accueil
+
+<a href="/assets/dashboard-home.jpg" target="_blank"><img src="/assets/dashboard-home.jpg" /></a>
+
+### Devices
+
+<a href="/assets/dashboard-devices.jpg" target="_blank"><img src="/assets/dashboard-devices.jpg" /></a>
+
+### Electricité
+
+<a href="/assets/dashboard-electricity.jpg" target="_blank"><img src="/assets/dashboard-electricity.jpg" /></a>
+
+### Monitoring
+
+<a href="/assets/dashboard-monitoring.jpg" target="_blank"><img src="/assets/dashboard-monitoring.jpg" /></a>
+
 ## Pourquoi choisir Home Assistant ?
 
 Lorsqu'il s'agit de domotiser son domicile le choix de l'orchestrateur est crucial puisqu'il est central : il doit pouvoir recueillir des informations venant de divers systèmes, également en commander certains, et bien entendu pouvoir fournir une interface d'utilisation simple et efficace pour restituer tout cela.
@@ -158,13 +177,9 @@ Avec Hassio vous pouvez installer en quelques clics le [Add-On Glances](https://
 A partir de Glances il est possible de compléter les sensors de supervision décris plus haut. Dans mon cas j'ai souhaité récupérer le nombre de containers en ajoutant la configuration suivante dans le fichier configuration.yaml :
 
 ```yaml
-sensor:
-  - platform: glances
-    host: !secret glances_host
-    port: !secret glances_port
-    version: 3
-    resources:
-      - 'docker_active'
+glances:
+  - host: !secret glances_host
+  - port: !secret glances_port
 ```
 
 
@@ -331,27 +346,21 @@ breaking_changes:
 
 ### Sensors : capteurs et services
 
+- [z-wave](https://www.home-assistant.io/integrations/zwave/) : permet de gérer le contrôleur z-wave connecté au RPI3
+- [xiaomi mi robot](https://www.home-assistant.io/integrations/vacuum.xiaomi_miio/) : permet de contrôler l'aspirateur robot
+- [somfy api](https://www.home-assistant.io/integrations/somfy/) : permet de contrôler mes volets (auparavant j'utilisais l'intégration [tahoma](https://www.home-assistant.io/integrations/tahoma/) qui fonctionne avec connexoon mais les APIs non officielles ont été dépréciées)
+- [linky](https://www.home-assistant.io/integrations/linky/) : permet de superviser ma consommation électrique
+- [speedtest](https://www.home-assistant.io/integrations/speedtestdotnet/) : permet de superviser l'état de ma connexion internet
+- [workday](https://www.home-assistant.io/integrations/workday/) : permet de connaître si le jour courant est un jour travaillé (avec prise en compte des jours fériés)
+- [google](https://www.home-assistant.io/integrations/google_assistant/) : pour importer mon calendrier des poubelles et recevoir des notifications quand je dois les sortir
+- [transmission](https://www.home-assistant.io/integrations/transmission/) : permet de contrôler et superviser mon client torrent
 
 
-## Dashboards
 
 ### Thèmes et custom cards
 
-### Accueil
+TODO
 
-<a href="/assets/dashboard-home.jpg" target="_blank"><img src="/assets/dashboard-home.jpg" /></a>
-
-### Devices
-
-<a href="/assets/dashboard-devices.jpg" target="_blank"><img src="/assets/dashboard-devices.jpg" /></a>
-
-### Electricité
-
-<a href="/assets/dashboard-electricity.jpg" target="_blank"><img src="/assets/dashboard-electricity.jpg" /></a>
-
-### Monitoring
-
-<a href="/assets/dashboard-monitoring.jpg" target="_blank"><img src="/assets/dashboard-monitoring.jpg" /></a>
 
 
 {% include comments.md %}
