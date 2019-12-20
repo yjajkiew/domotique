@@ -112,7 +112,7 @@ Personnellement j'ai désactivé cette automatisation mais je la conserve en doc
  
  **Fonctionnement:**
 
-Le fonctionnement ici est simple mais l'objectif c'est de le rendre paramétrable facilement depuis l'interface des dashboards. Pour cela il faut :
+Le fonctionnement ici est simple mais l'objectif est de rendre cette automatisation paramétrable facilement depuis l'interface des dashboards. Pour cela il faut :
  - créer des inputs (1 booléen pour activer ou désactiver l'automatisation, et 2 nombres pour gérer les offsets ouverture et fermeture)
  - créer des templates en fonction de ces inputs et des heures de levé/couché 
  - créer un groupe avec ces éléments pour un affichage facile dans le dashboard
@@ -344,13 +344,21 @@ Pour ce dernier point la technique est de calculer chaque matin si le dernier pa
  
 ## Réveil lumineux
 
-**Objectif :** recevoir une notification lorsque le conjoint arrive à la maison
+**Objectif :** allumer progressivement la lampe de chevet de ma chambre uniquement lorsque je suis présenet et que c'est un jour travaillé
 
 **Pré-requis :**
- - toto
+ - des ampoules connectées (dans mon cas Philips Hue)
+ - intégration du binary sensor [workday](https://www.home-assistant.io/integrations/workday/) pour savoir si c'est un jour travaillé (du lundi au vendredi, jours feriés exclus pris en charge directement dans le binary sensor)
+ - [détection de présence](https://www.home-assistant.io/getting-started/presence-detection/)
  
  **Fonctionnement:**
+Le fonctionnement ici est simple mais l'objectif est de rendre ce réveil lumineux paramétrable facilement depuis l'interface des dashboards. Pour cela il faut :
+ - créer des inputs (1 booléen pour activer ou désactiver l'automatisation, et 2 heures pour gérer le début et la fin)
+ - créer un groupe avec ces éléments pour un affichage facile dans le dashboard
+ 
+Ce qui donne ceci en front :
 
+<img src="/assets/alarme-UI.png" />
 
 ***Fichier configuration.yaml***
 ```yaml
@@ -362,8 +370,12 @@ input_boolean:
     initial: off
 
 input_datetime:
-  wakeup_weekday_time:
-    name: Heure
+  wakeup_weekday_timestart:
+    name: Heure de début
+    has_date: false
+    has_time: true
+  wakeup_weekday_timestop:
+    name: Heure de fin
     has_date: false
     has_time: true
 {% endraw %}
@@ -377,7 +389,8 @@ wakeup_week_day_panel:
   name: Alarme de semaine
   entities:
     - input_boolean.wakeup_weekday
-    - input_datetime.wakeup_weekday_time
+    - input_datetime.wakeup_weekday_timestart
+    - input_datetime.wakeup_weekday_timestop
 {% endraw %}
 ```
 
@@ -385,64 +398,75 @@ wakeup_week_day_panel:
 ***Fichier automations.yaml***
 ```yaml
 {% raw %}
-- id: '1570629369029'
+- id: '15706293690291'
   alias: Bedroom wake-up light
   trigger:
-  - platform: time_pattern
-    minutes: '/1'
+  - minutes: /1
+    platform: time_pattern
     seconds: 0
-  condition:
+  condition: # Yann is home and today is workday and time = start time set
   - condition: state
     entity_id: person.yann
     state: home
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+  - condition: state
+    entity_id: 'binary_sensor.workday_sensor'
+    state: 'on'
   - condition: state
     entity_id: input_boolean.wakeup_weekday
     state: 'on'
   - condition: template
-    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M:00")) == states("input_datetime.wakeup_weekday_time") }}'
+    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M:00")) ==
+      states("input_datetime.wakeup_weekday_timestart") }}'
   action:
-  - service: light.turn_on
-    entity_id: light.chambre
-    data:
+  - data:
       brightness: 1
+    entity_id: light.chambre
+    service: light.turn_on
   - delay: 00:00:10
+  - data:
+      brightness: 100
+      entity_id: light.chambre
+      transition: 600
+    service: light.turn_on
+    
+- id: '1570629959292'
+  alias: Bedroom light auto turn off
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition: # Yann is home and today is workday and time = stop time set
+  - condition: state
+    entity_id: person.yann
+    state: home
+  - condition: state
+    entity_id: 'binary_sensor.workday_sensor'
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.wakeup_weekday
+    state: 'on'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M:00")) ==
+      states("input_datetime.wakeup_weekday_timestop") }}'
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.chambre
+  - delay:
+      seconds: 1
   - service: light.turn_on
     data:
       entity_id: light.chambre
       brightness: 100
-      transition: 600
-    
-- id: '1570629959290'
-  alias: Bedroom light auto turn off
-  trigger:
-  - hours: '08'
-    minutes: '00'
-    platform: time_pattern
-    seconds: '00'
-  condition:
-  - condition: state
-    entity_id: person.yann
-    state: home
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-  action:
-  - data:
+  - delay:
+      seconds: 1
+  - service: light.turn_off
+    data:
       entity_id: light.chambre
-    service: light.turn_off
 {% endraw %}
 ```
+*Je fais clignoter l'ampoule avant de l'éteindre car cela me donne une indication visuelle qu'il est par exemple 07h55 lorsque je finis de me préparer le matin.*
+
 
 ## Notification quand il faut sortir les poubelles
 
