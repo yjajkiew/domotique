@@ -48,6 +48,7 @@ Au final pour être fiable je cumule :
  
 ***Fichier automations.yaml***
 ```yaml
+{% raw %}
 - id: '1569514492243'
   alias: Manon home notification
   trigger:
@@ -88,6 +89,7 @@ Au final pour être fiable je cumule :
     data_template:
       message: 'Yann home notification'
       level: info
+{% endraw %}
 ```
 
 **Astuces** :
@@ -131,6 +133,7 @@ Tous les jours à 07h05 l'automatisation vérifie certaines conditions pour savo
 
 ***Fichier automations.yaml***
 ```yaml
+{% raw %}
 - id: '15706293690293'
   alias: Sèche serviette auto turn on
   trigger:
@@ -166,6 +169,7 @@ Tous les jours à 07h05 l'automatisation vérifie certaines conditions pour savo
     data_template:
       message: 'Turn off Sèche Serviette after 45mn'
       level: info
+{% endraw %}
 ```
  
  
@@ -188,11 +192,14 @@ Tous les jours à 10h l'automatisation vérifie certaines conditions pour lancer
 
 Pour ce dernier point la technique est de calculer chaque matin si le dernier passage de l'aspirateur date de plus de 24h via un template :
 ```yaml
+{% raw %}
 {{ ((as_timestamp(now())|int)-(as_timestamp(state_attr("vacuum.xiaomi_vacuum_cleaner", "clean_stop"))|int)|int)//(60 * 60) >= 24 }}
+{% endraw %}
 ```
 
 ***Fichier automations.yaml***
 ```yaml
+{% raw %}
 - id: '15706299592930'
   alias: Vacuum
   trigger:
@@ -216,6 +223,7 @@ Pour ce dernier point la technique est de calculer chaque matin si le dernier pa
     data_template:
       message: 'Launch vacuum cleaner'
       level: info
+{% endraw %}
 ```
  
  
@@ -231,6 +239,7 @@ Pour ce dernier point la technique est de calculer chaque matin si le dernier pa
 
 ***Fichier configuration.yaml***
 ```yaml
+{% raw %}
 input_boolean:
   wakeup_weekday:
     name: 'Enable wakeup light'
@@ -242,16 +251,19 @@ input_datetime:
     name: Heure
     has_date: false
     has_time: true
+{% endraw %}
 ```
 
 
 ***Fichier groups.yaml***
 ```yaml
+{% raw %}
 wakeup_week_day_panel:
   name: Alarme de semaine
   entities:
     - input_boolean.wakeup_weekday
     - input_datetime.wakeup_weekday_time
+{% endraw %}
 ```
 
 
