@@ -101,6 +101,8 @@ Personnellement j'ai désactivé cette automatisation mais je la conserve en doc
 
 ## Allumer et éteindre le sèche serviette
 
+## Lancement automatique de l'aspirateur
+
 ## Réveil lumineux
 
 
