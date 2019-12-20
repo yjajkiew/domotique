@@ -14,7 +14,7 @@ aux_links:
 search_enabled: true
 
 # Footer content appears at the bottom of every page's main content
-footer_content: "Copyright &copy; 2019-2020bv  Yann Jajkiewicz."
+footer_content: "Copyright &copy; 2019-2020  Yann Jajkiewicz."
 
 # Color scheme currently only supports "dark" or nil (default)
 color_scheme: nil
