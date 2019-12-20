@@ -121,7 +121,7 @@ Ce qui donne ceci en front :
 
 <img src="/assets/covers-UI.png" />
 
-*lorsque les sliders sont modifiés les heures affichées sont également modifiées en temps réel à cause du référencement des inputs dans le template des heures affichées*
+*Lorsque les sliders sont modifiés les heures affichées sont également modifiées en temps réel à cause du référencement des inputs dans le template des heures affichées, l'offset pouvant être négatif.*
 
 ***Créer les inputs pour les offset : configuration.yaml***
 ```yaml
