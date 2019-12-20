@@ -21,7 +21,7 @@ Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa 
 
 | Nom                              | Modèle   | Quantité | Image    | Description |
 |:---------------------------------|:---------|:---------|:---------|:------------|
-| [Philips Hue Bridge 2.0](https://amzn.to/31RES3R)    | BSB002   |  1       | <img src="https://tinyurl.com/y4lagxb7" width="100"/>     |      todo       |
+| [Philips Hue Bridge 2.0](https://amzn.to/31RES3R)    | BSB002   |  1       | <img src="https://tinyurl.com/y4lagxb7" width="100"/>     |      Box ZigBee de Philips permettant de piloter les ampoules Philips Hue et les prises connectées OSRAM       |
 | [Ampoule Hue White E27](https://tinyurl.com/yykjqsmh)   | LWB006   |  2       | <img src="https://tinyurl.com/y6yfvx2e" width="100"/>     |   Lampe d'appoint dans le salon<br/>Lampe table de chevet de la chambre    |
 
 ## Prises électriques
@@ -37,10 +37,10 @@ Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa 
 
 | Nom                              | Modèle         | Quantité | Image    | Description |
 |:---------------------------------|:---------------|:---------|:---------|:------------|
-| Somfy moteur volet IO            |                |  3       |                                                           |      todo       |
-| Somfy commande SMOOVE Origin IO  |                |  2       | <img src="https://tinyurl.com/y6pjmqv4" width="100"/>     |     todo        |
-| Somfy commande SMOOVE RS 100 IO  |                |  1       | <img src="https://tinyurl.com/y62jkbnk" width="100"/>     |     todo        |
-| Porte de garage Rollixo IO       |                |  1       |                                                           |     todo        |
+| Somfy moteur volet IO            |                |  3       |                                                           |      Moteur de volet piloté par la box Somfy Connexoon et donc pilotable également par API    |
+| Somfy commande SMOOVE Origin IO  |                |  2       | <img src="https://tinyurl.com/y6pjmqv4" width="100"/>     |     Commande de moteur Somfy physiques       |
+| Somfy commande SMOOVE RS 100 IO  |                |  1       | <img src="https://tinyurl.com/y62jkbnk" width="100"/>     |     Commande de moteur Somfy physique        |
+| Porte de garage Rollixo IO       |                |  1       |                                                           |     Porte de garage pilotable par la box Somfy Connexoon et donc pilotable également par API        |
 | [Somfy Connexoon](https://amzn.to/31Re3g6)    | 03660849507169 |  1       | <img src="https://tinyurl.com/y36vzd7n" width="100"/>     |     Permet de contrôler les volets et la porte de garage        |
 
 
@@ -71,10 +71,10 @@ Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa 
 
 | Nom                              | Modèle         | Quantité | Image    | Description |
 |:---------------------------------|:---------------|:---------|:---------|:------------|
-| [RackMatic Rack Serveur](https://amzn.to/2VjvMdM)           |  19" 9U        |  1       | <img src="https://tinyurl.com/y2tloshc" width="100"/>     |      todo       |
-| [Perel Bloc 8 Prises](https://amzn.to/2LTs47z)  |   19" 1U       |  1       | <img src="https://tinyurl.com/yxntelnn" width="100"/>     |     todo        |
-| [Lindy Panneau de Brassage](https://amzn.to/2pPJVDJ)  |  24 Ports Cat.6 STP  |  1       | <img src="https://tinyurl.com/yyvgp3wp" width="100"/>     |     todo        |
-| [D-Link Switch 24 ports Gigabit](https://amzn.to/2pRkcLd)   |  DGS-1100-24   |  1       | <img src="https://tinyurl.com/y37wsdg2" width="100"/>    |     todo        |
+| [RackMatic Rack Serveur](https://amzn.to/2VjvMdM)           |  19" 9U        |  1       | <img src="https://tinyurl.com/y2tloshc" width="100"/>     |      Rack d'accueil des câbles ethernet, switch, box, etc.       |
+| [Perel Bloc 8 Prises](https://amzn.to/2LTs47z)  |   19" 1U       |  1       | <img src="https://tinyurl.com/yxntelnn" width="100"/>     |     Bloc prises dédié au rack        |
+| [Lindy Panneau de Brassage](https://amzn.to/2pPJVDJ)  |  24 Ports Cat.6 STP  |  1       | <img src="https://tinyurl.com/yyvgp3wp" width="100"/>     |     Panneau de brassage qui récupère les arrivées filaires ethernet        |
+| [D-Link Switch 24 ports Gigabit](https://amzn.to/2pRkcLd)   |  DGS-1100-24   |  1       | <img src="https://tinyurl.com/y37wsdg2" width="100"/>    |     Switch global        |
 | [Netgear R7000](https://amzn.to/2OpGw94)   |  AC1900   |  1       | <img src="https://tinyurl.com/yyujzgkt" width="100"/>    |     - Routeur principal<br/>- Connecté à la LiveBox pour recevoir et propager internet <br/>- WiFi sur une partie de la maison        |
 | [Netgear D6400](https://amzn.to/31Rnmg6)   |  AC1600   |  1       | <img src="https://tinyurl.com/yxsws67x" width="100"/>    |  Routeur Wifi configuré en AP (access point) pour diffuser du Wifi dans le salon        |
 | Orange Livebox    |  V3   |  1       | <img src="https://tinyurl.com/y564fdyp" width="100"/>    |  Box Orange classique pour le réseau internet    |
