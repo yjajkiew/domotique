@@ -331,3 +331,52 @@ wakeup_week_day_panel:
 
 ## Notification quand il faut sortir les poubelles
 
+**Objectif :** recevoir une notification à 18h lorsque je dois les sortir les poubelles (bac ou recyclage selon les semaines)
+
+**Pré-requis :**
+ - intégration [calendrier google](https://www.home-assistant.io/integrations/calendar.google/)
+ - mettre en place un [sensor template](https://www.home-assistant.io/integrations/template/)
+ 
+ 
+**Fonctionnement:**
+J'ai créé un calendrier Google dédié à mes horaires de levée des poubelles : 1 semaine bac, 1 semaine recylage, décalages exceptionnels en fonction des jours fériés, le type (recyclage ou bac) dans le nom de l'événement.
+
+A partir de là j'ai pu intégrer uniquement ce calendrier dans Home Assistant et créer un template qui fournit une entité m'indiquant si le jour courant je dois sortir les poubelles et en mettant dans le nom de l'entité le nom de l'événement (bac ou recyclage).
+
+***Fichier configuration.yaml***
+```yaml
+{% raw %}
+sensor:
+  # templates
+  - platform: template
+    sensors:
+      trash_status:
+        friendly_name: "Poubelles"
+        friendly_name_template: "{{ state_attr('calendar.poubelles', 'message') }}"
+        value_template: "{{ states('calendar.poubelles') }}"
+        icon_template: mdi:delete-circle
+{% endraw %}
+```
+
+***Fichier automations.yaml***
+```yaml
+{% raw %}
+- id: '15706299592920'
+  alias: Notification poubelles
+  trigger:
+    platform: time
+    at: "18:00:00"
+  condition:
+   - condition: state
+     entity_id: calendar.poubelles
+     state: 'on'
+  action:
+  - data:
+      message: "{{ state_attr('calendar.poubelles', 'message') }}"
+      data:
+        icon: "/local/delete-circle.png"
+    service: notify.firebase
+{% endraw %}
+```
+
+
