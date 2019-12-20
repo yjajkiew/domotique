@@ -22,7 +22,7 @@ comments: false
 
 | Description               |
 |:-------------------------------|
-| TODO      |
+| Hassio/HomeAssistant : thèmes et custom cards      |
 
 
 
