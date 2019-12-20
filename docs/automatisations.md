@@ -82,8 +82,9 @@ Au final pour être fiable je cumule :
  - il est possible de notifier directement un device en précisant la target dans le service notify.firebase
  - il est possible d'ajouter des images dans les notifications, le chemin doit être relatif à l'URL publique de votre instance home assistant
  - j'ai mis en place des logs lorsqu'une notification est envoyée pour pouvoir le tracer
- - il est possible de définir des [zones](https://www.home-assistant.io/integrations/zone/) pour pouvoir avoir des états de présence supplémentaires à "home" tel que "travail" ou "famille"
+ - il est possible de définir des [zones](https://www.home-assistant.io/integrations/zone/) pour pouvoir avoir des états de présence supplémentaires à "home" tel que "travail" ou "famille" mais dans ce cas lorsque vous passez de l'état "travail" à l'état "home" cette automatisation ne fonctionnera pas car vous ne serez pas dans l'état "not_home"
 
+Personnellement j'ai désactivé cette automatisation mais je la conserve en documentation car c'est un bon exemple pour débuter :-)
 
 ## Ouverture et fermeture des volets
 
