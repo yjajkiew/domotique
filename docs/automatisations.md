@@ -21,7 +21,8 @@ Il est à noter que toutes les automatisations ci-dessous reposent sur la config
 
 C'est la toute première automatisation que j'ai mis en place, elle n'apporte pas grand chose mais elle m'a permis de me familiariser avec Home Assistant !
 
-**Pré-requis : **
+**Pré-requis :**
+
 Aux débuts pour tracker qui était présent à la maison j'ai utilisé l'intégration [netgear](https://www.home-assistant.io/integrations/netgear/) pour scanner les device sur le réseau domestique et possède l'avantage de gérer les Access Points vu que j'ai deux routeurs à la maison : le problème c'est que Home Assistant récupère bien les device mais la mise à jour ne s'effectuait pas lorsque l'on quittait le réseau.
 
 Donc ensuite j'ai décidé d'utiliser l'intégration [nmap](https://www.home-assistant.io/integrations/nmap_tracker/) pour scanner le réseau régulièrement et savoir quels devices sont connectés ou non au réseau et ainsi savoir si moi et ma conjointe sommes à la maison. Cela a bien fonctionné un temps mais au bout d'un moment, et peu importe les réglages que j'ai pu effectuer, les moments de présence et d'absence n'étaient pas fiable et devenaient intermittent comme suivant :
