@@ -33,7 +33,7 @@ Au final pour être fiable je cumule :
  - nmap pour tracker les devices au global (routeurs, robot aspirateur, etc.) et pouvoir afficher cela dans le dashboard de [monitoring](/hassio#monitoring)
  - [owntracks](https://www.home-assistant.io/integrations/owntracks/) installé sur les smartphones pour envoyer les changements importants de position GPS à mon instance de home assistant
  
-L'automatisation des notifications devient alors la suivante :
+***Fichier automations.yaml***
 ```yaml
 - id: '1569514492243'
   alias: Manon home notification
