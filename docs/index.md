@@ -23,6 +23,9 @@ Les sources de mes configurations et automatisations Home Assistant sont disponi
 <br/>
 <hr>
 
+<a href="/assets/dashboard-home.jpg" target="_blank"><img src="/assets/dashboard-home.jpg" /></a>
+
+
 <a href="/architecture"><img src="assets/domotique_architecture_logique.jpg" /></a>
 
 **Technologies et composants majeurs** : home assistant, hassio, raspberry pi, philips hue, osram, zigbee, aeotec, z-wave, fibaro, somfy, connexoon
