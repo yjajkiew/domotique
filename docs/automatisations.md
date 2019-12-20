@@ -30,7 +30,9 @@ Aux débuts pour tracker qui était présent à la maison j'ai utilisé l'intég
 
 Donc ensuite j'ai décidé d'utiliser l'intégration [nmap](https://www.home-assistant.io/integrations/nmap_tracker/) pour scanner le réseau régulièrement et savoir quels devices sont connectés ou non au réseau et ainsi savoir si moi et ma conjointe sommes à la maison. Cela a bien fonctionné un temps mais au bout d'un moment, et peu importe les réglages que j'ai pu effectuer, les moments de présence et d'absence n'étaient pas fiable et devenaient intermittent comme suivant :
 
+
 <img src="assets/home-assistant-nmap.png" />
+
 
 Ceci est sûrement dû aux smartphones qui coupent le wifi par intermittence pour économiser la batterie.
 
