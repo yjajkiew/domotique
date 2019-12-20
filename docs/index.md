@@ -16,6 +16,8 @@ Mais cette année, en 2019, j'ai acheté une maison et là ça a changé la donn
 
 J'ai donc vu cette maison comme le terrain de jeu idéal pour la domotique et j'ai donc décidé de documenter ici ma solution domotique autour de [Home Assistant](https://www.home-assistant.io) : les automatisations, les configurations, les usages, les astuces, la résilience, les prochains projets, etc.
 
+Les sources de mes configurations et automatisations Home Assistant sont disponibles sur [github](https://github.com/yjajkiew/domotique/tree/master/home-assistant/config).
+
 *J'ai mis en bas de certaines pages la possibilité de laisser des commentaires afin d'échanger et s'entraider au besoin.*
 
 <br/>
