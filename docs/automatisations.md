@@ -23,7 +23,7 @@ C'est la toute première automatisation que j'ai mis en place, elle n'apporte pa
 
 **Pré-requis :**
  - [nmap](https://www.home-assistant.io/integrations/nmap_tracker/) et/ou [owntracks](https://www.home-assistant.io/integrations/owntracks/)
- - home assistant [accessible sur internet](/hassio#accès-depuis-lextérieur)
+ - home assistant [accessible sur internet](/hassio.html#accès-depuis-lextérieur)
  - [notifications push](https://www.home-assistant.io/integrations/html5/)
  
 Aux débuts pour tracker qui était présent à la maison j'ai utilisé l'intégration [netgear](https://www.home-assistant.io/integrations/netgear/) pour scanner les device sur le réseau domestique et possède l'avantage de gérer les Access Points vu que j'ai deux routeurs à la maison : le problème c'est que Home Assistant récupère bien les device mais la mise à jour ne s'effectuait pas lorsque l'on quittait le réseau.
@@ -33,7 +33,7 @@ Donc ensuite j'ai décidé d'utiliser l'intégration [nmap](https://www.home-ass
 Ceci est sûrement dû aux smartphones qui coupent le wifi par intermittence pour économiser la batterie.
 
 Au final pour être fiable je cumule :
- - nmap pour tracker les devices au global (routeurs, robot aspirateur, etc.) et pouvoir afficher cela dans le dashboard de [monitoring](/hassio#devices)
+ - nmap pour tracker les devices au global (routeurs, robot aspirateur, etc.) et pouvoir afficher cela dans le dashboard de [monitoring](/hassio.html#devices)
  - [owntracks](https://www.home-assistant.io/integrations/owntracks/) installé sur les smartphones pour envoyer les changements importants de position GPS à mon instance de home assistant
  
 ***Fichier automations.yaml***
