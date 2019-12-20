@@ -33,7 +33,7 @@ Donc ensuite j'ai décidé d'utiliser l'intégration [nmap](https://www.home-ass
 Ceci est sûrement dû aux smartphones qui coupent le wifi par intermittence pour économiser la batterie.
 
 Au final pour être fiable je cumule :
- - nmap pour tracker les devices au global (routeurs, robot aspirateur, etc.) et pouvoir afficher cela dans le dashboard de [monitoring](/hassio#monitoring)
+ - nmap pour tracker les devices au global (routeurs, robot aspirateur, etc.) et pouvoir afficher cela dans le dashboard de [monitoring](/hassio#devices)
  - [owntracks](https://www.home-assistant.io/integrations/owntracks/) installé sur les smartphones pour envoyer les changements importants de position GPS à mon instance de home assistant
  
 ***Fichier automations.yaml***
