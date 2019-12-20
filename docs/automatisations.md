@@ -108,11 +108,126 @@ Personnellement j'ai désactivé cette automatisation mais je la conserve en doc
 **Pré-requis :**
  - intégration de volets ([api somfy](https://www.home-assistant.io/integrations/somfy/) avec connexoon dans mon cas)
  - intégration du [soleil](https://www.home-assistant.io/integrations/sun/) pour connaître les heures de levé et couché chaque jour
+  - mettre en place un [sensor template](https://www.home-assistant.io/integrations/template/)
  
  **Fonctionnement:**
 
+Le fonctionnement ici est simple mais l'objectif c'est de le rendre paramétrable facilement depuis l'interface des dashboards. Pour cela il faut :
+ - créer des inputs (1 booléen pour activer ou désactiver l'automatisation, et 2 nombres pour gérer les offsets ouverture et fermeture)
+ - créer des templates en fonction de ces inputs et des heures de levé/couché 
+ - créer un groupe avec ces éléments pour un affichage facile dans le dashboard
+ 
+Ce qui donne ceci en front :
+
+<img src="/assets/covers-UI.png" />
+
+*lorsque les sliders sont modifiés les heures affichées sont également modifiées en temps réel à cause du référencement des inputs dans le template des heures affichées*
+
+***Créer les inputs pour les offset : configuration.yaml***
+```yaml
+{% raw %}
+input_boolean:
+  cover_automation:
+    name: Activer automatisation des volets
+    icon: mdi:window-shutter
+    
+input_number:
+  cover_day_offset:
+    name: Minutes après le lever du soleil
+    icon: mdi:timer
+    min: -60
+    max: 60
+    step: 10
+  cover_night_offset:
+    name: Minutes après le coucher du soleil
+    icon: mdi:timer
+    min: -60
+    max: 60
+    step: 10
+{% endraw %}
+```
+
+***Créer les template d'heure d'ouverture et fermeture des volets : configuration.yaml***
+```yaml
+{% raw %}
+sensor:
+  # templates
+  - platform: template
+    sensors:
+      cover_auto_open:
+        friendly_name: 'Ouverture des volets à'
+        value_template: '{{ (as_timestamp(states.sun.sun.attributes.next_rising) + (states("input_number.cover_day_offset") | int)  * 60)  | timestamp_custom("%H:%M") }}'
+        entity_id: [sun.sun, input_number.cover_day_offset]
+        icon_template: mdi:clock
+      cover_auto_close:
+        friendly_name: 'Fermeture des volets à'
+        value_template: '{{ (as_timestamp(states.sun.sun.attributes.next_setting) + (states("input_number.cover_night_offset") | int)  * 60)  | timestamp_custom("%H:%M") }}'
+        entity_id: [sun.sun, input_number.cover_night_offset]
+        icon_template: mdi:clock
+{% endraw %}
+```
+
+***Créer le groupe pour l'affichage dans le dashboard : groups.yaml***
+```yaml
+{% raw %}
+cover_automation_panel:
+  name: Automatisation des volets
+  entities:
+    - input_boolean.cover_automation
+    - input_number.cover_day_offset
+    - sensor.cover_auto_open
+    - input_number.cover_night_offset
+    - sensor.cover_auto_close
+{% endraw %}
+```
 
 
+***Fichier automations.yaml***
+```yaml
+{% raw %}
+- id: '15706299592911'
+  alias: Ouverture des volets
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition: # automation enabled and time is right
+    - condition: state
+      entity_id: input_boolean.cover_automation
+      state: 'on'
+    - condition: template
+      value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_open") }}'
+  action:
+  - service: cover.open_cover
+    data:
+      entity_id: group.covers_all_open
+  - service: system_log.write
+    data_template:
+      message: 'Automatically open covers'
+      level: info
+
+- id: '15706299592912'
+  alias: Fermeture des volets
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition: # automation enabled and time is right
+    - condition: state
+      entity_id: input_boolean.cover_automation
+      state: 'on'
+    - condition: template
+      value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_close") }}'
+  action:
+  - service: cover.close_cover
+    data:
+      entity_id: group.covers_all_open
+  - service: system_log.write
+    data_template:
+      message: 'Automatically close covers'
+      level: info
+{% endraw %}
+```
 
 ## Allumer et éteindre le sèche serviette
 
