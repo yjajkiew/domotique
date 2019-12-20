@@ -124,10 +124,49 @@ Personnellement j'ai désactivé cette automatisation mais je la conserve en doc
  
  **Fonctionnement:**
  
-En mettant une condition sur la détection de présence cela permet de ne pas avoir à le désactiver manuellement si jamais on part en week-end ou en vacances.
+Tous les jours à 07h05 l'automatisation vérifie certaines conditions pour savoir s'il doit déclencher le sèche serviette pendant 30mn :
+ - être présent à la maison (moi ou ma conjointe) : en mettant une condition sur la détection de présence cela permet de ne pas avoir à le désactiver manuellement si jamais on part en week-end ou en vacances
+ - être sur un jour travaillé car cela évite de faire fonctionner le sèche serviette tôt le matin lorsque l'on travaille car le week-end on dort souvent plus tard et on ne sait pas à l'avance l'heure à laquelle on va se lever.
 
-En mettant une condition sur le jour travaillé cela évite de faire fonctionner le sèche serviette tôt le matin lorsque l'on travaille car le week-end on dort souvent plus tard et on ne sait pas à l'avance l'heure à laquelle on va se lever.
- 
+
+***Fichier automations.yaml***
+```yaml
+- id: '15706293690293'
+  alias: Sèche serviette auto turn on
+  trigger:
+  - platform: time
+    at: 07:05:00
+  condition: # workday and (Manon or Yann is home)
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: person.yann
+        state: home
+      - condition: state
+        entity_id: person.manon
+        state: home
+  action:
+  - service: switch.turn_on
+    data:
+      entity_id: switch.fibaro_secheserviette_switch
+  - service: system_log.write
+    data_template:
+      message: 'Turn on Sèche Serviette and wait 45mn'
+      level: info
+  - delay: "00:30:00"
+  - service: switch.turn_off
+    data:
+      entity_id: switch.fibaro_secheserviette_switch
+  - service: system_log.write
+    data_template:
+      message: 'Turn off Sèche Serviette after 45mn'
+      level: info
+```
  
  
 ## Lancement automatique de l'aspirateur
