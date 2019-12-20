@@ -44,6 +44,8 @@ Au final pour être fiable je cumule :
  - nmap pour tracker les devices au global (routeurs, robot aspirateur, etc.) et pouvoir afficher cela dans le dashboard de [monitoring du réseau](/hassio.html#devices)
  - [owntracks](https://www.home-assistant.io/integrations/owntracks/) installé sur les smartphones pour envoyer les changements importants de position GPS à mon instance de home assistant
  
+ Pour en savoir plus sur la détection de présence dans home assistant : [https://www.home-assistant.io/getting-started/presence-detection](https://www.home-assistant.io/getting-started/presence-detection/)
+ 
 ***Fichier automations.yaml***
 ```yaml
 - id: '1569514492243'
@@ -99,12 +101,93 @@ Personnellement j'ai désactivé cette automatisation mais je la conserve en doc
 
 ## Ouverture et fermeture des volets
 
+**Objectif :** ouvrir et fermer automatiquement les volets de la maison en fonction de l'heure de levé et couché du soleil avec offset paramètrable
+
+**Pré-requis :**
+ - intégration de volets ([api somfy](https://www.home-assistant.io/integrations/somfy/) avec connexoon dans mon cas)
+ - intégration du [soleil](https://www.home-assistant.io/integrations/sun/) pour connaître les heures de levé et couché chaque jour
+ 
+ **Fonctionnement:**
+
+
+
+
 ## Allumer et éteindre le sèche serviette
 
+**Objectif :** allumer automatiquement le sèche serviette si moi ou ma coinjointe sommes à la maison et que l'on est sur un jour travaillé
+
+**Pré-requis :**
+ - prise connectée connecté au sèche serviette (prise z-wave dans mon cas)
+ - intégration [z-wave](https://www.home-assistant.io/integrations/zwave/)
+ - [détection de présence](https://www.home-assistant.io/getting-started/presence-detection/)
+ - intégration du binary sensor [workday](https://www.home-assistant.io/integrations/workday/) pour savoir si c'est un jour travaillé (du lundi au vendredi, jours feriés exclus pris en charge directement dans le binary sensor)
+ 
+ **Fonctionnement:**
+ 
+En mettant une condition sur la détection de présence cela permet de ne pas avoir à le désactiver manuellement si jamais on part en week-end ou en vacances.
+
+En mettant une condition sur le jour travaillé cela évite de faire fonctionner le sèche serviette tôt le matin lorsque l'on travaille car le week-end on dort souvent plus tard et on ne sait pas à l'avance l'heure à laquelle on va se lever.
+ 
+ 
+ 
 ## Lancement automatique de l'aspirateur
 
+**Objectif :** lancer l'aspirateur un jour sur deux sauf si on est à la maison
+
+**Pré-requis :**
+ - aspirateur connecté (Xiaomi Mi Robot 1ère version dans mon cas)
+ - intégration [xiaomi mi robot](https://www.home-assistant.io/integrations/vacuum.xiaomi_miio/)
+ - intégration du binary sensor [workday](https://www.home-assistant.io/integrations/workday/) pour savoir si c'est un jour travaillé (du lundi au vendredi, jours feriés exclus pris en charge directement dans le binary sensor)
+ - [détection de présence](https://www.home-assistant.io/getting-started/presence-detection/)
+ 
+ **Fonctionnement:**
+
+Tous les jours à 10h l'automatisation vérifie certaines conditions pour lancer l'aspirateur :
+ - lorsque c'est le week-end ou un jour férié nous sommes présent à la maison ou nous sommes occupé à bricoler donc on ne souhaite que l'aspirateur se lance.
+ - lorsque l'on est à la maison en cas de télétravail par exemple on ne souhaite pas que l'aspirateur se lance.
+ - je préfère que l'aspirateur se lance tous les deux jours plutôt que tous les jours, cela permet d'économiser un peu d'énergie et d'économiser les consommables (filtres, brosses, etc).
+
+Pour ce dernier point la technique est de calculer chaque matin si le dernier passage de l'aspirateur date de plus de 24h via un template :
+```yaml
+{{ ((as_timestamp(now())|int)-(as_timestamp(state_attr("vacuum.xiaomi_vacuum_cleaner", "clean_stop"))|int)|int)//(60 * 60) >= 24 }}
+```
+
+***Fichier automations.yaml***
+```yaml
+- id: '15706299592930'
+  alias: Vacuum
+  trigger:
+  - platform: time
+    at: "10:00:00"
+  condition: 
+    - condition: state
+      entity_id: 'binary_sensor.workday_sensor'
+      state: 'on'
+    - condition: template
+      value_template: "{{ not is_state('person.yann', 'home') }}"
+    - condition: template
+      value_template: "{{ not is_state('person.manon', 'home') }}"
+    - condition: template
+      value_template: '{{ ((as_timestamp(now())|int)-(as_timestamp(state_attr("vacuum.xiaomi_vacuum_cleaner", "clean_stop"))|int)|int)//(60 * 60) >= 24 }}'
+  action:
+  - service: vacuum.start
+    data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+  - service: system_log.write
+    data_template:
+      message: 'Launch vacuum cleaner'
+      level: info
+```
+ 
+ 
 ## Réveil lumineux
 
+**Objectif :** recevoir une notification lorsque le conjoint arrive à la maison
+
+**Pré-requis :**
+ - toto
+ 
+ **Fonctionnement:**
 
 
 ***Fichier configuration.yaml***
