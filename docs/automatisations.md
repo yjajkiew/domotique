@@ -339,6 +339,7 @@ wakeup_week_day_panel:
  
  
 **Fonctionnement:**
+
 J'ai créé un calendrier Google dédié à mes horaires de levée des poubelles : 1 semaine bac, 1 semaine recylage, décalages exceptionnels en fonction des jours fériés, le type (recyclage ou bac) dans le nom de l'événement.
 
 A partir de là j'ai pu intégrer uniquement ce calendrier dans Home Assistant et créer un template qui fournit une entité m'indiquant si le jour courant je dois sortir les poubelles et en mettant dans le nom de l'entité le nom de l'événement (bac ou recyclage).
