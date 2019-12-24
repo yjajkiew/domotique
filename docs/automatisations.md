@@ -245,6 +245,31 @@ Tous les jours à 07h05 l'automatisation vérifie certaines conditions pour savo
  - être présent à la maison (moi ou ma conjointe) : en mettant une condition sur la détection de présence cela permet de ne pas avoir à le désactiver manuellement si jamais on part en week-end ou en vacances
  - être sur un jour travaillé car cela évite de faire fonctionner le sèche serviette tôt le matin lorsque l'on travaille car le week-end on dort souvent plus tard et on ne sait pas à l'avance l'heure à laquelle on va se lever.
 
+Etant donné que j'utilise un "delay" de 30 minutes entre l'allumage de la prise Z-Wave et son éteignage il est préférable de passer par un script, qui pourra en plus être réutiliser comme bouton dans un dashboard pour lancer ponctuellement le sèche serviette.
+
+***Fichier scripts.yaml***
+```yaml
+{% raw %}
+# launch "sèche serviette" for 30mn
+seche_serviette:
+  sequence:
+  - service: system_log.write
+    data_template:
+      message: 'Turn on sèche serviette from script'
+      level: info
+  - service: switch.turn_on
+    data:
+      entity_id: switch.fibaro_secheserviette_switch
+  - delay: '00:30:00'
+  - service: system_log.write
+    data_template:
+      message: 'Turn off sèche serviette from script'
+      level: info
+  - service: switch.turn_off
+    data:
+      entity_id: switch.fibaro_secheserviette_switch
+{% endraw %}
+```
 
 ***Fichier automations.yaml***
 ```yaml
@@ -269,24 +294,46 @@ Tous les jours à 07h05 l'automatisation vérifie certaines conditions pour savo
         entity_id: person.manon
         state: home
   action:
-  - service: switch.turn_on
+  - service: script.turn_on
     data:
-      entity_id: switch.fibaro_secheserviette_switch
+      entity_id: script.seche_serviette
   - service: system_log.write
     data_template:
-      message: 'Turn on Sèche Serviette and wait 45mn'
+      message: 'Launch sèche serviette script from automation'
       level: info
-  - delay: "00:30:00"
+{% endraw %}
+```
+
+**Astuce :**
+
+J'ai déjà rencontré des cas où le sèche serviette ne s'éteignait pas, sans forcément trouver la cause mais je suppose que cela peut être dû au delay. Par mesure de sécurité pour éviter que le sèche serviette reste allumé pendant des heures j'ai mis en place l'automatisation suivante qui éteint le sèche serviette s'il reste allumé plus de 35 minutes : 
+
+```yaml
+{% raw %}
+- id: '15706293690294'
+  alias: Sèche serviette auto turn off security
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition: # sèche serviette is ON
+    - condition: state
+      entity_id: switch.fibaro_secheserviette_switch
+      state: 'on'
+    - condition: template # sèche serviette has been ON for more than 35 minutes
+      value_template: '{{ ((as_timestamp(now())|int) - as_timestamp(states.switch.fibaro_secheserviette_switch.last_changed))//60 >= 35  }}'
+  action:
   - service: switch.turn_off
     data:
       entity_id: switch.fibaro_secheserviette_switch
   - service: system_log.write
     data_template:
-      message: 'Turn off Sèche Serviette after 45mn'
+      message: 'Security switch turn off for sèche serviette'
       level: info
 {% endraw %}
 ```
- 
+
+
  
 ## Lancement automatique de l'aspirateur
 
