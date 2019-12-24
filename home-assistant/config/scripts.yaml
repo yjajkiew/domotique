@@ -1,10 +1,18 @@
 # launch "sèche serviette" for 30mn
 seche_serviette:
   sequence:
+  - service: system_log.write
+    data_template:
+      message: 'Turn on sèche serviette from script'
+      level: info
   - service: switch.turn_on
     data:
       entity_id: switch.fibaro_secheserviette_switch
   - delay: '00:30:00'
+  - service: system_log.write
+    data_template:
+      message: 'Turn off sèche serviette from script'
+      level: info
   - service: switch.turn_off
     data:
       entity_id: switch.fibaro_secheserviette_switch
