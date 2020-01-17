@@ -217,29 +217,29 @@ sensor:
     sensors:
       sensors_count: # needed to automate calling homeassistant.update_entity periodically
         friendly_name: "Sensors count"
-        value_template: "{{ states.sensor|list|length }}"
+        value_template: "{{states.sensor|list|length}}"
         icon_template: mdi:eye
         entity_id: sensor.time # refresh this count every minute
       lights_count:
         friendly_name: "Lights count"
-        value_template: "{{ states.light|list|length }}"
+        value_template: "{{states.light|list|length}}"
         icon_template: mdi:lightbulb
-        entity_id: group.all_lights
+        entity_id: sensor.time # refresh this count every minute
       devices_count:
         friendly_name: "Devices count"
-        value_template: "{{states.group.all_devices.attributes.entity_id|list|length}}"
+        value_template: "{{states.device_tracker|list|length}}"
         icon_template: mdi:robot-industrial
-        entity_id: group.all_devices
+        entity_id: sensor.time # refresh this count every minute
       automations_count:
         friendly_name: "Automations count"
-        value_template: "{{states.group.all_automations.attributes.entity_id|list|length}}"
+        value_template: "{{states.automation|list|length}}"
         icon_template: mdi:robot
-        entity_id: group.all_automations
+        entity_id: sensor.time # refresh this count every minute
       covers_count:
         friendly_name: "Covers count"
-        value_template: "{{states.group.all_covers.attributes.entity_id|list|length}}"
+        value_template: "{{states.cover|list|length}}"
         icon_template: mdi:window-closed
-        entity_id: group.all_covers
+        entity_id: sensor.time # refresh this count every minute
       trash_status:
         friendly_name: "Poubelles"
         friendly_name_template: "{{ state_attr('calendar.poubelles', 'message') }}"
