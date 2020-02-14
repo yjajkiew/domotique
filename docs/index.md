@@ -1,6 +1,7 @@
 ---
 layout: home
-title: Mon installation domotique avec Home Assistant 
+title: Mon installation domotique avec Home Assistant
+menu: Accueil
 comments: true
 ---
 
