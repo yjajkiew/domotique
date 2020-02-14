@@ -57,6 +57,7 @@ Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa 
  | Nom                              | Modèle   | Quantité | Image    | Description |
 |:---------------------------------|:---------|:---------|:---------|:------------|
 | [Starter Kit Officiel Pi3](https://tinyurl.com/yxz7pb35)  |Modèle B |  1       | <img src="https://tinyurl.com/y4oxet5p" width="100"/>     | Orchestrateur central de ma domotique sur lequel est installé Hassio Home Assistant  |
+| [CLé USB Lexar 128Go](https://tinyurl.com/rup4ymy)  | S45 |  1       | <img src="https://tinyurl.com/s7rqb56" width="100"/>     | Clé USB bootable sur le RPi pour éviter les crash de la carte SD  |
 | [Contrôleur Z-Wave Plus<br/>Z-Stick GEN5 Aeon Labs](https://amzn.to/2pUv1fD)     | AEOEZW090-C |  1       | <img src="https://tinyurl.com/yyktqsk9" width="100"/>     | Contrôleur Z-Wave connecté sur le raspberry et utilisé par Hassio |
 | [Xiaomi MI BOX TV BOX 3](https://amzn.to/2PgAt6U)     |  |  1       | <img src="https://tinyurl.com/y3uky7ea" width="100"/>     | Box TV Android |
 
@@ -86,7 +87,7 @@ Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa 
 
 
 ## A venir
- - **mini PC fanless** : plus robuste que la carte SD d'un raspberry qui peut crasher
+ - **mini PC fanless** : plus robuste et plus puissant que le Raspberry avec une clé USB
  - **caméras IPs** : pour la terrasse et le garage, les caméras devront être PoE pour rationnaliser les câbles
  - **switch PoE** : permettra d'alimenter les caméras IPs
  - **arduino avec shield GSM** : pour envoyer des SMS en cas de coupure d'internet
