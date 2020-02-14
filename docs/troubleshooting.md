@@ -35,3 +35,13 @@ ERROR (SyncWorker_17) [hassio.docker] Can't create container from addon_cebe7a76
 
 La solution, un peu radicale, fut de désinstaller le plugin et de le réinstaller.
 Pensez-bien à remettre votre configuration du plugin et d'y aller faire un tour via l'UI pour vous re-connecter à Google Drive !
+
+## The Recorder could not start, please check the log
+
+Après un redémarrage de Home Assistant cette erreur peut survenir en utilisant l'add-on MariaDB (qui remplace la base SQLite par défaut).
+Home Assistant fonctionne correctement mais il n'enregistre pas les changements d'état en base donc il n'y a plus d'historique.
+
+La seule solution qui fonctionne chez moi est de désinstaller le plugin, de le réinstaller puis de redémarrer Home Assistant.
+
+
+
