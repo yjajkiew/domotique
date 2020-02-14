@@ -63,6 +63,10 @@ Si vous êtes passé par les pages [matériel](/materiel) ou [architecture](/arc
 
 L'installation de Hassio sur RPI est ultra simple puisqu'il suffit de flasher la carte SD, connecter le raspberry en ethernet à votre réseau et allumer le tout : il est important qu'au démarrage le RPI soit connecté à internet puisqu'au démarrage l'image télécharger toutes les dépendances ainsi que la dernière version de Home Assistant, donc l'installation peut prendre 20 à 30mn.
 
+Update 02-2020 : à la place d'une carte SD qui peut se corrompre plus facilement j'utilise désormais une clé USB bootable
+ 1. Flasher une carte SD avec une raspbian Lite, activer le ssh, s'y connecter et activer le paramètre de boot usb : [documentation](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bootmodes/msd.md) et [tutoriel](https://www.instructables.com/id/Booting-Raspberry-Pi-3-B-With-a-USB-Drive/) > cette étape n'est pas nécessaire sur certains modèles, vérifiez la documentation avant !
+ 2. Flasher l'image Hassio sur la carte USB, la brancher sur le RPi, retirer la carte SD, brancher l'alimentation et le tour est joué !
+
 La documentation officielle en fonction de votre matériel est disponible ici : [https://www.home-assistant.io/hassio/installation/](https://www.home-assistant.io/hassio/installation/)
 
 
