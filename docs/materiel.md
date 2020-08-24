@@ -21,15 +21,21 @@ Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa 
 
 | Nom                              | Modèle   | Quantité | Image    | Description |
 |:---------------------------------|:---------|:---------|:---------|:------------|
-| [Philips Hue Bridge 2.0](https://amzn.to/31RES3R)    | BSB002   |  1       | <img src="https://tinyurl.com/y4lagxb7" width="100"/>     |      Box ZigBee de Philips permettant de piloter les ampoules Philips Hue et les prises connectées OSRAM       |
 | [Ampoule Hue White E27](https://tinyurl.com/yykjqsmh)   | LWB006   |  2       | <img src="https://tinyurl.com/y6yfvx2e" width="100"/>     |   Lampe d'appoint dans le salon<br/>Lampe table de chevet de la chambre    |
 
 ## Prises électriques
 
 | Nom                              | Modèle           | Quantité | Image    | Description |
 |:---------------------------------|:-----------------|:---------|:---------|:------------|
-|  [OSRAM Smart+](https://amzn.to/2AONgoW)                    | 4058075036239    |  2       | <img src="https://tinyurl.com/y63o6vvw" width="100"/>     | Protocol ZigBee compatible et intégrable avec le bridge Philips Hue<br/>Me permet de piloter des lampes d'appoint (guirlande, lumière d'ambiance) |
+|  [OSRAM Smart+](https://amzn.to/2AONgoW)                    | 4058075036239    |  3       | <img src="https://tinyurl.com/y63o6vvw" width="100"/>     | Protocol ZigBee compatible et intégrable avec le bridge Philips Hue<br/>Me permet de piloter des lampes d'appoint (guirlande, lumière d'ambiance) |
 | [FIBARO Wall Plug Type E](https://amzn.to/2nqW69i)  | FGWPE-102 ZW5 EU |  1       | <img src="https://tinyurl.com/y2z75gj2" width="100"/>     | Protocole Z-Wave avec consommation d'énergie<br/>Me permet de détecter la fin d'un cycle sur ma machine à laver pour recevoir une notification   |
+
+
+## Interrupteurs
+
+| Nom                              | Modèle   | Quantité | Image    | Description |
+|:---------------------------------|:---------|:---------|:---------|:------------|
+| [Aqara Interrupteur sans fils](https://amzn.to/2EuRfMs)           | WJO6815943896214LC |  1       | <img src="https://tinyurl.com/y47gdam8" width="100"/>     |  Interrupteur ZigBee permettant de contrôler le sèche-serviette via Home Assistant      |
 
 
 
@@ -41,7 +47,6 @@ Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa 
 | Somfy commande SMOOVE Origin IO  |                |  2       | <img src="https://tinyurl.com/y6pjmqv4" width="100"/>     |     Commande de moteur Somfy physiques       |
 | Somfy commande SMOOVE RS 100 IO  |                |  1       | <img src="https://tinyurl.com/y62jkbnk" width="100"/>     |     Commande de moteur Somfy physique        |
 | Porte de garage Rollixo IO       |                |  1       |                                                           |     Porte de garage pilotable par la box Somfy Connexoon et donc pilotable également par API        |
-| [Somfy Connexoon](https://amzn.to/31Re3g6)    | 03660849507169 |  1       | <img src="https://tinyurl.com/y36vzd7n" width="100"/>     |     Permet de contrôler les volets et la porte de garage        |
 
 
 ## Aspirateur
@@ -52,19 +57,30 @@ Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa 
 | [Housolution bande magnétique](https://amzn.to/30RqY01)     | 4 mètres |  1       | <img src="https://tinyurl.com/y3ngumng" width="100"/>     |  Bande magnétique pour créer des "virtual wall" pour l'aspirateur  |
 
 
-## Divers
- 
- | Nom                              | Modèle   | Quantité | Image    | Description |
+## Multimédia
+
+| Nom                              | Modèle   | Quantité | Image    | Description |
 |:---------------------------------|:---------|:---------|:---------|:------------|
-| [Starter Kit Officiel Pi3](https://tinyurl.com/yxz7pb35)  |Modèle B |  1       | <img src="https://tinyurl.com/y4oxet5p" width="100"/>     | Orchestrateur central de ma domotique sur lequel est installé Hassio Home Assistant  |
-| [CLé USB Lexar 128Go](https://tinyurl.com/rup4ymy)  | S45 |  1       | <img src="https://tinyurl.com/s7rqb56" width="100"/>     | Clé USB bootable sur le RPi pour éviter les crash de la carte SD  |
-| [Contrôleur Z-Wave Plus<br/>Z-Stick GEN5 Aeon Labs](https://amzn.to/2pUv1fD)     | AEOEZW090-C |  1       | <img src="https://tinyurl.com/yyktqsk9" width="100"/>     | Contrôleur Z-Wave connecté sur le raspberry et utilisé par Hassio |
 | [Xiaomi MI BOX TV BOX 3](https://amzn.to/2PgAt6U)     |  |  1       | <img src="https://tinyurl.com/y3uky7ea" width="100"/>     | Box TV Android |
 
 
+## Hubs
+ 
+| Nom                              | Modèle   | Quantité | Image    | Description |
+|:---------------------------------|:---------|:---------|:---------|:------------|
+| [Philips Hue Bridge 2.0](https://amzn.to/31RES3R)    | BSB002   |  1       | <img src="https://tinyurl.com/y4lagxb7" width="100"/>     |      Box ZigBee de Philips permettant de piloter les ampoules Philips Hue et les prises connectées OSRAM       |
+| [Contrôleur Z-Wave Plus<br/>Z-Stick GEN5 Aeon Labs](https://amzn.to/2pUv1fD)     | AEOEZW090-C |  1       | <img src="https://tinyurl.com/yyktqsk9" width="100"/>     | Contrôleur Z-Wave connecté sur le raspberry et utilisé par Hassio |
+| [Contrôleur ZigBee<br/>Phoscon ConBee II](https://amzn.to/3jaCiOx)     | BN-600107 |  1       | <img src="https://tinyurl.com/yxhhmuk6" width="100"/>     | Contrôleur ZigBee branché sur le raspberry et utilisé par Hassio |
+| [Somfy Connexoon](https://amzn.to/31Re3g6)    | 03660849507169 |  1       | <img src="https://tinyurl.com/y36vzd7n" width="100"/>     |     Permet de contrôler les volets et la porte de garage        |
 
 
-
+## Home Assistant
+ 
+| Nom                              | Modèle   | Quantité | Image    | Description |
+|:---------------------------------|:---------|:---------|:---------|:------------|
+| [Starter Kit Officiel Pi3](https://tinyurl.com/yxz7pb35)  |Modèle B |  1       | <img src="https://tinyurl.com/y4oxet5p" width="100"/>     | Orchestrateur central de ma domotique sur lequel est installé Hassio Home Assistant  |
+| [CLé USB Lexar 128Go](https://tinyurl.com/rup4ymy)  | S45 |  1       | <img src="https://tinyurl.com/s7rqb56" width="100"/>     | Clé USB bootable sur le RPi pour éviter les crash de la carte SD  |
+| [Rallonges câble USB](https://amzn.to/32nI4W6)    |     |  2       | <img src="https://tinyurl.com/y3dgqk2w" width="100"/>     |      Rallonge Câble USB 3.0 mâle A vers femelle A 1m pour les contrôleurs Z-Wave et ZigBee       |
 
 
 
