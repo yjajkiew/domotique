@@ -10,6 +10,7 @@ comments: false
 
 | Date         | Modification      |
 |:-------------|:------------------|
+| 24/08/2020   | Mise à jour du matériel avec l'ajout de ConBee II      |
 | 20/12/2019   | Détail des automatisations      |
 | 14/11/2019   | Hassio : ajout supervision <br /> Home : modification de l'introduction      |
 | 23/10/2019   | Hassio : Exposition sur internet + backup      |
