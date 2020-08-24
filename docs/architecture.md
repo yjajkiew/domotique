@@ -36,19 +36,21 @@ Le schéma suivant décrit succintement le [matériel](/materiel) et les interco
 <a href="assets/domotique_architecture_logique.jpg" target="_blank"><img src="assets/domotique_architecture_logique.jpg" /></a>
 
 
-- Home Assistant est installé sur Raspberry Pi *(à terme il devra être installé sur un mini PC Fanless plus robuste)*
-- Un dongle Z-wave est branché en USB directement dessus, il permet de contrôler mes prises Fibaro :
+- Home Assistant est installé sur Raspberry Pi qui boot sur une clé USB *(ce qui booste énormément les performances comparé à une carte SD)*
+- Un dongle Z-wave est branché en USB avec une petite rallonge USB de 1m pour le sortir de la baie de brassage, il permet de contrôler mes prises Fibaro :
   - une pour allumer automatiquement le sèche serviette par exemple du lundi au vendredi à 6h30 et l'éteindre à 8h30, seulement si nous sommes à la maison
   - une pour superviser la consommation d'énergie du lave-linge, permettant d'envoyer une notification lorsque le lave-linge a fini son cycle
+- Un dongle ZigBee est branché en USB avec une petite rallonge USB de 1m pour le sortir de la baie de brassage, il permet de contrôler mon interrupteur Aqara :
+  - il permet ainsi de lancer ou d'arrêter la prise et les scripts qui contrôlent le sèche serviette
 - Home Assistant s'interface avec divers périphériques sur le réseau domestique, qui contrôlent eux-même certains éléments :
   - scan du réseau sur les routeurs Wifi pour vérifier de la présence de ma conjointe, de ma belle-famille et de moi-même
   - Philips Hue pour le contrôle des lumières et certaines prises électriques
   - Connexoon pour le contrôle des volets de la porte de garage
   - Le robot aspirateur Xiaomi V1
 - Home Assistant communique avec des services externes :
-  - enedis pour la récupération de mes données de consommation électrique via le compteur Linky
   - SpeedTest pour réaliser des tests de connexion internet toutes les 6h et pouvoir superviser sa stabilité
   - Firebase pour pouvoir envoyer des notifications push sur les téléphones respectifs de ma conjointe et moi-même
+  - Google Calendar pour récupérer mon agenda de gestion de sortie des poubelles et envoyer des notifications de rappel
 
 
 ## Architecture physique et infrastructure réseau
