@@ -25,4 +25,10 @@ It's a stretch puisque pour l'instant je possède certes :
 Un petit peu d'électricité pour remplacer les néons et ensuite c'est Philips Hue qui fera le reste :-)
 
 
+## Fermer les volets s'il fait trop chaud
+
+"Y'a plus qu'à" comme on dit : les capteurs de température sont présents (Xiaomi Aqara) et les volets du RDC sont déjà domotisés (Somfy Connexoon) donc il n'y a plus qu'à créer l'automatisation mais également aux cas tordus (feu de cheminée qui pourrait déclencher l'action alors que ce n'est pas voulu ou autre).
+
+
+
 {% include comments.md %}
