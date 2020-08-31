@@ -11,6 +11,19 @@ comments: true
 1. TOC
 {:toc}
 
+## Détecter une livraison de courrier ou de colis dans la boîte aux lettres
+
+Deux options :
+- utiliser un détecteur d'ouverture de porte à mettre dans la boîte aux lettres :
+  - avantage : permet de savoir si un colis a été livré
+  - inconvénient : ne permet pas de savoir si une lettre à été livrée
+- utiliser un détecteur de vibration/choc Aqara à mettre dans la boîte aux lettres : 
+  - avantage : permet de savoir si un colis ou une lettre a été livré
+  - inconvénient : se déclenchera lorsque l'on ouvrira la boîte aux lettres de l'intérieur pour récupérer le courrier
+
+## Fermer les volets s'il fait trop chaud
+
+"Y'a plus qu'à" comme on dit : les capteurs de température sont présents (Xiaomi Aqara) et les volets du RDC sont déjà domotisés (Somfy Connexoon) donc il n'y a plus qu'à créer l'automatisation mais également aux cas tordus (feu de cheminée qui pourrait déclencher l'action alors que ce n'est pas voulu ou autre).
 
 ## Bandeaux leds au dessus des fenêtres synchronisés avec la TV Ambilight
 
@@ -25,9 +38,7 @@ It's a stretch puisque pour l'instant je possède certes :
 Un petit peu d'électricité pour remplacer les néons et ensuite c'est Philips Hue qui fera le reste :-)
 
 
-## Fermer les volets s'il fait trop chaud
 
-"Y'a plus qu'à" comme on dit : les capteurs de température sont présents (Xiaomi Aqara) et les volets du RDC sont déjà domotisés (Somfy Connexoon) donc il n'y a plus qu'à créer l'automatisation mais également aux cas tordus (feu de cheminée qui pourrait déclencher l'action alors que ce n'est pas voulu ou autre).
 
 
 
