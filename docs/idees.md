@@ -20,7 +20,7 @@ It's a stretch puisque pour l'instant je possède certes :
 
 **Matériel requis** :
  - Une nouvelle TV Ambilight plus récente
- - des led strips de couleur avec contrôleur ZigBee compatible avec Philips Hue (impératif)
+ - des led strips de couleur avec contrôleur ZigBee de marque Philips (impératif pour que ce soit fonctionnel avec Philips Hue Entertainment)
  
 Un petit peu d'électricité pour remplacer les néons et ensuite c'est Philips Hue qui fera le reste :-)
 
