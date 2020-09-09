@@ -2,6 +2,13 @@
 ## SYSTEM ##
 ############
 
+# internal web server
+http:
+  use_x_forwarded_for: true
+  # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
+  # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
+  trusted_proxies: !secret http_trusted_proxies
+
 # data rotation
 recorder:
   db_url: !secret db_url
@@ -33,5 +40,3 @@ discovery:
   ignore:
 #    - google_cast # ignore google cast from my android tv > it doesn't work
 #    - glance # ignore glances as it is already defined below > it doesn't work
-
-# binary sensors

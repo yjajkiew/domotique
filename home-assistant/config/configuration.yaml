@@ -1,20 +1,6 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
-################
-## WEB SERVER ##
-################
-
-http:
-  use_x_forwarded_for: true
-  # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
-  # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
-  trusted_proxies: !secret http_trusted_proxies
-
-####################
-## HOME ASSISTANT ##
-####################
-
 homeassistant:
   external_url: !secret external_url
   internal_url: !secret internal_url
@@ -32,43 +18,6 @@ automation: !include_dir_merge_list automations
 script: !include_dir_merge_named scripts
 zone: !include zones.yaml
 sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml
 frontend:
   themes: !include themes.yaml
-
-binary_sensor:
-  - platform: workday # enable sensor workday to find out if holiday or not
-    country: FRA
-  - platform: template
-    sensors:
-      # away mode
-      away_mode: 
-        friendly_name: "Away mode"
-        value_template: >
-          {% if is_state('group.person_all', 'not_home') %}
-            on
-          {% else %}
-            off
-          {% endif %}
-        entity_id: group.person_all
-        icon_template: >
-          {% if is_state('group.person_all', 'not_home') %}
-            mdi:home-lock
-          {% else %}
-            mdi:home-lock-open
-          {% endif %}
-      # battery notification
-      battery_notification:
-        friendly_name: 'One device battery < 10%'
-        value_template: >-
-          {% set ns = namespace(notify='off') %} 
-          {% for state in states.sensor %}
-            {% if (state.name | regex_search('battery', ignorecase=True)) 
-            and not(state.name | regex_search('ONEPLUS', ignorecase=True)) 
-            and not(state.entity_id | regex_search('battery_notification', ignorecase=True))
-            and ((state.state|int) <= 10) %} 
-              {% set ns.notify = 'on' %} 
-            {% endif %}
-          {% endfor %}
-          {{ ns.notify }}
-        icon_template: mdi:battery-10
-        entity_id: sensor.date #every day
