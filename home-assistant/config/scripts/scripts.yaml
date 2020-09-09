@@ -1,0 +1,20 @@
+# SECHE SERVIETTE
+seche_serviette:
+  sequence:
+  - data_template:
+      level: info
+      message: Turn on sèche serviette from script
+    service: system_log.write
+  - data:
+      entity_id: switch.fibaro_secheserviette_switch
+    service: switch.turn_on
+  - delay: 00:20:00
+  - data_template:
+      level: info
+      message: Turn off sèche serviette from script
+    service: system_log.write
+  - data:
+      entity_id: switch.fibaro_secheserviette_switch
+    service: switch.turn_off
+  mode: restart
+      

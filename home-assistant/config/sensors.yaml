@@ -1,0 +1,173 @@
+# time sensor
+- platform: time_date
+  display_options:
+    - 'time'
+# System monitor
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use_percent
+    - type: processor_use
+    - type: network_in
+      arg: eth0
+    - type: network_out
+      arg: eth0
+    - type: throughput_network_in
+      arg: eth0
+    - type: throughput_network_out
+      arg: eth0
+    - type: last_boot
+# UpTime
+- platform: uptime
+# Filesize monitoring
+- platform: filesize
+  file_paths:
+  #  - /config/home-assistant_v2.db
+    - /config/home-assistant.log
+# database monitoring
+- platform: sql
+  db_url: !secret db_url
+  queries:
+    - name: MariaDB Size
+      query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+      column: 'value'
+      unit_of_measurement: MB
+# hassio version
+- platform: version
+# netgear enhanced for main router
+- platform: netgear_enhanced
+  host: !secret netgear_main_ip
+  username: !secret netgear_user
+  password: !secret netgear_password
+  resources:
+    - check_app_fw
+    - traffic_meter
+# netgear enhanced for living room access point
+#- platform: netgear_enhanced
+#  host: !secret netgear_livingroom_ip
+#  username: !secret netgear_user
+#  password: !secret netgear_password
+#  resources:
+    - check_app_fw
+# templates
+- platform: template
+  sensors:
+    weather_temperature: #get temperature attribute from weather entity
+      friendly_name: "Température extérieure"
+      value_template: "{{states.weather.home.attributes.temperature}}"
+      icon_template: mdi:coolant-temperature
+      entity_id: weather.maison
+    sensors_count: # needed to automate calling homeassistant.update_entity periodically
+      friendly_name: "Sensors count"
+      value_template: "{{states.sensor|list|length}}"
+      icon_template: mdi:eye
+      entity_id: sensor.time # refresh this count every minute
+    binarysensors_count: 
+      friendly_name: "Binary Sensors count"
+      value_template: "{{states.binary_sensor|list|length}}"
+      icon_template: mdi:circle-slice-8
+      entity_id: sensor.time # refresh this count every minute
+    lights_count:
+      friendly_name: "Lights count"
+      value_template: "{{states.light|list|length}}"
+      icon_template: mdi:lightbulb
+      entity_id: sensor.time # refresh this count every minute
+    devices_count:
+      friendly_name: "Devices tracker count"
+      value_template: "{{states.device_tracker|list|length}}"
+      icon_template: mdi:robot-industrial
+      entity_id: sensor.time # refresh this count every minute
+    automations_count:
+      friendly_name: "Automations count"
+      value_template: "{{states.automation|list|length}}"
+      icon_template: mdi:robot
+      entity_id: sensor.time # refresh this count every minute
+    covers_count:
+      friendly_name: "Covers count"
+      value_template: "{{states.cover|list|length}}"
+      icon_template: mdi:window-closed
+      entity_id: sensor.time # refresh this count every minute
+    groups_count:
+      friendly_name: "Groups count"
+      value_template: "{{states.group|list|length}}"
+      icon_template: mdi:account-group
+      entity_id: sensor.time # refresh this count every minute
+    inputs_count:
+      friendly_name: "Inputs count"
+      value_template: "{{states.input_boolean|list|length + states.input_number|list|length + states.input_datetime|list|length}}"
+      icon_template: mdi:import
+      entity_id: sensor.time # refresh this count every minute
+    scripts_count:
+      friendly_name: "Scripts count"
+      value_template: "{{states.script|list|length}}"
+      icon_template: mdi:script
+      entity_id: sensor.time # refresh this count every minute
+    switch_count:
+      friendly_name: "Switch count"
+      value_template: "{{states.switch|list|length}}"
+      icon_template: mdi:toggle-switch
+      entity_id: sensor.time # refresh this count every minute
+    trash_status:
+      friendly_name: "Poubelles"
+      friendly_name_template: "{{ state_attr('calendar.poubelles', 'message') }}"
+      value_template: "{{states('calendar.poubelles')}}"
+      icon_template: mdi:delete-circle
+    period_of_day:
+      friendly_name: 'period of the day'
+      value_template: >-
+        {% if (as_timestamp(states.sun.sun.attributes.next_dusk)) - (as_timestamp(states.sun.sun.attributes.next_setting)) < 0 %}
+          dusk
+        {% elif (as_timestamp(states.sun.sun.attributes.next_rising)) - (as_timestamp(states.sun.sun.attributes.next_dawn)) < 0 %}
+          dawn
+        {% elif (states.sun.sun.attributes.elevation) < -4 %}
+          night
+        {% else %}
+          day
+        {% endif %}
+      icon_template: >-
+        {% if (as_timestamp(states.sun.sun.attributes.next_dusk)) - (as_timestamp(states.sun.sun.attributes.next_setting)) < 0 %}
+          mdi:weather-sunset-down
+        {% elif (as_timestamp(states.sun.sun.attributes.next_rising)) - (as_timestamp(states.sun.sun.attributes.next_dawn)) < 0 %}
+          mdi:weather-sunset-up
+        {% elif (states.sun.sun.attributes.elevation) < -4 %}
+          mdi:weather-night
+        {% else %}
+          mdi:weather-sunny
+        {% endif %}
+    cover_auto_open:
+      friendly_name: 'Ouverture des volets à'
+      value_template: '{{ (as_timestamp(states.sun.sun.attributes.next_rising) + (states("input_number.cover_day_offset") | int)  * 60)  | timestamp_custom("%H:%M") }}'
+      entity_id: [sun.sun, input_number.cover_day_offset]
+      icon_template: mdi:clock
+    cover_auto_close:
+      friendly_name: 'Fermeture des volets à'
+      value_template: '{{ (as_timestamp(states.sun.sun.attributes.next_setting) + (states("input_number.cover_night_offset") | int)  * 60)  | timestamp_custom("%H:%M") }}'
+      entity_id: [sun.sun, input_number.cover_night_offset]
+      icon_template: mdi:clock
+    ng_enhanced_traffic_meter_download:
+      friendly_name: 'Traffic meter Download'
+      value_template: '{{ (((states.sensor.ng_enhanced_traffic_meter.attributes.NewMonthDownload | replace("(","") | replace(")","") | string).split(",")[0] | int) / 1000) | int }}'
+      unit_of_measurement: 'Go'
+      entity_id: sensor.ng_enhanced_traffic_meter
+      icon_template: mdi:download
+    ng_enhanced_traffic_meter_upload:
+      friendly_name: 'Traffic meter Upload'
+      value_template: '{{ (((states.sensor.ng_enhanced_traffic_meter.attributes.NewMonthUpload | replace("(","") | replace(")","") | string).split(",")[0] | int) / 1000) | int }}'
+      unit_of_measurement: 'Go'
+      entity_id: sensor.ng_enhanced_traffic_meter
+      icon_template: mdi:upload
+    ng_enhanced_traffic_meter_downloadlastmonth:
+      friendly_name: 'Traffic meter Download last month'
+      value_template: '{{ (((states.sensor.ng_enhanced_traffic_meter.attributes.NewLastMonthDownload | replace("(","") | replace(")","") | string).split(",")[0] | int) / 1000) | int }}'
+      unit_of_measurement: 'Go'
+      entity_id: sensor.ng_enhanced_traffic_meter
+      icon_template: mdi:download
+    ng_enhanced_traffic_meter_uploadlastmonth:
+      friendly_name: 'Traffic meter Upload last month'
+      value_template: '{{ (((states.sensor.ng_enhanced_traffic_meter.attributes.NewLastMonthUpload | replace("(","") | replace(")","") | string).split(",")[0] | int) / 1000) | int }}'
+      unit_of_measurement: 'Go'
+      entity_id: sensor.ng_enhanced_traffic_meter
+      icon_template: mdi:upload
+
+    

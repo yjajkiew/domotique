@@ -1,0 +1,47 @@
+# Ramp Light up or down
+ramp_light:
+  fields:
+      direction:
+        description: "Direction to change brightness: up or down"
+        example: up
+      light:
+        description: Light entity_id
+        example: light.family_room_lamp
+  mode: restart
+  sequence:
+  - repeat:
+      while:
+        - condition: template
+          value_template: >
+            {% set brightness = state_attr(light, 'brightness')|int(0) %}
+            {% set min = 10 %}
+            {% set max = 254 %}
+            {{ direction == 'up' and brightness < max or
+                   direction == 'down' and brightness > min }}
+      sequence:
+        - service: light.turn_on
+          data_template:
+            entity_id: light.master_bedroom
+            brightness: >
+              {% set brightness = state_attr(light, 'brightness')|int(0) %}
+              {% set min = 10 %}
+              {% set max = 254 %}
+              {% set step = 10 %}
+              {% if direction == 'up' %}
+                {{ [brightness + step, max]|min }}
+              {% else %}
+                {{ [brightness - step, min]|max }}
+              {% endif %}
+        - delay:
+            milliseconds: 10
+  
+# Light Master Bedroom Decrease
+light_masterbedroom_decrease:
+  sequence:
+  - service: light.turn_on
+    data_template:
+      entity_id: light.master_bedroom
+      brightness: 0
+      transition: 10
+  mode: single
+  

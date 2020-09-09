@@ -1,0 +1,47 @@
+##########
+# VACUUM #
+##########
+
+# Regular
+- alias: Vacuum Regular
+  trigger:
+  - at: '10:00:00'
+    platform: time
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  - condition: template
+    value_template: '{{ not is_state(''person.yann'', ''home'') }}'
+  - condition: template
+    value_template: '{{ not is_state(''person.manon'', ''home'') }}'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int)-(as_timestamp(state_attr("vacuum.xiaomi_vacuum_cleaner",
+      "clean_stop"))|int)|int)//(60 * 60) >= 24 }}'
+  action:
+  - service: script.vacuum_clean_rdc
+  - data_template:
+      level: info
+      message: Launch vacuum cleaner
+    service: system_log.write
+  mode: single
+  
+# Fallback Home Office
+- alias: Vacuum Home Office
+  trigger:
+  - at: 07:30:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int)-(as_timestamp(state_attr("vacuum.xiaomi_vacuum_cleaner",
+      "clean_stop"))|int)|int)//(60 * 60) >= 40 }}'
+  action:
+  - service: script.vacuum_clean_rdc
+  - data_template:
+      level: info
+      message: Launch vacuum cleaner
+    service: system_log.write
+  mode: single

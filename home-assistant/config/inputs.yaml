@@ -1,0 +1,44 @@
+#############
+## INPUTS  ##
+#############
+
+# booleans
+input_boolean:
+  alarm:
+    name: Alarme
+    icon: mdi:alarm-light
+  wakeup_weekday:
+    name: Activer réveil lumineux
+    icon: mdi:power
+  cover_automation:
+    name: Activer automatisation des volets
+    icon: mdi:window-shutter
+  yann_sleep:
+    name: Etat de sommeil de Yann
+    icon: mdi:sleep
+
+# datetime
+input_datetime:
+  wakeup_weekday_timestart:
+    name: Heure de début
+    has_date: false
+    has_time: true
+  wakeup_weekday_timestop:
+    name: Heure de fin
+    has_date: false
+    has_time: true
+
+# numbers
+input_number:
+  cover_day_offset:
+    name: Minutes après le lever du soleil
+    icon: mdi:timer-outline
+    min: -60
+    max: 60
+    step: 10
+  cover_night_offset:
+    name: Minutes après le coucher du soleil
+    icon: mdi:timer-outline
+    min: -60
+    max: 60
+    step: 10

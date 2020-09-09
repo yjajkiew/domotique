@@ -1,0 +1,87 @@
+##################
+## INTEGRATIONS ##
+##################
+      
+zwave:
+  usb_path: /dev/serial/by-id/usb-0658_0200-if00
+  network_key: !secret zwave_network_key
+
+# Xiaomi Robot Vacuum
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret vacuum_host
+    token: !secret vacuum_token
+
+# Somfy API
+somfy:
+  client_id: !secret somfy_client_id
+  client_secret: !secret somfy_client_secret
+  
+tahoma:
+  username: !secret tahoma_username
+  password: !secret tahoma_password
+
+# Speedtest
+speedtestdotnet:
+  scan_interval: 03:00
+  
+glances:
+  - host: !secret glances_host
+  - port: !secret glances_port
+
+
+# for google calendar
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
+
+# Push notifications
+notify:
+  - platform: html5
+    name: firebase
+    vapid_pub_key: !secret firebase_vapid_pub_key
+    vapid_prv_key: !secret firebase_vapid_prv_key
+    vapid_email: !secret vapid_email
+  - platform: nfandroidtv
+    name: Salon
+    host: !secret mibox_ip
+  - platform: group
+    name: all
+    services:
+      - service: salon
+      - service: mobile_app_oneplus_a5000
+      - service: mobile_app_oneplus_a5010
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# device tracker
+device_tracker:
+# nmap : track main router
+#  - platform: nmap_tracker
+#    hosts: 192.168.0.1-30
+#    exclude: !secret device_tracker_exclude # exclude home assistant internal ip
+#    scan_options: "-F –host-timeout 10s"
+#    interval_seconds: 40
+# netgear : track devices (more reliable than nmap but changing state is not working)
+  - platform: netgear
+    password: !secret netgear_password
+    accesspoints: !secret netgear_accesspoints # routeur AP salon
+    #devices: !secret netgear_devices
+    interval_seconds: 10
+    consider_home: 20
+
+# Orange Livebox
+livebox:
+  host: 192.168.1.1
+  username: 'admin'
+  password: !secret livebox_password
+
+# transmission client
+transmission:
+  host: !secret transmission_host
+  port: !secret transmission_port
+  username: !secret transmission_username
+  password: !secret transmission_password
+  scan_interval: 60

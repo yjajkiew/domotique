@@ -1,0 +1,10 @@
+person.yann:
+  entity_picture: /local/yann.jpg
+person.manon:
+  entity_picture: /local/manon.png
+calendar.poubelles:
+  icon: mdi:delete-circle
+script.seche_serviette:
+  icon: mdi:radiator
+sensor.mariadb_size:
+  icon: mdi:database

@@ -1,0 +1,35 @@
+################
+# FLASH LIGHTS #
+################
+
+flash_bureau:
+  alias: Flash Bureau On
+  sequence:
+    - alias: Light Bureau On
+      service: light.turn_on
+      data:
+        entity_id: light.bureau
+        color_name: red
+        brightness: 255
+        transition: 0
+    - delay:
+        seconds: 1 # time for flash light on
+    - alias: Light Bureau Off
+      service: light.turn_off
+      data:
+        entity_id: light.bureau
+        transition: 0
+    - alias: loop_bureau
+      service: script.turn_on
+      data:
+        entity_id: script.flash_loop
+
+flash_loop:
+  alias: Flash loop
+  sequence:
+    - delay:
+        seconds: 1 # time for flash light off
+    - alias: loop_bureau
+      service: script.turn_on
+      data:
+        entity_id: script.flash_bureau

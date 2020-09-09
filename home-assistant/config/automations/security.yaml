@@ -1,0 +1,55 @@
+#####################################
+# ENABLE ALARM IF AWAY MODE ENABLED #
+#####################################
+- alias: Automatically enable alarm
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.away_mode
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.alarm
+  mode: restart
+  
+  
+#######################################
+# DISABLE ALARM IF AWAY MODE DISABLED #
+#######################################
+- id: '159620965002'
+  alias: Automatically disable alarm
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.away_mode
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.alarm
+  mode: restart
+
+##################
+# DOORWAY MOTION #
+##################
+- alias: Away motion detected
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.doorway_motion_sensor
+    from: 'off'
+    to: 'on'
+  condition: 
+  - condition: state
+    entity_id: input_boolean.alarm
+    state: 'on'
+  action:
+  - service: notify.mobile_app_oneplus_a5000
+    data:
+      message: 'Doorway motion detected'
+  mode: restart

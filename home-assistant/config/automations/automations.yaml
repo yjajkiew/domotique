@@ -1,0 +1,177 @@
+#########
+# LIGHT #
+#########
+
+# Bedroom wake-up light
+- alias: Bedroom wake-up light
+  trigger:
+  - minutes: /1
+    platform: time_pattern
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: person.yann
+    state: home
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.wakeup_weekday
+    state: 'on'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M:00")) ==
+      states("input_datetime.wakeup_weekday_timestart") }}'
+  action:
+  - data:
+      brightness: 1
+    entity_id: light.master_bedroom
+    service: light.turn_on
+  - delay: 00:00:10
+  - data:
+      brightness: 100
+      entity_id: light.master_bedroom
+      transition: 600
+    service: light.turn_on
+    
+# Bedroom light auto turn off
+- alias: Bedroom light auto turn off
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: person.yann
+    state: home
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.wakeup_weekday
+    state: 'on'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M:00")) ==
+      states("input_datetime.wakeup_weekday_timestop") }}'
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.master_bedroom
+  - delay:
+      seconds: 1
+  - service: light.turn_on
+    data:
+      entity_id: light.master_bedroom
+      brightness: 100
+  - delay:
+      seconds: 1
+  - service: light.turn_off
+    data:
+      entity_id: light.master_bedroom
+
+##########      
+# SWITCH #
+##########
+
+# Sèche serviette auto turn on 07:40
+- alias: Sèche serviette auto turn on 07:40
+  trigger:
+  - platform: time
+    at: 07:40:00
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: person.yann
+        state: home
+      - condition: state
+        entity_id: person.manon
+        state: home
+  action:
+  - service: script.turn_on
+    data:
+      entity_id: script.seche_serviette
+  - service: system_log.write
+    data_template:
+      message: Launch sèche serviette script from automation
+      level: info
+
+# Sèche serviette auto turn on 08:05
+- alias: Sèche serviette auto turn on 08:05
+  trigger:
+  - at: 08:05:00
+    platform: time
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: person.yann
+        state: home
+      - condition: state
+        entity_id: person.manon
+        state: home
+  action:
+  - data:
+      entity_id: script.seche_serviette
+    service: script.turn_on
+  - data_template:
+      level: info
+      message: Launch sèche serviette script from automation
+    service: system_log.write
+
+#########
+# COVER #
+#########
+
+# Ouverture des volets
+- alias: Ouverture des volets
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.cover_automation
+    state: 'on'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_open")
+      }}'
+  action:
+  - service: cover.open_cover
+    data:
+      entity_id: group.covers_all_open
+  - service: system_log.write
+    data_template:
+      message: Automatically open covers
+      level: info
+
+# Fermeture des volets
+- alias: Fermeture des volets
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: input_boolean.cover_automation
+    state: 'on'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_close")
+      }}'
+  action:
+  - service: cover.close_cover
+    data:
+      entity_id: group.covers_all_open
+  - service: system_log.write
+    data_template:
+      message: Automatically close covers
+      level: info

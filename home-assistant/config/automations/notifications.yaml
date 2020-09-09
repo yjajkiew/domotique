@@ -1,0 +1,209 @@
+###########
+# IS HOME #
+###########
+
+# Manon is Home
+- alias: Manon home notification
+  trigger:
+  - entity_id: person.manon
+    from: not_home
+    platform: state
+    to: home
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_a5000
+    data:
+      message: Manon est à la maison
+      data:
+        icon: /local/manon.png
+  - service: notify.salon
+    data:
+      message: Manon est à la maison
+      
+# Yann is Home
+- alias: Yann home notification
+  trigger:
+  - entity_id: person.yann
+    from: not_home
+    platform: state
+    to: home
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_a5010
+    data:
+      message: Yann est à la maison
+      target: manon
+      data:
+        icon: /local/yann.jpg
+  - service: notify.salon
+    data:
+      message: Yann est à la maison
+
+##############
+# MONITORING #
+##############
+
+# Hassio Update available
+- alias: Update hassio notification
+  trigger:
+  - entity_id: binary_sensor.updater
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: Update Hass.io available
+    service: notify.mobile_app_oneplus_a5000
+  mode: single
+
+# Hassio disk usage critical
+- alias: Monitoring disk usage notification
+  trigger:
+  - above: '80'
+    entity_id: sensor.disk_use_percent
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      message: disk usage > 80%
+    service: notify.mobile_app_oneplus_a5000
+  - service: system_log.write
+    data_template:
+      message: Disk usage > 80%
+      level: info
+      
+# Netgear router R7000 firmware update available
+- alias: R7000 firmware update
+  description: ''
+  trigger:
+  - entity_id: sensor.ng_enhanced_check_app_fw
+    from: '0'
+    platform: state
+    to: '1'
+  condition: []
+  action:
+  - data:
+      message: Firmware update R7000 available
+    service: notify.mobile_app_oneplus_a5000
+  mode: single
+  
+# Hassio start-up
+- alias: Hassio start-up notification
+  description: ''
+  trigger:
+    platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - data:
+      message: Home Assistant démarre
+    service: notify.mobile_app_oneplus_a5000
+  mode: single
+  
+# Battery low
+- alias: Battery low
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.battery_notification
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      message: One device battery is under 10%
+    service: notify.mobile_app_oneplus_a5000
+  mode: single
+
+############
+# CALENDAR #
+############
+
+# Poubelles
+- alias: Notification Poubelles
+  trigger:
+    platform: time
+    at: '18:00:00'
+  condition:
+  - condition: state
+    entity_id: calendar.poubelles
+    state: 'on'
+  action:
+  - data:
+      message: '{{ state_attr(''calendar.poubelles'', ''message'') }}'
+      data:
+        icon: /local/delete-circle.png
+    service: notify.all
+
+# Calendar event reminder
+- alias: Notification Calendrier
+  trigger:
+    platform: time
+    at: '09:00:00'
+  condition:
+  - condition: state
+    entity_id: calendar.manon_yann
+    state: 'on'
+  action:
+  - data:
+      message: '{{ state_attr(''calendar.manon_yann'', ''message'') }}'
+    service: notify.all
+    
+##########
+# VACUUM #
+##########
+
+# Vacuum started cleaning
+- alias: Vacuum Clean
+  trigger:
+    platform: state
+    entity_id: vacuum.xiaomi_vacuum_cleaner
+    to: 'cleaning'
+  action:
+    service: notify.all
+    data_template:
+      title: "Vacuum Started Cleaning"
+      message: "Started at {{ now().strftime('%H:%M:%S') }}"
+
+# Vacuum stopped
+- alias: Vacuum Finish
+  trigger:
+    platform: state
+    entity_id: vacuum.xiaomi_vacuum_cleaner
+    to: 'returning'
+  action:
+    service: notify.all
+    data_template:
+      title: "Vacuum Finished Cleaning"
+      message: "Finished at {{ now().strftime('%H:%M:%S') }}"
+
+# Vacuum in error
+- alias: Vacuum ERROR
+  trigger:
+    platform: state
+    entity_id: vacuum.xiaomi_vacuum_cleaner
+    to: 'error'
+  action:
+    service: notify.all
+    data_template:
+      title: "Vacuum Error"
+      message: "Error Reported at {{ now().strftime('%H:%M:%S') }}"
+
+# Vacuum maintenance needed
+- alias: Vacuum Maintenance
+  trigger:
+    platform: template
+    value_template: >
+      {{
+        (state_attr('vacuum.xiaomi_vacuum_cleaner', 'main_brush_left') | int  == 0) or
+        (state_attr('vacuum.xiaomi_vacuum_cleaner', 'side_brush_left') | int  == 0) or
+        (state_attr('vacuum.xiaomi_vacuum_cleaner', 'filter_left') | int  == 0) or
+        (state_attr('vacuum.xiaomi_vacuum_cleaner', 'sensor_dirty_left') | int  == 0)
+      }}
+  action:
+    service: notify.all
+    data_template:
+      title: "Vacuum Maintenance"
+      message: "Maintenance aspirateur : {% if state_attr('vacuum.xiaomi_vacuum_cleaner', 'main_brush_left') | int  == 0 %}changer la brosse principale{% elif state_attr('vacuum.xiaomi_vacuum_cleaner', 'side_brush_left') | int  == 0 %}changer la petite brosse{% elif state_attr('vacuum.xiaomi_vacuum_cleaner', 'filter_left') | int  == 0 %}changer le filtre{% elif state_attr('vacuum.xiaomi_vacuum_cleaner', 'sensor_dirty_left') | int  == 0 %}nettoyer les capteurs{% endif %}"
+

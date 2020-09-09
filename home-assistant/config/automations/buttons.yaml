@@ -1,0 +1,138 @@
+###########################
+# SECHE SERVIETTE TRIGGER #
+###########################
+
+# trigger ON
+- alias: Sèche serviette trigger ON
+  description: ''
+  trigger:
+  - event_data:
+      event: 1002
+      id: switch_1
+    event_type: deconz_event
+    platform: event
+  condition:
+  - condition: device
+    device_id: 76e54eb36cef435dbe3d203d1c03ed01
+    domain: switch
+    entity_id: switch.fibaro_secheserviette_switch
+    type: is_off
+  action:
+  - data: {}
+    entity_id: script.seche_serviette
+    service: script.turn_on
+  mode: restart
+  
+# trigger OFF
+- alias: Sèche serviette trigger OFF
+  description: ''
+  trigger:
+  - event_data:
+      event: 1002
+      id: switch_1
+    event_type: deconz_event
+    platform: event
+  condition:
+  - condition: state
+    entity_id: switch.fibaro_secheserviette_switch
+    state: 'on'
+  action:
+  - device_id: 76e54eb36cef435dbe3d203d1c03ed01
+    domain: switch
+    entity_id: switch.fibaro_secheserviette_switch
+    type: turn_off
+  mode: single
+
+########################
+# LIGHT MASTER BEDROOM #
+########################
+
+# trigger single press ON
+- alias: Light Master Bedroom ON
+  description: ''
+  trigger:
+  - event_data:
+      event: 1002
+      id: ikea_switch
+    event_type: deconz_event
+    platform: event
+  condition: []
+  action:
+  - service : light.turn_on
+    entity_id: light.master_bedroom
+  mode: single
+  
+# trigger single press OFF
+- alias: Light Master Bedroom OFF
+  description: ''
+  trigger:
+  - event_data:
+      event: 2002
+      id: ikea_switch
+    event_type: deconz_event
+    platform: event
+  condition: []
+  action:
+  - service : light.turn_off
+    entity_id: light.master_bedroom
+  mode: single
+
+# trigger long press START INCREASE
+- alias: Light Master Bedroom START INCREASE
+  description: ''
+  trigger:
+  - event_data:
+      event: 1001
+      id: ikea_switch
+    event_type: deconz_event
+    platform: event
+  condition: []
+  action:
+  - service : script.turn_on
+    entity_id: script.ramp_light
+    data:
+      variables:
+        direction: up
+        light: light.master_bedroom
+  mode: single
+  
+# trigger long press START DECREASE
+- alias: Light Master Bedroom START DECREASE
+  description: ''
+  trigger:
+  - event_data:
+      event: 2001
+      id: ikea_switch
+    event_type: deconz_event
+    platform: event
+  condition: []
+  action:
+  - service : script.turn_on
+    entity_id: script.ramp_light
+    data:
+      variables:
+        direction: down
+        light: light.master_bedroom
+  mode: single
+
+# trigger long press STOP RAMP (up or down)
+- alias: Light Master Bedroom STOP RAMP (up or down)
+  description: ''
+  trigger:
+  - event_data:
+      event: 1003
+      id: ikea_switch
+    event_type: deconz_event
+    platform: event
+  - event_data:
+      event: 2003
+      id: ikea_switch
+    event_type: deconz_event
+    platform: event
+  condition: []
+  action:
+  - service : script.turn_off
+    entity_id: script.ramp_light
+  mode: single
+  
+  

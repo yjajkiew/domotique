@@ -21,3 +21,10 @@ covers_all_open:
     - cover.salon_3
     - cover.bureau_fenetre
     - cover.bureau_baie
+    
+person_all:
+  name: Personnes
+  entities:
+    - person.yann
+    - person.manon
+    - person.claude

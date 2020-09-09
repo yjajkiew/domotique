@@ -1,0 +1,24 @@
+############################
+# TURN OFF SECHE SERVIETTE #
+############################
+
+- alias: Sèche serviette auto turn off security
+  trigger:
+  - platform: time_pattern
+    minutes: /1
+    seconds: 0
+  condition:
+  - condition: state
+    entity_id: switch.fibaro_secheserviette_switch
+    state: 'on'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int) - as_timestamp(states.switch.fibaro_secheserviette_switch.last_changed))//60
+      >= 30  }}'
+  action:
+  - service: switch.turn_off
+    data:
+      entity_id: switch.fibaro_secheserviette_switch
+  - service: system_log.write
+    data_template:
+      message: Security switch turn off for sèche serviette
+      level: info

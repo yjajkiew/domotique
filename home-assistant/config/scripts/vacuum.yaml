@@ -1,0 +1,182 @@
+######################
+# VACUUM MAINTENANCE #
+######################
+
+# Reset Main Brush
+vacuum_reset_main_brush:
+  alias: "Reset hours for main brush replacement"
+  icon: mdi:broom
+  sequence:
+    - service: vacuum.send_Command
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+        command: reset_consumable
+        params: ['main_brush_work_time']
+
+# Reset Side Brush
+vacuum_reset_side_brush:
+  alias: "Reset hours for side brush replacement"
+  icon: mdi:brush
+  sequence:
+    - service: vacuum.send_Command
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+        command: reset_consumable
+        params: ['side_brush_work_time']
+        
+# Reset Filter
+vacuum_reset_filter:
+  alias: "Reset hours for filter replacement"
+  icon: mdi:air-filter
+  sequence:
+    - service: vacuum.send_Command
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+        command: reset_consumable
+        params: ['filter_work_time']
+        
+# Reset Sensors
+vacuum_reset_sensors:
+  alias: "Reset hours for sensors cleaning"
+  icon: mdi:eye
+  sequence:
+    - service: vacuum.send_Command
+      data:
+        entity_id: vacuum.xiaomi_vacuum_cleaner
+        command: reset_consumable
+        params: ['sensor_dirty_time']
+
+
+################
+# VACUUM ZONES #
+################
+
+# VACUUM RDC
+vacuum_clean_rdc:
+  alias: Aspirer RDC
+  icon: mdi:floor-plan
+  mode: single
+  fields:
+    fan_speed:
+      description: 'set_fan_speed : Silent, Standard, Turbo, Max'
+      example: 'Silent = 38 - Standard = 60 - Turbo = 75 - Max = 100'
+  sequence:
+  - service: vacuum.set_fan_speed
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      fan_speed: 38 # force Silent fan speed in order to be able to clean all RDC without battery drain
+  - service: xiaomi_miio.vacuum_clean_zone
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone: 
+      - [23404,21556,27404,27106] #bureau
+      - [27453,19908,29753,27058] #entrée
+      - [28407,19376,34707,21126] #cuisine
+      - [29623,20967,34273,26717] #salle à manger
+# en attente de plinthe     - [34773,21443,38923,26043] #salon
+      
+# VACUUM Salle à manger
+vacuum_clean_salleamanger:
+  alias: Aspirer Salle à manger
+  icon: mdi:silverware-fork-knife
+  mode: single
+  fields:
+    fan_speed:
+      description: 'set_fan_speed : Silent, Standard, Turbo, Max'
+      example: 'Silent = 38 - Standard = 60 - Turbo = 75 - Max = 100'
+  sequence:
+  - service: vacuum.set_fan_speed
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      fan_speed: 60 #"{{ fan_speed }}"
+  - service: xiaomi_miio.vacuum_clean_zone
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone: 
+      - [29623,20967,34273,26717]
+      
+# VACUUM Cuisine
+vacuum_clean_cuisine:
+  alias: Aspirer Cuisine
+  icon: mdi:fridge
+  mode: single
+  fields:
+    fan_speed:
+      description: 'set_fan_speed : Silent, Standard, Turbo, Max'
+      example: 'Silent = 38 - Standard = 60 - Turbo = 75 - Max = 100'
+  sequence:
+  - service: vacuum.set_fan_speed
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      fan_speed: 60 #'{{ fan_speed }}'
+  - service: xiaomi_miio.vacuum_clean_zone
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone: 
+      - [28407,19376,34707,21126]
+      
+# VACUUM Entrée
+vacuum_clean_entree:
+  alias: Aspirer Entrée
+  icon: mdi:door
+  mode: single
+  fields:
+    fan_speed:
+      description: 'set_fan_speed : Silent, Standard, Turbo, Max'
+      example: 'Silent = 38 - Standard = 60 - Turbo = 75 - Max = 100'
+  sequence:
+  - service: vacuum.set_fan_speed
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      fan_speed: 60 #'{{ fan_speed }}'
+  - service: xiaomi_miio.vacuum_clean_zone
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone: 
+      - [27453,19908,29753,27058]
+      
+# VACUUM Bureau
+vacuum_clean_bureau:
+  alias: Aspirer Bureau
+  icon: mdi:desktop-mac
+  mode: single
+  fields:
+    fan_speed:
+      description: 'set_fan_speed : Silent, Standard, Turbo, Max'
+      example: 'Silent = 38 - Standard = 60 - Turbo = 75 - Max = 100'
+  sequence:
+  - service: vacuum.set_fan_speed
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      fan_speed: 60 #'{{ fan_speed }}'
+  - service: xiaomi_miio.vacuum_clean_zone
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone: 
+      - [23404,21556,27404,27106]
+      
+# VACUUM Salon
+vacuum_clean_salon:
+  alias: Aspirer Salon
+  icon: mdi:sofa
+  mode: single
+  fields:
+    fan_speed:
+      description: 'set_fan_speed : Silent, Standard, Turbo, Max'
+      example: 'Silent = 38 - Standard = 60 - Turbo = 75 - Max = 100'
+  sequence:
+  - service: vacuum.set_fan_speed
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      fan_speed: 60 #'{{ fan_speed }}'
+  - service: xiaomi_miio.vacuum_clean_zone
+    data_template:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+      repeats: 1
+      zone: 
+      - [34773,21443,38923,26043]
