@@ -12,12 +12,11 @@
     entity_id: binary_sensor.workday_sensor
     state: 'on'
   - condition: template
-    value_template: '{{ not is_state(''person.yann'', ''home'') }}'
+    value_template: '{{ not is_state("person.yann", "home") }}'
   - condition: template
-    value_template: '{{ not is_state(''person.manon'', ''home'') }}'
+    value_template: '{{ not is_state("person.manon", "home") }}'
   - condition: template
-    value_template: '{{ ((as_timestamp(now())|int)-(as_timestamp(state_attr("vacuum.xiaomi_vacuum_cleaner",
-      "clean_stop"))|int)|int)//(60 * 60) >= 24 }}'
+    value_template: '{{ ((as_timestamp(now())|int)-(as_timestamp(state_attr("vacuum.xiaomi_vacuum_cleaner","clean_stop"))|int)|int)//(60 * 60) >= 24 }}'
   action:
   - service: script.vacuum_clean_rdc
   - data_template:
@@ -36,8 +35,7 @@
     entity_id: binary_sensor.workday_sensor
     state: 'on'
   - condition: template
-    value_template: '{{ ((as_timestamp(now())|int)-(as_timestamp(state_attr("vacuum.xiaomi_vacuum_cleaner",
-      "clean_stop"))|int)|int)//(60 * 60) >= 40 }}'
+    value_template: '{{ ((as_timestamp(now())|int)-(as_timestamp(state_attr("vacuum.xiaomi_vacuum_cleaner","clean_stop"))|int)|int)//(60 * 60) >= 40 }}'
   action:
   - service: script.vacuum_clean_rdc
   - data_template:

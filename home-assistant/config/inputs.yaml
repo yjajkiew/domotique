@@ -4,9 +4,6 @@
 
 # booleans
 input_boolean:
-  alarm:
-    name: Alarme
-    icon: mdi:alarm-light
   wakeup_weekday:
     name: Activer réveil lumineux
     icon: mdi:power

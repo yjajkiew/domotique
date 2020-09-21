@@ -6,14 +6,13 @@
     away_mode: 
       friendly_name: "Away mode"
       value_template: >
-        {% if is_state('group.person_all', 'not_home') %}
+        {% if not is_state('group.person_all', 'home') %}
           on
         {% else %}
           off
         {% endif %}
-      entity_id: group.person_all
       icon_template: >
-        {% if is_state('group.person_all', 'not_home') %}
+        {% if not is_state('group.person_all', 'home') %}
           mdi:home-lock
         {% else %}
           mdi:home-lock-open
@@ -24,7 +23,8 @@
       value_template: >-
         {% set ns = namespace(notify='off') %} 
         {% for state in states.sensor %}
-          {% if (state.name | regex_search('battery', ignorecase=True)) 
+          {% if (state.state|regex_match('[0-9]', ignorecase=False))
+          and (state.name | regex_search('battery', ignorecase=True)) 
           and not(state.name | regex_search('ONEPLUS', ignorecase=True)) 
           and not(state.entity_id | regex_search('battery_notification', ignorecase=True))
           and ((state.state|int) <= 10) %} 
@@ -33,4 +33,3 @@
         {% endfor %}
         {{ ns.notify }}
       icon_template: mdi:battery-10
-      entity_id: sensor.date #every day

@@ -1,44 +1,35 @@
-#####################################
-# ENABLE ALARM IF AWAY MODE ENABLED #
-#####################################
-- alias: Automatically enable alarm
-  description: ''
+#####################
+# ARM ALARM IF AWAY #
+#####################
+- alias: Arm alarm if away
   trigger:
   - platform: state
     entity_id: binary_sensor.away_mode
     from: 'off'
     to: 'on'
-  condition: []
   action:
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.alarm
+    - service: alarm_control_panel.alarm_arm_away
+      entity_id: alarm_control_panel.ha_alarm 
   mode: restart
-  
-  
-#######################################
-# DISABLE ALARM IF AWAY MODE DISABLED #
-#######################################
-- id: '159620965002'
-  alias: Automatically disable alarm
-  description: ''
+
+############################
+# DISARM ALARM IF GOT HOME #
+############################
+- alias: Disarm alarm if got home
   trigger:
   - platform: state
     entity_id: binary_sensor.away_mode
     from: 'on'
     to: 'off'
-  condition: []
   action:
-  - service: input_boolean.turn_off
-    data:
-      entity_id: input_boolean.alarm
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.ha_alarm  
   mode: restart
 
-##################
-# DOORWAY MOTION #
-##################
-- alias: Away motion detected
-  description: ''
+################
+# TRIGGER AWAY #
+################
+- alias: Trigger alarm away
   trigger:
   - platform: state
     entity_id: binary_sensor.doorway_motion_sensor
@@ -46,10 +37,39 @@
     to: 'on'
   condition: 
   - condition: state
-    entity_id: input_boolean.alarm
-    state: 'on'
+    entity_id: alarm_control_panel.ha_alarm
+    state: armed_away
   action:
+  - service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.ha_alarm
   - service: notify.mobile_app_oneplus_a5000
     data:
       message: 'Doorway motion detected'
   mode: restart
+
+###################
+# SIREN AND FLASH #
+###################
+
+# trigger start
+- alias: Alarm triggered
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'triggered'
+  action:
+    - service: script.turn_on
+      entity_id: script.flash_bureau
+      
+# alarm is disarmed
+- alias: Alarm disarmed
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.ha_alarm
+      to: 'disarmed'
+  action:
+    # Turn off the siren once the alarm is disarmed
+    - service: script.turn_off
+      entity_id: script.flash_bureau
+    - service: light.turn_off
+      entity_id: light.bureau_color

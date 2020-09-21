@@ -21,3 +21,22 @@ sensor: !include sensors.yaml
 binary_sensor: !include binary_sensors.yaml
 frontend:
   themes: !include themes.yaml
+
+alarm_control_panel:
+  - platform: manual
+    code: !secret alarm_code
+    code_arm_required: false # Don't require the code to arm the alarm
+    disarm_after_trigger: false # Arm again after triggering
+    arming_time: 120 # Delay from arming and becoming armed, eg. to leave the house.
+    delay_time: 60 # Allow time to disarm the alarm before it triggers, eg. when arriving home
+    trigger_time: 600 # Amount of time the alarm is triggered for
+    disarmed:
+      trigger_time: 0 # Ensure the alarm can never be directly triggered when disarmed
+    armed_home:
+      arming_time: 0 # Leave no delay between arming -> armed when home
+      delay_time: 0 # Leave no delay between pending -> triggered
+
+browser_mod:
+  prefix: "browsermod_"
+  disable:
+    - all

@@ -5,9 +5,8 @@
 # Bedroom wake-up light
 - alias: Bedroom wake-up light
   trigger:
-  - minutes: /1
-    platform: time_pattern
-    seconds: 0
+  - platform: time
+    at: input_datetime.wakeup_weekday_timestart
   condition:
   - condition: state
     entity_id: person.yann
@@ -18,9 +17,6 @@
   - condition: state
     entity_id: input_boolean.wakeup_weekday
     state: 'on'
-  - condition: template
-    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M:00")) ==
-      states("input_datetime.wakeup_weekday_timestart") }}'
   action:
   - data:
       brightness: 1
@@ -36,9 +32,8 @@
 # Bedroom light auto turn off
 - alias: Bedroom light auto turn off
   trigger:
-  - platform: time_pattern
-    minutes: /1
-    seconds: 0
+  - platform: time
+    at: input_datetime.wakeup_weekday_timestop
   condition:
   - condition: state
     entity_id: person.yann
@@ -49,9 +44,6 @@
   - condition: state
     entity_id: input_boolean.wakeup_weekday
     state: 'on'
-  - condition: template
-    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M:00")) ==
-      states("input_datetime.wakeup_weekday_timestop") }}'
   action:
   - service: light.turn_off
     data:
@@ -135,16 +127,14 @@
 # Ouverture des volets
 - alias: Ouverture des volets
   trigger:
-  - platform: time_pattern
-    minutes: /1
-    seconds: 0
+  - platform: template
+    value_template: '{{ states("sensor.time") == states("sensor.cover_auto_open") }}'
   condition:
   - condition: state
     entity_id: input_boolean.cover_automation
     state: 'on'
-  - condition: template
-    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_open")
-      }}'
+#  - condition: template
+#    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_open") }}'
   action:
   - service: cover.open_cover
     data:
@@ -157,16 +147,14 @@
 # Fermeture des volets
 - alias: Fermeture des volets
   trigger:
-  - platform: time_pattern
-    minutes: /1
-    seconds: 0
+  - platform: template
+    value_template: '{{ states("sensor.time") == states("sensor.cover_auto_close") }}'
   condition:
   - condition: state
     entity_id: input_boolean.cover_automation
     state: 'on'
-  - condition: template
-    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_close")
-      }}'
+#  - condition: template
+#    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_close") }}'
   action:
   - service: cover.close_cover
     data:

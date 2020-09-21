@@ -4,16 +4,12 @@
 
 - alias: Sèche serviette auto turn off security
   trigger:
-  - platform: time_pattern
-    minutes: /1
-    seconds: 0
+  - platform: template
+    value_template: '{{ ((as_timestamp(now())|int) - as_timestamp(states.switch.fibaro_secheserviette_switch.last_changed))/60 >= 30  }}'
   condition:
   - condition: state
     entity_id: switch.fibaro_secheserviette_switch
     state: 'on'
-  - condition: template
-    value_template: '{{ ((as_timestamp(now())|int) - as_timestamp(states.switch.fibaro_secheserviette_switch.last_changed))//60
-      >= 30  }}'
   action:
   - service: switch.turn_off
     data:
@@ -22,3 +18,36 @@
     data_template:
       message: Security switch turn off for sèche serviette
       level: info
+      
+##########
+# SYSTEM #
+##########
+
+# Update counters sensors (templates) every minute
+- alias: 'Update counters every minute'
+  trigger:
+  - platform: time_pattern
+    minutes: '*'
+  action:
+  - service: homeassistant.update_entity
+    entity_id: 
+    - sensor.sensors_count
+    - sensor.binarysensors_count
+    - sensor.lights_count
+    - sensor.devices_count
+    - sensor.automations_count
+    - sensor.covers_count
+    - sensor.groups_count
+    - sensor.inputs_count
+    - sensor.scripts_count
+    - sensor.switch_count
+    
+
+# Update battery check (templates) every 4 hours
+- alias: 'Update battery check every 4 hours'
+  trigger:
+  - platform: time_pattern
+    hours: '/4'
+  action:
+  - service: homeassistant.update_entity
+    entity_id: binary_sensor.battery_notification
