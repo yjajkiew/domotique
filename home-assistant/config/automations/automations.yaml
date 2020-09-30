@@ -64,25 +64,15 @@
 # SWITCH #
 ##########
 
-# Sèche serviette auto turn on 07:40
-- alias: Sèche serviette auto turn on 07:40
+# Sèche serviette auto turn for Yann
+- alias: Sèche serviette auto turn for Yann # sensor.oneplus_a5000_next_alarm
   trigger:
-  - platform: time
-    at: 07:40:00
+  - platform: template # right day and 10 minutes before phone alarm
+    value_template: '{{ states("sensor.date_time") == ((as_timestamp(states("sensor.oneplus_a5000_next_alarm"))- 10*60)|timestamp_custom("%Y-%m-%d, %H:%M")) }}'
   condition:
-    condition: and
-    conditions:
-    - condition: state
-      entity_id: binary_sensor.workday_sensor
-      state: 'on'
-    - condition: or
-      conditions:
-      - condition: state
-        entity_id: person.yann
-        state: home
-      - condition: state
-        entity_id: person.manon
-        state: home
+  - condition: state
+    entity_id: person.yann
+    state: home
   action:
   - service: script.turn_on
     data:
@@ -92,25 +82,15 @@
       message: Launch sèche serviette script from automation
       level: info
 
-# Sèche serviette auto turn on 08:05
-- alias: Sèche serviette auto turn on 08:05
+# Sèche serviette auto turn for Manon
+- alias: Sèche serviette auto turn on for Manon
   trigger:
-  - at: 08:05:00
-    platform: time
+  - platform: template # right day and 10 minutes before phone alarm
+    value_template: '{{ states("sensor.date_time") == ((as_timestamp(states("sensor.oneplus_a5010_prochaine_alarme"))- 10*60)|timestamp_custom("%Y-%m-%d, %H:%M")) }}'
   condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: binary_sensor.workday_sensor
-      state: 'on'
-    - condition: or
-      conditions:
-      - condition: state
-        entity_id: person.yann
-        state: home
-      - condition: state
-        entity_id: person.manon
-        state: home
+  - condition: state
+    entity_id: person.manon
+    state: home
   action:
   - data:
       entity_id: script.seche_serviette
@@ -133,8 +113,6 @@
   - condition: state
     entity_id: input_boolean.cover_automation
     state: 'on'
-#  - condition: template
-#    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_open") }}'
   action:
   - service: cover.open_cover
     data:
@@ -153,8 +131,6 @@
   - condition: state
     entity_id: input_boolean.cover_automation
     state: 'on'
-#  - condition: template
-#    value_template: '{{ ((as_timestamp(now())|int)|timestamp_custom("%H:%M")) ==  states("sensor.cover_auto_close") }}'
   action:
   - service: cover.close_cover
     data:
