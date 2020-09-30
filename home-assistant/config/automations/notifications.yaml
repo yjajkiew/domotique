@@ -9,7 +9,6 @@
     from: not_home
     platform: state
     to: home
-  condition: []
   action:
   - service: notify.mobile_app_oneplus_a5000
     data:
@@ -27,7 +26,6 @@
     from: not_home
     platform: state
     to: home
-  condition: []
   action:
   - service: notify.mobile_app_oneplus_a5010
     data:
@@ -46,11 +44,10 @@
 # Hassio Update available
 - alias: Update hassio notification
   trigger:
-  - entity_id: binary_sensor.updater
+  - platform: state
+    entity_id: binary_sensor.updater
     from: 'off'
-    platform: state
     to: 'on'
-  condition: []
   action:
   - data:
       message: Update Hass.io available
@@ -63,7 +60,6 @@
   - above: '80'
     entity_id: sensor.disk_use_percent
     platform: numeric_state
-  condition: []
   action:
   - data:
       message: disk usage > 80%
@@ -81,7 +77,6 @@
     from: '0'
     platform: state
     to: '1'
-  condition: []
   action:
   - data:
       message: Firmware update R7000 available
@@ -94,7 +89,6 @@
   trigger:
     platform: homeassistant
     event: start
-  condition: []
   action:
   - data:
       message: Home Assistant démarre
@@ -109,7 +103,6 @@
     from: 'off'
     platform: state
     to: 'on'
-  condition: []
   action:
   - data:
       message: One device battery is under 10%
