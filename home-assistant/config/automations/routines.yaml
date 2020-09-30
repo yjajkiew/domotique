@@ -4,12 +4,14 @@
 
 - alias: Sèche serviette auto turn off security
   trigger:
-  - platform: template
-    value_template: '{{ ((as_timestamp(now())|int) - as_timestamp(states.switch.fibaro_secheserviette_switch.last_changed))/60 >= 30  }}'
+  - platform: time_pattern
+    minutes: '/1'
   condition:
   - condition: state
     entity_id: switch.fibaro_secheserviette_switch
     state: 'on'
+  - condition: template
+    value_template: '{{ ((as_timestamp(now())|int) - as_timestamp(states.switch.fibaro_secheserviette_switch.last_changed))/60 >= 30  }}'
   action:
   - service: switch.turn_off
     data:
