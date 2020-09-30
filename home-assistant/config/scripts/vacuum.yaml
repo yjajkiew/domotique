@@ -70,11 +70,11 @@ vacuum_clean_rdc:
       entity_id: vacuum.xiaomi_vacuum_cleaner
       repeats: 1
       zone: 
-      - [23404,21556,27404,27106] #bureau
-      - [27453,19908,29753,27058] #entrée
-      - [28407,19376,34707,21126] #cuisine
-      - [29623,20967,34273,26717] #salle à manger
-# en attente de plinthe     - [34773,21443,38923,26043] #salon
+      - [20799,14850,26349,18800] #bureau
+      - [20747,18973,27947,20873] #entrée
+      - [26622,19809,28572,26359] #cuisine
+      - [20966,21048,26766,25998] #salle à manger
+# en attente de plinthe     - [21908,26215,26908,30565] #salon
       
 # VACUUM Salle à manger
 vacuum_clean_salleamanger:
@@ -95,7 +95,7 @@ vacuum_clean_salleamanger:
       entity_id: vacuum.xiaomi_vacuum_cleaner
       repeats: 1
       zone: 
-      - [29623,20967,34273,26717]
+      - [20966,21048,26766,25998]
       
 # VACUUM Cuisine
 vacuum_clean_cuisine:
@@ -116,7 +116,7 @@ vacuum_clean_cuisine:
       entity_id: vacuum.xiaomi_vacuum_cleaner
       repeats: 1
       zone: 
-      - [28407,19376,34707,21126]
+      - [26622,19809,28572,26359]
       
 # VACUUM Entrée
 vacuum_clean_entree:
@@ -137,7 +137,7 @@ vacuum_clean_entree:
       entity_id: vacuum.xiaomi_vacuum_cleaner
       repeats: 1
       zone: 
-      - [27453,19908,29753,27058]
+      - [20747,18973,27947,20873]
       
 # VACUUM Bureau
 vacuum_clean_bureau:
@@ -158,7 +158,7 @@ vacuum_clean_bureau:
       entity_id: vacuum.xiaomi_vacuum_cleaner
       repeats: 1
       zone: 
-      - [23404,21556,27404,27106]
+      - [20799,14850,26349,18800]
       
 # VACUUM Salon
 vacuum_clean_salon:
@@ -179,4 +179,4 @@ vacuum_clean_salon:
       entity_id: vacuum.xiaomi_vacuum_cleaner
       repeats: 1
       zone: 
-      - [34773,21443,38923,26043]
+      - [21908,26215,26908,30565]
