@@ -28,14 +28,18 @@ Par exemple j'ai commencé par des ampoules Philips Hue avec son bridge pour sa 
 | Nom                              | Modèle           | Quantité | Image    | Description |
 |:---------------------------------|:-----------------|:---------|:---------|:------------|
 |  [OSRAM Smart+](https://amzn.to/2AONgoW)                    | 4058075036239    |  3       | <img src="https://tinyurl.com/y63o6vvw" width="100"/>     | Protocol ZigBee compatible et intégrable avec le bridge Philips Hue<br/>Me permet de piloter des lampes d'appoint (guirlande, lumière d'ambiance) |
+| [IKEA TRÅDFRI Prise connectée](https://www.ikea.com/fr/fr/p/tradfri-prise-connectee-20364476/)  | 203.644.76 |  1       | <img src="https://tinyurl.com/y4bleqxc" width="100"/>     | Protocol ZigBee, cette prise connectée est bon marché et discrète, je l'utilise seulement comme répététeur dans mon réseau ZigBee   |
 | [FIBARO Wall Plug Type E](https://amzn.to/2nqW69i)  | FGWPE-102 ZW5 EU |  1       | <img src="https://tinyurl.com/y2z75gj2" width="100"/>     | Protocole Z-Wave avec consommation d'énergie<br/>Me permet de détecter la fin d'un cycle sur ma machine à laver pour recevoir une notification   |
 
 
-## Interrupteurs
+
+## Interrupteurs / Détecteurs
 
 | Nom                              | Modèle   | Quantité | Image    | Description |
 |:---------------------------------|:---------|:---------|:---------|:------------|
-| [Aqara Interrupteur sans fils](https://amzn.to/2EuRfMs)           | WJO6815943896214LC |  1       | <img src="https://tinyurl.com/y47gdam8" width="100"/>     |  Interrupteur ZigBee permettant de contrôler le sèche-serviette via Home Assistant      |
+| [Aqara Interrupteur sans fils](https://amzn.to/2EuRfMs)           | WJO6815943896214LC |  1       | <img src="https://tinyurl.com/y47gdam8" width="100"/>     |  Interrupteur nomade ZigBee permettant de contrôler le sèche-serviette via Home Assistant      |
+| [IKEA TRÅDFRI Interrupteur sans fil](https://www.ikea.com/fr/fr/p/tradfri-variateur-dintensite-sans-fil-blanc-70408595/)           | 704.085.95 |  1       | <img src="https://tinyurl.com/y3vgw67p" width="100"/>     |  Interrupteur nomade ZigBee permettant de contrôler ma lampe de chevet (allumer, éteindre, augmenter ou diminuer l'intensité) via Home Assistant      |
+| [IKEA TRÅDFRI Détecteur de mouvement sans fil](https://www.ikea.com/fr/fr/p/tradfri-detecteur-de-mouvement-sans-fil-blanc-70429913/)           | 704.299.13 |  2       | <img src="https://tinyurl.com/y5xmfhsy" width="100"/>     |  Détecteur de mouvement ZigBee connecté à Home Assistant      |
 
 
 
