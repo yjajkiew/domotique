@@ -346,9 +346,9 @@ discovery:
 
 ### Add-ons et composants
 
-**Configurator**
+**File Editor**
 
-[Configurator](https://www.home-assistant.io/addons/configurator/) est un outil indispensable puisqu'il permet de gérer (créer, modifier, supprimer, renommer) ses fichiers de configuration directement depuis l'interface de Home Assistant. Un éditeur YAML avec vérification de syntaxe y est directement intégré.
+[File Editor](https://www.home-assistant.io/addons/configurator/) est un outil indispensable puisqu'il permet de gérer (créer, modifier, supprimer, renommer) ses fichiers de configuration directement depuis l'interface de Home Assistant. Un éditeur YAML avec vérification de syntaxe y est directement intégré.
 
 **Log Viewer**
 
@@ -360,20 +360,20 @@ Cet [addon SSH](https://github.com/hassio-addons/addon-ssh) permet de configurer
 
 **AutoSSH**
 
-Cette section est détaillée plus haut sur l'[exposition sur internet via tunnel SSH](#solution-2--tunnel-ssh)
+Cette section est détaillée plus haut sur l'[exposition sur internet via tunnel SSH](#solution-2--tunnel-ssh).
 
-**Breaking changes**
 
-Ce composant n'est pas disponible en tant qu'Add-on Hassio installable en quelques clics, mais il est disponible via une [installation manuelle](https://developers.home-assistant.io/docs/en/creating_component_loading.html).
+**Google Drive Backup**
 
-[Breaking changes](https://github.com/custom-components/breaking_changes) est un module qui va permettre de comparer votre configuration par rapport à la prochaine version de Home Assistant disponible et de prévenir du nombre de "potential breaking changes". Plutôt pratique pour anticiper les mises à jour sans avoir à scruter tout le changelog à chaque release.
+Cette section est détaillée plus haut sur la [gestion des backups automatiques](#backups).
 
-Après installation le module est à activer en mettant ceci dans la fichier configuration.yaml :
-```yaml
-# activate custom component "breaking changes"
-breaking_changes:
-```
+**MariaDB**
 
+C'est un Add-On officiel de Home Assistant que j'utilise pour remplacer la base de donnée par défaut puisque ce dernier repose sur SQLite et pose des problèmes de performance de durabilité des cartes SD sur Raspberry Pi. Même si aujourd'hui mon RPI boot sur une clé USB plutôt que sur une carte SD j'ai conservé cette configuration pour ces mêmes raison de performance.
+
+**deCONZ**
+
+C'est un Add-On officiel de Home Assistant qui permet de communiquer avec mon ConBee II et donc mon réseau ZigBee.
 
 
 ### Sensors : capteurs et services
