@@ -217,37 +217,57 @@ sensor:
   # templates
   - platform: template
     sensors:
-      sensors_count: # need to automate calling homeassistant.update_entity periodically
+      sensors_count: 
         friendly_name: "Sensors count"
-        value_template: "{{ states.sensor|list|length }}"
+        value_template: "{{states.sensor|list|length}}"
         icon_template: mdi:eye
-        entity_id: sensor.time # refresh this count every minute
+      binarysensors_count: 
+        friendly_name: "Binary Sensors count"
+        value_template: "{{states.binary_sensor|list|length}}"
+        icon_template: mdi:circle-slice-8
       lights_count:
         friendly_name: "Lights count"
-        value_template: "{{ states.light|list|length }}"
+        value_template: "{{states.light|list|length}}"
         icon_template: mdi:lightbulb
-        entity_id: group.all_lights
       devices_count:
-        friendly_name: "Devices count"
-        value_template: "{{states.group.all_devices.attributes.entity_id|list|length}}"
+        friendly_name: "Devices tracker count"
+        value_template: "{{states.device_tracker|list|length}}"
         icon_template: mdi:robot-industrial
-        entity_id: group.all_devices
       automations_count:
         friendly_name: "Automations count"
-        value_template: "{{states.group.all_automations.attributes.entity_id|list|length}}"
+        value_template: "{{states.automation|list|length}}"
         icon_template: mdi:robot
-        entity_id: group.all_automations
       covers_count:
         friendly_name: "Covers count"
-        value_template: "{{states.group.all_covers.attributes.entity_id|list|length}}"
+        value_template: "{{states.cover|list|length}}"
         icon_template: mdi:window-closed
-        entity_id: group.all_covers
+      groups_count:
+        friendly_name: "Groups count"
+        value_template: "{{states.group|list|length}}"
+        icon_template: mdi:account-group
+      inputs_count:
+        friendly_name: "Inputs count"
+        value_template: "{{states.input_boolean|list|length + states.input_number|list|length + states.input_datetime|list|length}}"
+        icon_template: mdi:import
+      scripts_count:
+        friendly_name: "Scripts count"
+        value_template: "{{states.script|list|length}}"
+        icon_template: mdi:script
+      switch_count:
+        friendly_name: "Switch count"
+        value_template: "{{states.switch|list|length}}"
+        icon_template: mdi:toggle-switch
+
 {% endraw %}
 ```
 
+### Supervision des routeurs
 
+Cela ne concerne pas la supervision de Home Assistant en soit mais plutôt l'inverse : la supervision de mes routeurs et de ma LiveBox depuis Home Assistant pour tout regrouper à un seul endroit.
 
+Dans mon cas mon FAI est Orange via une Livebox donc j'ai simplement installé le plugin custom [Orange Livebox](https://github.com/cyr-ius/hass-livebox-component) qui me permet de vérifier le status de ma connexion, mon adresse WAN, et d'avoir un bouton de reboot.
 
+Mon routeur principal par lequel passe tout mon traffic internet est un routeur Netgear R7000 et j'ai installé le plugin custom [Netgear Enhanced](https://gitlab.landry.me/Home-Assistant/custom_components/netgear-enhanced-sensor) qui permet de connaître le nombre total de Go downloaded/uploaded dans le mois courant et dans le mois précédent.
 
 
 ## Backups
