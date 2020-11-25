@@ -189,7 +189,7 @@ glances:
 
 ### Configurations custom
 
-En plus des sensors décris ci-dessus j'en ai ajouté quelques-uns natifs comme le uptime, la taille de la base de données, et la taille des logs via la configuration suivante :
+En plus des sensors décris ci-dessus j'en ai ajouté quelques-uns natifs comme le uptime, la taille des logs mais aussi la taille de ma base MariaDB via la configuration suivante :
 
 ```yaml
 sensor:
@@ -198,8 +198,15 @@ sensor:
   # Filesize monitoring
   - platform: filesize
     file_paths:
-      - /config/home-assistant_v2.db
       - /config/home-assistant.log
+  # database monitoring
+  - platform: sql
+    db_url: !secret db_url
+    queries:
+      - name: MariaDB Size
+        query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+        column: 'value'
+        unit_of_measurement: MB
 ```
 
 Je suis allé également un peu plus loin en utilisant les [templates](https://www.home-assistant.io/integrations/template/) de Home Assistant pour récupérer et calculer : le nombre de sensors, le nombre de lumières, le nombre de devices connus sur mon réseau, le nombre d'automatisations, le nombre de volets.
