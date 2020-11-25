@@ -296,17 +296,18 @@ Ainsi en cas de problèmes ou de réinstallation je peux restaurer un de ces bac
 
 Avant d'entrer dans les configurations je vous invite à utiliser les [secrets](https://www.home-assistant.io/docs/configuration/secrets/) : il suffit de créer un fichier secrets.yaml dans le dossier config pour y mettre tous les configurations sensibles tels que les IPs et mots de passe pour ensuite les inclure dans le fichier configuration.yaml
 
-Configuration HTTP (absolument nécessaire lorsque Home Assistant est exposé derrière un reverse proxy nginx par exemple) :
+Configuration générale de Home Assistant permettant de définir les URLs internes et externes à utiliser et d'inclure des fichiers de configurations splittés :
 ```yaml
-http:
-  # For extra security set this to only accept connections on localhost if NGINX is on the same machine
-  # server_host: 127.0.0.1
-  # Update this line to be your domain
-  base_url: !secret base_url
-  use_x_forwarded_for: true
-  # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
-  # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
-  trusted_proxies: !secret http_trusted_proxies
+homeassistant:
+  external_url: !secret external_url
+  internal_url: !secret internal_url
+  whitelist_external_dirs: 
+    - '/config/'
+  customize: !include customize.yaml
+  packages:
+    inputs: !include inputs.yaml
+    integrations: !include integrations.yaml
+    system: !include system.yaml
 ```
 
 Si dans la partie [supervision](#supervision) vous monitorez la taille de la BDD et des logs il faut autoriser la lecture de ces fichiers à travers la configuration suivante :
