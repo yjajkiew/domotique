@@ -5,6 +5,14 @@ nav_order: 11
 comments: true
 ---
 
+# TODO LIST Documentation
+
+- mettre à jour le matériel (capteurs de température, aqara open sensors, ampoules philips hue color, ampoules innr color, sirène aeotec, bandeau led color lidl, prise connectée lidl)
+- intégration enedis : https://www.canaletto.fr/post/home-assistant-and-enedis
+- cartes 3D avec affichage des sensors
+
+
+
 # Idées d'automatisations à venir
 {: .no_toc }
 
