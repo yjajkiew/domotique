@@ -19,6 +19,10 @@ comments: true
 1. TOC
 {:toc}
 
+## Onduleur et rétablissement d'état en coupure de courant
+
+https://www.canaletto.fr/post/home-assistant-restauration-etat-apres-coupure-electrique
+
 ## Détecter une livraison de courrier ou de colis dans la boîte aux lettres
 
 Deux options :
