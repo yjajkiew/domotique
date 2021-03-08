@@ -49,18 +49,16 @@ Utiliser un module Z-Wave relay switch type Fibaro FGS213 connecté au carillon 
 **Matériel requis** :
  - Fibaro FGS 213 : https://www.domotique-store.fr/domotique/modules-domotiques/micromodules/micromodules-switch-domotique-sans-fil/667-fibaro-fgs-213-single-switch-2-micromodule-interrupteur-simple-on-off-z-wave-avec-mesure-de-consommation.html
 
-## Bandeaux leds au dessus des fenêtres synchronisés avec la TV Ambilight
 
-It's a stretch puisque pour l'instant je possède certes :
- - une TV Philips Ambilight mais de 2014 donc pas synchronisable avec Philips Hue
- - des néons au dessus des coffrages de volet du salon
+## Allumer/Eteindre la chaudière fioul en fonction du gel 
+
+La chaudière fioul fonctionne en renfort lors des jours de gel, actuellement je la branche ou débranche en fonction des prévisions même si le "cerveau" fait la bascule automatiquement. Cela permet de ne pas consommer du fioul pendant le mode hors gel lorsqu'elle n'est pas utilisée.
+
+L'idée ici serait d'automatiser ce ON/OFF en fonction des prévisions météo. L'avantage serait également de pouvoir suivre l'utilisation de la chaudière pour voir quand elle se déclenche exactement.
 
 **Matériel requis** :
- - Une nouvelle TV Ambilight plus récente
- - des led strips de couleur avec contrôleur ZigBee de marque Philips (impératif pour que ce soit fonctionnel avec Philips Hue Entertainment)
+ - Fibaro wall plug (prise z-wave avec suivi de consommation électrique)
  
-Un petit peu d'électricité pour remplacer les néons et ensuite c'est Philips Hue qui fera le reste :-)
-
 
 
 
