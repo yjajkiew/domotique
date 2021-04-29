@@ -113,7 +113,7 @@ Bien entendu pour communiquer avec le serveur le raspberry passe bien par intern
  - il existe l'outil [autossh](https://linux.die.net/man/1/autossh) qui permet de créer des tunnels SSH persistent qui se reconstruisent en cas de fail
  - encore mieux il existe un [addon Hassio AutoSSH](https://github.com/pjcarly/hassio-addons) qu'il suffit d'installer et configurer pour que cela fasse partie intégrante de votre Hassio : [voir tutoriel](https://carly.be/expose-home-assistant-through-ssh-tunnel/)
  - désactiver la fonction monitoring de autossh et utiliser plutôt les options ServerAliveInterval et ServerAliveCountMax pour maintenir la connexion active entre home assistant et le serveur distant
- - activer le monitoring côté client (serveur distant) pour libérer le port en cas d'interruption de la connexion SSH (dans mon cas en cas de coupure de courant autossh ne pouvait pas couper correctement la connexion ainsi le port restait ouvert à tort sur le serveur distant, au redémarrage autossh ne pouvait donc plus se connecter au port du serveur distant puisqu'il restait bloqué) > [voir tutoriel](http://go2linux.garron.me/linux/2011/02/limit-idle-ssh-sessions-time-avoid-unattended-ones-clientaliveinterval-clientalivecoun/)
+ - activer le monitoring côté client (serveur distant) pour libérer le port en cas d'interruption de la connexion SSH (dans mon cas en cas de coupure de courant autossh ne pouvait pas couper correctement la connexion ainsi le port restait ouvert à tort sur le serveur distant, au redémarrage autossh ne pouvait donc plus se connecter au port du serveur distant puisqu'il restait bloqué) > [voir tutoriel](https://www.techrepublic.com/article/how-to-prevent-unattended-ssh-connections-from-remaining-connected/)
  - utiliser une adresse IP différente sur le serveur distant pour décorréler l'IP du reverse proxy de Home Assistant de vos sites publiques et éviter un discovery via un reverse IP lookup
  - pour les configurations nginx et certificat SSL la documentation de Home Assistant fournit tout ce qu'il faut : [voir documentation](https://www.home-assistant.io/docs/ecosystem/nginx_subdomain/)
  - ma configuration autossh est la suivante
@@ -189,7 +189,7 @@ glances:
 
 ### Configurations custom
 
-En plus des sensors décris ci-dessus j'en ai ajouté quelques-uns natifs comme le uptime, la taille de la base de données, et la taille des logs via la configuration suivante :
+En plus des sensors décris ci-dessus j'en ai ajouté quelques-uns natifs comme le uptime, la taille des logs mais aussi la taille de ma base MariaDB via la configuration suivante :
 
 ```yaml
 sensor:
@@ -198,8 +198,15 @@ sensor:
   # Filesize monitoring
   - platform: filesize
     file_paths:
-      - /config/home-assistant_v2.db
       - /config/home-assistant.log
+  # database monitoring
+  - platform: sql
+    db_url: !secret db_url
+    queries:
+      - name: MariaDB Size
+        query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+        column: 'value'
+        unit_of_measurement: MB
 ```
 
 Je suis allé également un peu plus loin en utilisant les [templates](https://www.home-assistant.io/integrations/template/) de Home Assistant pour récupérer et calculer : le nombre de sensors, le nombre de lumières, le nombre de devices connus sur mon réseau, le nombre d'automatisations, le nombre de volets.
@@ -210,37 +217,57 @@ sensor:
   # templates
   - platform: template
     sensors:
-      sensors_count: # need to automate calling homeassistant.update_entity periodically
+      sensors_count: 
         friendly_name: "Sensors count"
-        value_template: "{{ states.sensor|list|length }}"
+        value_template: "{{states.sensor|list|length}}"
         icon_template: mdi:eye
-        entity_id: sensor.time # refresh this count every minute
+      binarysensors_count: 
+        friendly_name: "Binary Sensors count"
+        value_template: "{{states.binary_sensor|list|length}}"
+        icon_template: mdi:circle-slice-8
       lights_count:
         friendly_name: "Lights count"
-        value_template: "{{ states.light|list|length }}"
+        value_template: "{{states.light|list|length}}"
         icon_template: mdi:lightbulb
-        entity_id: group.all_lights
       devices_count:
-        friendly_name: "Devices count"
-        value_template: "{{states.group.all_devices.attributes.entity_id|list|length}}"
+        friendly_name: "Devices tracker count"
+        value_template: "{{states.device_tracker|list|length}}"
         icon_template: mdi:robot-industrial
-        entity_id: group.all_devices
       automations_count:
         friendly_name: "Automations count"
-        value_template: "{{states.group.all_automations.attributes.entity_id|list|length}}"
+        value_template: "{{states.automation|list|length}}"
         icon_template: mdi:robot
-        entity_id: group.all_automations
       covers_count:
         friendly_name: "Covers count"
-        value_template: "{{states.group.all_covers.attributes.entity_id|list|length}}"
+        value_template: "{{states.cover|list|length}}"
         icon_template: mdi:window-closed
-        entity_id: group.all_covers
+      groups_count:
+        friendly_name: "Groups count"
+        value_template: "{{states.group|list|length}}"
+        icon_template: mdi:account-group
+      inputs_count:
+        friendly_name: "Inputs count"
+        value_template: "{{states.input_boolean|list|length + states.input_number|list|length + states.input_datetime|list|length}}"
+        icon_template: mdi:import
+      scripts_count:
+        friendly_name: "Scripts count"
+        value_template: "{{states.script|list|length}}"
+        icon_template: mdi:script
+      switch_count:
+        friendly_name: "Switch count"
+        value_template: "{{states.switch|list|length}}"
+        icon_template: mdi:toggle-switch
+
 {% endraw %}
 ```
 
+### Supervision des routeurs
 
+Cela ne concerne pas la supervision de Home Assistant en soit mais plutôt l'inverse : la supervision de mes routeurs et de ma LiveBox depuis Home Assistant pour tout regrouper à un seul endroit.
 
+Dans mon cas mon FAI est Orange via une Livebox donc j'ai simplement installé le plugin custom [Orange Livebox](https://github.com/cyr-ius/hass-livebox-component) qui me permet de vérifier le status de ma connexion, mon adresse WAN, et d'avoir un bouton de reboot.
 
+Mon routeur principal par lequel passe tout mon traffic internet est un routeur Netgear R7000 et j'ai installé le plugin custom [Netgear Enhanced](https://gitlab.landry.me/Home-Assistant/custom_components/netgear-enhanced-sensor) qui permet de connaître le nombre total de Go downloaded/uploaded dans le mois courant et dans le mois précédent.
 
 
 ## Backups
@@ -269,17 +296,18 @@ Ainsi en cas de problèmes ou de réinstallation je peux restaurer un de ces bac
 
 Avant d'entrer dans les configurations je vous invite à utiliser les [secrets](https://www.home-assistant.io/docs/configuration/secrets/) : il suffit de créer un fichier secrets.yaml dans le dossier config pour y mettre tous les configurations sensibles tels que les IPs et mots de passe pour ensuite les inclure dans le fichier configuration.yaml
 
-Configuration HTTP (absolument nécessaire lorsque Home Assistant est exposé derrière un reverse proxy nginx par exemple) :
+Configuration générale de Home Assistant permettant de définir les URLs internes et externes à utiliser et d'inclure des fichiers de configurations splittés :
 ```yaml
-http:
-  # For extra security set this to only accept connections on localhost if NGINX is on the same machine
-  # server_host: 127.0.0.1
-  # Update this line to be your domain
-  base_url: !secret base_url
-  use_x_forwarded_for: true
-  # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
-  # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
-  trusted_proxies: !secret http_trusted_proxies
+homeassistant:
+  external_url: !secret external_url
+  internal_url: !secret internal_url
+  whitelist_external_dirs: 
+    - '/config/'
+  customize: !include customize.yaml
+  packages:
+    inputs: !include inputs.yaml
+    integrations: !include integrations.yaml
+    system: !include system.yaml
 ```
 
 Si dans la partie [supervision](#supervision) vous monitorez la taille de la BDD et des logs il faut autoriser la lecture de ces fichiers à travers la configuration suivante :
@@ -318,9 +346,9 @@ discovery:
 
 ### Add-ons et composants
 
-**Configurator**
+**File Editor**
 
-[Configurator](https://www.home-assistant.io/addons/configurator/) est un outil indispensable puisqu'il permet de gérer (créer, modifier, supprimer, renommer) ses fichiers de configuration directement depuis l'interface de Home Assistant. Un éditeur YAML avec vérification de syntaxe y est directement intégré.
+[File Editor](https://www.home-assistant.io/addons/configurator/) est un outil indispensable puisqu'il permet de gérer (créer, modifier, supprimer, renommer) ses fichiers de configuration directement depuis l'interface de Home Assistant. Un éditeur YAML avec vérification de syntaxe y est directement intégré.
 
 **Log Viewer**
 
@@ -332,20 +360,20 @@ Cet [addon SSH](https://github.com/hassio-addons/addon-ssh) permet de configurer
 
 **AutoSSH**
 
-Cette section est détaillée plus haut sur l'[exposition sur internet via tunnel SSH](#solution-2--tunnel-ssh)
+Cette section est détaillée plus haut sur l'[exposition sur internet via tunnel SSH](#solution-2--tunnel-ssh).
 
-**Breaking changes**
 
-Ce composant n'est pas disponible en tant qu'Add-on Hassio installable en quelques clics, mais il est disponible via une [installation manuelle](https://developers.home-assistant.io/docs/en/creating_component_loading.html).
+**Google Drive Backup**
 
-[Breaking changes](https://github.com/custom-components/breaking_changes) est un module qui va permettre de comparer votre configuration par rapport à la prochaine version de Home Assistant disponible et de prévenir du nombre de "potential breaking changes". Plutôt pratique pour anticiper les mises à jour sans avoir à scruter tout le changelog à chaque release.
+Cette section est détaillée plus haut sur la [gestion des backups automatiques](#backups).
 
-Après installation le module est à activer en mettant ceci dans la fichier configuration.yaml :
-```yaml
-# activate custom component "breaking changes"
-breaking_changes:
-```
+**MariaDB**
 
+C'est un Add-On officiel de Home Assistant que j'utilise pour remplacer la base de donnée par défaut puisque ce dernier repose sur SQLite et pose des problèmes de performance de durabilité des cartes SD sur Raspberry Pi. Même si aujourd'hui mon RPI boot sur une clé USB plutôt que sur une carte SD j'ai conservé cette configuration pour ces mêmes raison de performance.
+
+**deCONZ**
+
+C'est un Add-On officiel de Home Assistant qui permet de communiquer avec mon ConBee II et donc mon réseau ZigBee.
 
 
 ### Sensors : capteurs et services
