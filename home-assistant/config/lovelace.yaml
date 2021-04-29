@@ -1,0 +1,1103 @@
+title: Maison
+views:
+  - badges: []
+    cards:
+      - entities:
+          - entity: sensor.trash_status
+        show_empty: false
+        state_filter:
+          - 'on'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Birthdays tomorrow
+          type: entities
+        filter:
+          include:
+            - domain: birthdays
+              state: '1'
+        type: 'custom:auto-entities'
+        sort:
+          method: none
+        show_empty: false
+      - cards:
+          - entities:
+              - binary_sensor.away_mode
+            type: entities
+          - type: entities
+            entities:
+              - entity: alarm_control_panel.ha_alarm
+                tap_action:
+                  action: call-service
+                  service: browser_mod.popup
+                  service_data:
+                    command: popup
+                    title: Alarme
+                    card:
+                      type: alarm-panel
+                      entity: alarm_control_panel.ha_alarm
+                    deviceID: this
+          - card:
+              type: glance
+            entities:
+              - person.manon
+              - person.yann
+              - person.claude
+            state_filter:
+              - home
+            type: entity-filter
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - entity: light.master_bedroom_yann
+            type: light
+          - entity: light.master_bedroom_manon
+            type: light
+        type: horizontal-stack
+      - card:
+          show_header_toggle: false
+          title: Lumières
+          type: entities
+        filter:
+          exclude:
+            - entity_id: light.chambre
+            - entity_id: light.configuration_tool_1
+            - entity_id: light.bureau
+            - entity_id: light.bureau_2
+            - entity_id: light.sejour
+            - entity_id: light.salon
+            - entity_id: light.salle_de_sejour
+          include:
+            - domain: light
+            - entity_id: switch.guirlande
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Volets
+          type: entities
+        filter:
+          exclude:
+            - entity_id: cover.garage
+          include:
+            - domain: cover
+        type: 'custom:auto-entities'
+      - actions:
+          - icon: 'mdi:floor-plan'
+            name: Nettoyer RDC
+            service: script.vacuum_clean_rdc
+          - icon: 'mdi:sofa'
+            name: Nettoyer Salon
+            service: script.vacuum_clean_salon
+          - icon: 'mdi:silverware-fork-knife'
+            name: Nettoyer Salle à manger
+            service: script.vacuum_clean_salleamanger
+          - icon: 'mdi:fridge'
+            name: Nettoyer Cuisine
+            service: script.vacuum_clean_cuisine
+          - icon: 'mdi:door'
+            name: Nettoyer Entrée
+            service: script.vacuum_clean_entree
+          - icon: 'mdi:desktop-mac'
+            name: Nettoyer Bureau
+            service: script.vacuum_clean_bureau
+        compact_view: false
+        entity: vacuum.rockrobo_vacuum_v1
+        show_attributes: false
+        show_name: true
+        show_status: true
+        stats:
+          cleaning:
+            - attribute: cleaned_area
+              subtitle: Cleaning area
+              unit: m2
+            - attribute: cleaning_time
+              subtitle: Cleaning time
+              unit: minutes
+        style: |
+          ha-card .preview {
+            background: var( --ha-card-background, var(--card-background-color, white) ) !important;
+          }
+          ha-card .preview .header {
+            background: var(--primary-color);
+          }
+          .toolbar ha-icon-button:first-child {
+            display: none;
+          }
+          ha-card img.vacuum {
+            max-height: 100px !important;
+          }
+        type: 'custom:vacuum-card'
+      - card:
+          entities:
+            - input_boolean.cover_automation
+            - input_number.cover_day_offset
+            - sensor.cover_auto_open
+            - input_number.cover_night_offset
+            - sensor.cover_auto_close
+          show_header_toggle: false
+          title: Automatisation des volets
+          type: entities
+        group: group.cover_automation_panel
+        type: 'custom:group-card'
+      - cards:
+          - entities:
+              - input_boolean.wakeup_weekday
+            type: entities
+          - entity: input_datetime.wakeup_weekday_timestart
+            hour_mode: 24
+            hour_step: 1
+            layout:
+              align_controls: right
+              name: inside
+            minute_step: 5
+            name: ''
+            style: |
+              .time-picker-row {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+              }
+            type: 'custom:time-picker-card'
+          - entity: input_datetime.wakeup_weekday_timestop
+            hour_mode: 24
+            hour_step: 1
+            layout:
+              align_controls: right
+              name: inside
+            minute_step: 5
+            name: ''
+            style: |
+              .time-picker-row {
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+              }
+            type: 'custom:time-picker-card'
+        title: Réveil lumineux
+        type: 'custom:vertical-stack-in-card'
+      - cards:
+          - entity: weather.home
+            number_of_forecasts: '5'
+            type: 'custom:weather-card'
+          - entities:
+              - entity: sensor.temperature_terrasse
+              - entity: sensor.saison
+            type: entities
+        type: 'custom:vertical-stack-in-card'
+    icon: 'mdi:home-assistant'
+    panel: false
+    path: default_view
+    title: Home
+  - badges: []
+    cards:
+      - elements:
+          - entity: light.salon_vinyle
+            style:
+              left: 75%
+              top: 19%
+              '--paper-item-icon-color': white
+            type: state-icon
+          - entity: light.salon_vaisselier
+            style:
+              left: 45%
+              top: 19%
+              '--paper-item-icon-color': white
+            type: state-icon
+          - entity: cover.salon_3
+            style:
+              left: 32%
+              top: 0%
+            type: state-icon
+          - entity: sensor.temperature_salon
+            style:
+              background: white
+              border-radius: 10px
+              color: black
+              left: 45%
+              top: 14%
+            type: state-label
+          - entity: binary_sensor.open_salon_porte
+            style:
+              left: 83%
+              top: 7%
+              '--paper-item-icon-color': white
+            type: state-icon
+          - entity: light.guirlande_salon
+            style:
+              left: 14%
+              top: 17%
+              '--paper-item-icon-color': black
+            type: state-icon
+            icon: 'mdi:led-strip-variant'
+          - entity: cover.salle_a_manger
+            style:
+              left: 2%
+              top: 36%
+            type: state-icon
+          - entity: sensor.temperature_salleamanger
+            style:
+              color: black
+              left: 28%
+              top: 35%
+            type: state-label
+          - entity: vacuum.rockrobo_vacuum_v1
+            style:
+              left: 36%
+              top: 29%
+              '--paper-item-icon-color': white
+            type: state-icon
+          - entity: light.bureau_guitares
+            style:
+              left: 40%
+              top: 55%
+              '--paper-item-icon-color': white
+            type: state-icon
+          - entity: light.bureau_guirlande_yann
+            style:
+              left: 30%
+              top: 55%
+              '--paper-item-icon-color': black
+            type: state-icon
+            icon: 'mdi:led-strip-variant'
+          - entity: light.bureau_guirlande_yann
+            style:
+              left: 7%
+              top: 69%
+              '--paper-item-icon-color': black
+            type: state-icon
+          - entity: cover.bureau_fenetre
+            style:
+              left: 2%
+              top: 60%
+            type: state-icon
+          - entity: cover.bureau_baie
+            style:
+              left: 38%
+              top: 60%
+            type: state-icon
+          - entity: sensor.temperature_bureau
+            style:
+              left: 25%
+              top: 62%
+            type: state-label
+          - entity: binary_sensor.open_bureau_baie
+            style:
+              left: 45%
+              top: 60%
+              '--paper-item-icon-color': white
+            type: state-icon
+          - entity: cover.garage
+            style:
+              left: 4%
+              top: 83%
+              '--paper-item-icon-color': white
+            type: state-icon
+          - entity: binary_sensor.doorway_motion_sensor
+            style:
+              left: 17%
+              top: 48%
+              '--paper-item-icon-color': white
+            type: state-icon
+          - entity: binary_sensor.open_porte_principale
+            style:
+              left: 3%
+              top: 50%
+              '--paper-item-icon-color': white
+            type: state-icon
+          - entity: sensor.temperature_terrasse
+            style:
+              left: 61%
+              top: 60%
+              background: white
+              border-radius: 10px
+              color: black
+            type: state-label
+          - entity: binary_sensor.open_terrasse
+            style:
+              left: 50%
+              top: 50%
+              '--paper-item-icon-color': white
+            type: state-icon
+          - entity: sensor.temperature_atelier
+            style:
+              left: 63%
+              top: 82%
+              background: white
+              border-radius: 10px
+              color: black
+            type: state-label
+        image: /local/floorplan_rdc.png
+        title: RDC
+        type: picture-elements
+      - card:
+          show_header_toggle: false
+          title: Salon
+          type: entities
+        filter:
+          include:
+            - area: Salon
+        type: 'custom:auto-entities'
+      - elements:
+          - entity: sensor.temperature_dressing
+            style:
+              color: black
+              left: 16%
+              top: 20%
+              background: white
+              border-radius: 5px
+            type: state-label
+          - entity: sensor.temperature_bibliotheque
+            style:
+              color: black
+              left: 16%
+              top: 52%
+              background: white
+              border-radius: 5px
+            type: state-label
+          - entity: sensor.temperature_chambre_bleue
+            style:
+              color: black
+              left: 25%
+              top: 80%
+              background: white
+              border-radius: 5px
+            type: state-label
+          - entity: switch.fibaro_secheserviette_switch
+            style:
+              left: 45%
+              top: 74.5%
+              '--paper-item-icon-color': black
+            type: state-icon
+          - entity: light.master_bedroom_manon
+            style:
+              left: 55%
+              top: 94%
+              '--paper-item-icon-color': black
+            type: state-icon
+          - entity: light.master_bedroom_yann
+            style:
+              left: 75%
+              top: 94%
+              '--paper-item-icon-color': black
+            type: state-icon
+          - entity: switch.ikea_master_bedroom
+            style:
+              left: 20%
+              top: 70%
+              '--paper-item-icon-color': black
+            type: state-icon
+          - entity: sensor.temperature_master_bedroom
+            style:
+              color: black
+              left: 75%
+              top: 75%
+            type: state-label
+        image: /local/floorplan_etage.png
+        title: Etage
+        type: picture-elements
+      - card:
+          show_header_toggle: false
+          title: Cuisine
+          type: entities
+        filter:
+          include:
+            - area: Cuisine
+            - entity_id: vacuum.xiaomi_vacuum_cleaner
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Bureau
+          type: entities
+        filter:
+          include:
+            - area: Bureau
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Master Bedroom
+          type: entities
+        filter:
+          include:
+            - area: Master Bedroom
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Douche
+          type: entities
+        filter:
+          exclude:
+            - entity_id: sensor.fibaro_secheserviette_alarm*
+            - entity_id: sensor.fibaro_secheserviette_exporting*
+            - entity_id: sensor.fibaro_secheserviette_energy
+            - entity_id: sensor.fibaro_secheserviette_power_2
+            - entity_id: sensor.fibaro_secheserviette_power_management
+            - entity_id: sensor.fibaro_secheserviette_sourcenodeid
+            - entity_id: sensor.fibaro_system*
+          include:
+            - area: Douche
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Salle à manger
+          type: entities
+        filter:
+          include:
+            - area: Salle à manger
+            - entity_id: vacuum.xiaomi_vacuum_cleaner
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Atelier
+          type: entities
+        filter:
+          include:
+            - area: Atelier
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Terrasse
+          type: entities
+        filter:
+          include:
+            - area: Terrasse
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Entrée
+          type: entities
+        filter:
+          include:
+            - area: Entrée
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Bibliothèque
+          type: entities
+        filter:
+          include:
+            - area: Bibliothèque
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Chambre Bleue
+          type: entities
+        filter:
+          include:
+            - area: Chambre Bleue
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Dressing
+          type: entities
+        filter:
+          include:
+            - area: Dressing
+        type: 'custom:auto-entities'
+    icon: 'mdi:floor-plan'
+    path: rooms
+    title: Pièces
+  - badges: []
+    cards:
+      - card:
+          show_header_toggle: false
+          title: Connected devices
+          type: entities
+        filter:
+          exclude:
+            - entity_id: device_tracker.yann_oneplus5
+            - entity_id: device_tracker.oneplus_a5000
+            - entity_id: device_tracker.oneplus_a5010
+            - entity_id: device_tracker.hassio_pi
+          include:
+            - domain: device_tracker
+              state: home
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Disconnected devices
+          type: entities
+        filter:
+          exclude:
+            - entity_id: device_tracker.hassio
+            - entity_id: device_tracker.9c_3d_cf_94_35_9b
+            - entity_id: device_tracker.yann_oneplus5
+            - entity_id: device_tracker.oneplus_a5000
+            - entity_id: device_tracker.oneplus_a5010
+          include:
+            - domain: device_tracker
+              state: not_home
+        type: 'custom:auto-entities'
+      - card:
+          show_header_toggle: false
+          title: Transmission
+          type: entities
+        filter:
+          include:
+            - entity_id: switch.transmission*
+            - entity_id: sensor.transmission*
+        type: 'custom:auto-entities'
+      - cards:
+          - entities:
+              - entity: sensor.speedtest_ping
+            line_color: blue
+            name: Ping
+            show:
+              icon: false
+            type: 'custom:mini-graph-card'
+          - entities:
+              - entity: sensor.speedtest_download
+            line_color: red
+            name: Download
+            show:
+              icon: false
+            type: 'custom:mini-graph-card'
+          - entities:
+              - entity: sensor.speedtest_upload
+            name: Upload
+            show:
+              icon: false
+            type: 'custom:mini-graph-card'
+        title: SpeedTest
+        type: horizontal-stack
+      - cards:
+          - card:
+              content: |2
+                 <ha-icon icon="mdi:update"></ha-icon> Mise à jour firmware R7000  disponible
+                 
+              type: markdown
+            conditions:
+              - entity: sensor.ng_enhanced_check_app_fw
+                state: '1'
+            type: conditional
+          - entities:
+              - entity: sensor.ng_enhanced_traffic_meter_download
+              - entity: sensor.ng_enhanced_traffic_meter_upload
+            title: Traffic this month
+            type: glance
+          - entities:
+              - entity: sensor.ng_enhanced_traffic_meter_downloadlastmonth
+              - entity: sensor.ng_enhanced_traffic_meter_uploadlastmonth
+            title: Traffic last Month
+            type: glance
+        type: vertical-stack
+      - entities:
+          - entity: binary_sensor.orange_livebox_wan_status
+          - attribute: wan_ipaddress
+            entity: binary_sensor.orange_livebox_wan_status
+            name: WAN IP
+            type: attribute
+          - entity: sensor.orange_livebox_download_speed
+          - entity: sensor.orange_livebox_upload_speed
+          - action_name: Reboot
+            icon: 'mdi:power'
+            name: Reboot modem
+            tap_action:
+              action: call-service
+              confirmation:
+                text: Are you sure you want to restart?
+              service: livebox.reboot
+            type: button
+        title: Orange Livebox
+        type: entities
+    icon: 'mdi:access-point-network'
+    panel: false
+    path: devices
+    title: Devices
+  - badges: []
+    cards:
+      - entities:
+          - entity: switch.fibaro_secheserviette_switch
+        type: glance
+      - entities:
+          - sensor.fibaro_secheserviette_power
+        icon: 'mdi:radiator'
+        line_color: red
+        name: Seche serviette - power
+        type: 'custom:mini-graph-card'
+      - entity: script.seche_serviette
+        hold_action:
+          action: more-info
+        name: Activer le sèche serviette (20mn)
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: call-service
+          service: script.turn_on
+          service_data:
+            entity_id: script.seche_serviette
+        type: entity-button
+      - aggregate_func: max
+        entities:
+          - entity: sensor.linky_yesterday
+          - entity: sensor.weather_temperature
+        group_by: date
+        hours_to_show: 168
+        icon: 'mdi:flash'
+        name: Test
+        show:
+          graph: bar
+        type: 'custom:mini-graph-card'
+      - filter:
+          include:
+            - name: entity_id
+              value: '*_niveau_de_batterie'
+            - name: entity_id
+              value: '*_battery_level'
+        title: Battery levels
+        type: 'custom:battery-state-card'
+      - type: 'custom:content-card-linky'
+        entity: sensor.myenedis_09320549854506_2
+        showIcon: false
+        showHistory: true
+        showPeakOffPeak: true
+        showInTableUnit: false
+        showDayPrice: true
+        showDayPriceHCHP: false
+        showDayHCHP: false
+      - type: 'custom:apexcharts-card'
+        graph_span: 5d
+        span:
+          end: day
+          offset: '-1d'
+        header:
+          show: true
+        series:
+          - entity: sensor.myenedis_09320549854506_2
+            offset: +1d
+            type: line
+            group_by:
+              duration: 24h
+              func: avg
+          - entity: sensor.temperature_terrasse
+            offset: '-1d'
+            type: column
+            group_by:
+              duration: 24h
+              func: avg
+          - entity: sensor.weather_temperature
+            offset: '-1d'
+            type: column
+            group_by:
+              duration: 24h
+              func: avg
+    icon: 'mdi:flash'
+    path: electricite
+    title: Electricite
+  - badges: []
+    cards:
+      - cards:
+          - entities:
+              - attribute: sensor_dirty_left
+                entity: vacuum.rockrobo_vacuum_v1
+                icon: 'mdi:eye'
+                name: Sensors dirty left
+                suffix: h
+                type: attribute
+              - attribute: main_brush_left
+                entity: vacuum.rockrobo_vacuum_v1
+                icon: 'mdi:broom'
+                name: Main Brush left
+                suffix: h
+                type: attribute
+              - attribute: side_brush_left
+                entity: vacuum.rockrobo_vacuum_v1
+                icon: 'mdi:brush'
+                name: Side Brush left
+                suffix: h
+                type: attribute
+              - attribute: filter_left
+                entity: vacuum.rockrobo_vacuum_v1
+                icon: 'mdi:air-filter'
+                name: Filter left
+                suffix: h
+                type: attribute
+            type: entities
+          - entities:
+              - entity: script.vacuum_reset_sensors
+              - entity: script.vacuum_reset_main_brush
+              - entity: script.vacuum_reset_side_brush
+              - entity: script.vacuum_reset_filter
+            type: entities
+        title: Vacuum Maintenance
+        type: horizontal-stack
+    icon: 'mdi:hammer-screwdriver'
+    path: utility--and--maintenance
+    title: Utilities
+  - badges: []
+    cards:
+      - entity: sensor.memory_use_percent
+        max: 100
+        min: 0
+        name: Memory
+        severity:
+          green: 0
+          red: 0
+          yellow: 0
+        theme: default
+        type: gauge
+      - entity: sensor.disk_use_percent
+        max: 100
+        min: 0
+        name: Disk
+        severity:
+          green: 0
+          red: 0
+          yellow: 0
+        theme: default
+        type: gauge
+      - entity: sensor.processor_use
+        max: 100
+        min: 0
+        name: CPU
+        severity:
+          green: 0
+          red: 0
+          yellow: 0
+        theme: default
+        type: gauge
+      - entities:
+          - entity: sensor.mariadb_size
+          - entity: sensor.home_assistant_log
+            name: logs
+          - entity: sensor.uptime
+          - entity: sensor.current_version
+          - entity: sensor.last_boot
+          - entity: sensor.glances_containers_active_2
+          - entity: binary_sensor.updater
+            name: Update
+          - entity: sensor.hacs
+        title: HassOS
+        type: glance
+      - entities:
+          - entity: sensor.automations_count
+          - entity: sensor.sensors_count
+          - entity: sensor.binarysensors_count
+          - entity: sensor.devices_count
+          - entity: sensor.lights_count
+          - entity: sensor.covers_count
+          - entity: sensor.groups_count
+          - entity: sensor.inputs_count
+          - entity: sensor.scripts_count
+          - entity: sensor.switch_count
+        show_header_toggle: false
+        title: Home Assistant
+        type: entities
+      - entities:
+          - entity: sensor.network_throughput_in_eth0
+          - entity: sensor.network_throughput_out_eth0
+        icon: 'mdi:speedometer'
+        name: Network Throughput
+        type: 'custom:mini-graph-card'
+      - name: Refresh Deconz
+        show_icon: true
+        show_name: true
+        show_state: false
+        tap_action:
+          action: call-service
+          service: deconz.device_refresh
+        type: button
+    icon: 'mdi:speedometer'
+    path: monitoring
+    title: Monitoring
+  - badges: []
+    cards:
+      - entities:
+          - entity: vacuum.rockrobo_vacuum_v1
+          - entity: script.vacuum_clean_rdc
+          - entity: script.vacuum_clean_salon
+          - entity: script.vacuum_clean_salleamanger
+          - entity: script.vacuum_clean_cuisine
+          - entity: script.vacuum_clean_entree
+          - entity: script.vacuum_clean_bureau
+        type: entities
+      - card:
+          filter:
+            include:
+              - key: vacuum.xiaomi_vacuum_cleaner.status
+              - key: vacuum.xiaomi_vacuum_cleaner.cleaned_area
+                unit: m2
+              - key: vacuum.xiaomi_vacuum_cleaner.cleaning_time
+                unit: mn
+              - key: vacuum.xiaomi_vacuum_cleaner.battery_level
+                unit: '%'
+              - key: vacuum.xiaomi_vacuum_cleaner.error
+          heading_name: Libellés
+          heading_state: Valeurs
+          title: Aspirateur en marche
+          type: 'custom:entity-attributes-card'
+        conditions:
+          - entity: vacuum.xiaomi_vacuum_cleaner
+            state_not: docked
+        type: conditional
+      - card:
+          entities:
+            - input_boolean.wakeup_weekday
+            - input_datetime.wakeup_weekday_timestart
+            - input_datetime.wakeup_weekday_timestop
+          show_header_toggle: false
+          title: Alarme de semaine
+          type: entities
+        group: group.wakeup_week_day_panel
+        type: 'custom:group-card'
+      - type: alarm-panel
+        states:
+          - arm_home
+          - arm_away
+        entity: alarm_control_panel.ha_alarm
+      - aspect_ratio: 3/1
+        custom_fields:
+          battery: |
+            [[[
+              return `${
+                states['sensor.oneplus_a5000_battery_level'].state
+              }`
+            ]]]
+        entity: person.yann
+        layout: icon_name
+        show_entity_picture: true
+        show_name: true
+        state:
+          - name: "\U0001F3E1 Yann (Home)"
+            styles:
+              name:
+                - color: '#FF6162'
+            value: home
+          - name: "\U0001F3C3‍♂️ Yann (Away)"
+            styles:
+              name:
+                - color: '#93ADCB'
+            value: not_home
+          - name: "\U0001F3E2 Yann (Capgemini)"
+            styles:
+              name:
+                - color: '#93ADCB'
+            value: Capgemini
+          - styles:
+              name:
+                - color: gray
+            value: unknown
+        styles:
+          custom_fields:
+            battery:
+              - position: absolute
+              - left: 110px
+              - border-radius: 50%
+              - height: 30px
+              - width: 30px
+              - font-size: 14px
+              - line-height: 30px
+              - padding: 5px
+              - color: |-
+                  [[[
+                    return states['sensor.oneplus_a5000_battery_level'].state > 20
+                    ? 'white'
+                    : 'black'
+                  ]]]
+              - background-color: |-
+                  [[[
+                    return states['sensor.oneplus_a5000_battery_level'].state > 20
+                      ? '#FF6162'
+                      : 'red'
+                  ]]]
+          icon:
+            - width: 60%
+        type: 'custom:button-card'
+      - aspect_ratio: 3/1
+        custom_fields:
+          battery: |
+            [[[
+              return `${
+                states['sensor.oneplus_a5010_niveau_de_batterie'].state
+              }`
+            ]]]
+        entity: person.manon
+        layout: icon_name
+        show_entity_picture: true
+        show_name: true
+        state:
+          - name: "\U0001F3E1 Manon (Home)"
+            styles:
+              name:
+                - color: '#93ADCB'
+            value: home
+          - name: "\U0001F3C3‍♂️ Manon (Away)"
+            styles:
+              name:
+                - color: '#93ADCB'
+            value: not_home
+          - name: "\U0001F3E2 Manon (MorganView)"
+            styles:
+              name:
+                - color: '#93ADCB'
+            value: MorganView
+          - styles:
+              name:
+                - color: '#93ADCB'
+            value: unknown
+        styles:
+          custom_fields:
+            battery:
+              - position: absolute
+              - left: 110px
+              - border-radius: 50%
+              - height: 30px
+              - width: 30px
+              - font-size: 14px
+              - line-height: 30px
+              - padding: 5px
+              - color: |-
+                  [[[
+                    return states['sensor.oneplus_a5010_niveau_de_batterie'].state > 20
+                    ? 'white'
+                    : 'black'
+                  ]]]
+              - background-color: |-
+                  [[[
+                    return states['sensor.oneplus_a5010_niveau_de_batterie'].state > 20
+                      ? '#FF6162'
+                      : 'red'
+                  ]]]
+          icon:
+            - width: 60%
+        type: 'custom:button-card'
+      - type: horizontal-stack
+        cards:
+          - type: 'custom:button-card'
+            entity: person.yann
+            aspect_ratio: 4/3
+            show_name: false
+            show_icon: false
+            styles:
+              card:
+                - padding: 4%
+                - background-image: url("/local/yann.jpg")
+                - background-size: 58%
+                - background-repeat: no-repeat
+                - background-position: top center
+              custom_fields:
+                location:
+                  - text-transform: capitalize
+                  - position: absolute
+                  - left: 4%
+                  - top: 80%
+                  - opacity: 0.45
+                battery:
+                  - align-self: right
+                  - position: absolute
+                  - right: 4%
+                  - top: 80%
+                  - opacity: >-
+                      [[[ if (states["sensor.oneplus_a5000_battery_level"].state
+                      > 20) return "0.45"; ]]]
+                  - color: >-
+                      [[[ if (states["sensor.oneplus_a5000_battery_level"].state
+                      <= 20) return "red"; ]]]
+            custom_fields:
+              location: |
+                [[[
+                  if (entity.state = 'home')
+                    return `<ha-icon
+                    icon="mdi:home"
+                    style="width: 20px; height: 20px;"></ha-icon> Home`;
+                  else
+                    return `Away`;
+                ]]]
+              battery: |
+                [[[
+                  return `<ha-icon
+                    icon="mdi:battery"
+                    style="width: 20px; height: 20px;"></ha-icon>
+                    <span>${states['sensor.oneplus_a5000_battery_level'].state}%</span>`
+                ]]]
+          - type: 'custom:button-card'
+            entity: person.yann
+            aspect_ratio: 4/3
+            show_name: false
+            show_icon: false
+            styles:
+              card:
+                - padding: 4%
+                - background-image: url("/local/yann.jpg")
+                - background-size: 58%
+                - background-repeat: no-repeat
+                - background-position: top center
+              custom_fields:
+                location:
+                  - text-transform: capitalize
+                  - position: absolute
+                  - left: 4%
+                  - top: 4%
+                  - opacity: 0.45
+                battery:
+                  - align-self: right
+                  - position: absolute
+                  - right: 4%
+                  - top: 4%
+                  - opacity: >-
+                      [[[ if (states["sensor.oneplus_a5000_battery_level"].state
+                      > 20) return "0.45"; ]]]
+                  - color: >-
+                      [[[ if (states["sensor.oneplus_a5000_battery_level"].state
+                      <= 20) return "red"; ]]]
+            custom_fields:
+              location: |
+                [[[
+                  if (entity.state = 'home')
+                    return `<ha-icon
+                    icon="mdi:home"
+                    style="width: 20px; height: 20px;"></ha-icon> Home`;
+                  else
+                    return `Away`;
+                ]]]
+              battery: |
+                [[[
+                  return `<ha-icon
+                    icon="mdi:battery"
+                    style="width: 20px; height: 20px;"></ha-icon>
+                    <span>${states['sensor.oneplus_a5000_battery_level'].state}%</span>`
+                ]]]
+      - cards:
+          - entities:
+              - binary_sensor.away_mode
+            type: entities
+          - type: entities
+            entities:
+              - entity: alarm_control_panel.ha_alarm
+                tap_action:
+                  action: call-service
+                  service: browser_mod.popup
+                  service_data:
+                    command: popup
+                    title: Alarme
+                    card:
+                      type: alarm-panel
+                      entity: alarm_control_panel.ha_alarm
+                    deviceID: this
+          - card:
+              type: glance
+            entities:
+              - person.manon
+              - person.yann
+              - person.claude
+            state_filter:
+              - home
+            type: entity-filter
+        type: 'custom:vertical-stack-in-card'
+      - type: 'custom:banner-card'
+        heading:
+          - 'mdi:desktop-mac'
+          - Bureau
+        background: '#B0C2ED'
+        entities:
+          - entity: sensor.temperature_bureau
+            name: Température
+          - entity: cover.bureau_baie
+            name: Baie
+          - entity: cover.bureau_fenetre
+            name: Fenêtre
+          - entity: light.bureau_guirlande_yann
+            name: Guirlande Yann
+          - entity: light.bureau_guitares
+            name: Guitares
+          - entity: light.bureau_manon
+            name: Manon
+    icon: 'mdi:progress-question'
+    path: wip
+    title: WIP
