@@ -21,7 +21,9 @@ ramp_light:
       sequence:
         - service: light.turn_on
           data_template:
-            entity_id: light.master_bedroom
+            entity_id: 
+              - light.master_bedroom_yann
+              - light.master_bedroom_manon
             brightness: >
               {% set brightness = state_attr(light, 'brightness')|int(0) %}
               {% set min = 10 %}
@@ -34,14 +36,3 @@ ramp_light:
               {% endif %}
         - delay:
             milliseconds: 10
-  
-# Light Master Bedroom Decrease
-light_masterbedroom_decrease:
-  sequence:
-  - service: light.turn_on
-    data_template:
-      entity_id: light.master_bedroom
-      brightness: 0
-      transition: 10
-  mode: single
-  

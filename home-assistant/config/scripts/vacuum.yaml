@@ -9,7 +9,7 @@ vacuum_reset_main_brush:
   sequence:
     - service: vacuum.send_Command
       data:
-        entity_id: vacuum.xiaomi_vacuum_cleaner
+        entity_id: vacuum.rockrobo_vacuum_v1
         command: reset_consumable
         params: ['main_brush_work_time']
 
@@ -20,7 +20,7 @@ vacuum_reset_side_brush:
   sequence:
     - service: vacuum.send_Command
       data:
-        entity_id: vacuum.xiaomi_vacuum_cleaner
+        entity_id: vacuum.rockrobo_vacuum_v1
         command: reset_consumable
         params: ['side_brush_work_time']
         
@@ -31,7 +31,7 @@ vacuum_reset_filter:
   sequence:
     - service: vacuum.send_Command
       data:
-        entity_id: vacuum.xiaomi_vacuum_cleaner
+        entity_id: vacuum.rockrobo_vacuum_v1
         command: reset_consumable
         params: ['filter_work_time']
         
@@ -42,7 +42,7 @@ vacuum_reset_sensors:
   sequence:
     - service: vacuum.send_Command
       data:
-        entity_id: vacuum.xiaomi_vacuum_cleaner
+        entity_id: vacuum.rockrobo_vacuum_v1
         command: reset_consumable
         params: ['sensor_dirty_time']
 
@@ -63,11 +63,11 @@ vacuum_clean_rdc:
   sequence:
   - service: vacuum.set_fan_speed
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       fan_speed: 38 # force Silent fan speed in order to be able to clean all RDC without battery drain
   - service: xiaomi_miio.vacuum_clean_zone
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       repeats: 1
       zone: 
       - [20799,14850,26349,18800] #bureau
@@ -88,11 +88,11 @@ vacuum_clean_salleamanger:
   sequence:
   - service: vacuum.set_fan_speed
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       fan_speed: 60 #"{{ fan_speed }}"
   - service: xiaomi_miio.vacuum_clean_zone
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       repeats: 1
       zone: 
       - [20966,21048,26766,25998]
@@ -109,11 +109,11 @@ vacuum_clean_cuisine:
   sequence:
   - service: vacuum.set_fan_speed
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       fan_speed: 60 #'{{ fan_speed }}'
   - service: xiaomi_miio.vacuum_clean_zone
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       repeats: 1
       zone: 
       - [26622,19809,28572,26359]
@@ -130,11 +130,11 @@ vacuum_clean_entree:
   sequence:
   - service: vacuum.set_fan_speed
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       fan_speed: 60 #'{{ fan_speed }}'
   - service: xiaomi_miio.vacuum_clean_zone
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       repeats: 1
       zone: 
       - [20747,18973,27947,20873]
@@ -151,11 +151,11 @@ vacuum_clean_bureau:
   sequence:
   - service: vacuum.set_fan_speed
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       fan_speed: 60 #'{{ fan_speed }}'
   - service: xiaomi_miio.vacuum_clean_zone
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       repeats: 1
       zone: 
       - [20799,14850,26349,18800]
@@ -172,11 +172,11 @@ vacuum_clean_salon:
   sequence:
   - service: vacuum.set_fan_speed
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       fan_speed: 60 #'{{ fan_speed }}'
   - service: xiaomi_miio.vacuum_clean_zone
     data_template:
-      entity_id: vacuum.xiaomi_vacuum_cleaner
+      entity_id: vacuum.rockrobo_vacuum_v1
       repeats: 1
       zone: 
       - [21908,26215,26908,30565]
