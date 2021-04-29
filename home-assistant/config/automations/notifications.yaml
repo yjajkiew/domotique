@@ -1,3 +1,47 @@
+#########
+# ALARM #
+#########
+
+- alias: Send notification when alarm is Disarmed
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'disarmed'
+  action:
+    - service: notify.notify
+      data:
+        message: "Alarme désarmée à {{ states('sensor.date_time') }}"
+        
+- alias: Send notification when alarm is in pending status
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'pending'
+  action:
+    - service: notify.notify
+      data:
+        message: "Alarme en cours à {{ states('sensor.date_time') }}"
+        
+- alias: Send notification when alarm is Armed in Away mode
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'armed_away'
+  action:
+    - service: notify.notify
+      data:
+        message: "Alarme armée (away) à {{ states('sensor.date_time') }}"
+        
+- alias: Send notification when alarm is Armed in Home mode
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'armed_home'
+  action:
+    - service: notify.notify
+      data:
+        message: "Alarmée armée (home) à {{ states('sensor.date_time') }}"
+
 ###########
 # IS HOME #
 ###########
@@ -143,6 +187,32 @@
       message: '{{ state_attr(''calendar.manon_yann'', ''message'') }}'
     service: notify.all
     
+# Birthdays
+- alias: Notification anniversaire
+  trigger:
+    platform: event
+    event_type: 'birthday'
+  action:
+  - service: notify.all
+    data_template:
+      title: 'Birthday!'
+      message: "{{ trigger.event.data.name }} turns {{ trigger.event.data.age }} today!"
+
+###########
+# HEATING #
+###########
+
+# it's gonna be freezing tomorrow
+- alias: Notification gel
+  trigger:
+    platform: time
+    at: '18:20:00'
+  condition: "{{ state_attr('weather.home', 'forecast')[0].templow <= 1 }}"
+  action:
+  - data:
+      message: "Demain il va geler : {{ state_attr('weather.home', 'forecast')[0].templow }}"
+    service: notify.all
+
 ##########
 # VACUUM #
 ##########
@@ -151,7 +221,7 @@
 - alias: Vacuum Clean
   trigger:
     platform: state
-    entity_id: vacuum.xiaomi_vacuum_cleaner
+    entity_id: vacuum.rockrobo_vacuum_v1
     to: 'cleaning'
   action:
     service: notify.all
@@ -163,7 +233,7 @@
 - alias: Vacuum Finish
   trigger:
     platform: state
-    entity_id: vacuum.xiaomi_vacuum_cleaner
+    entity_id: vacuum.rockrobo_vacuum_v1
     to: 'returning'
   action:
     service: notify.all
@@ -175,7 +245,7 @@
 - alias: Vacuum ERROR
   trigger:
     platform: state
-    entity_id: vacuum.xiaomi_vacuum_cleaner
+    entity_id: vacuum.rockrobo_vacuum_v1
     to: 'error'
   action:
     service: notify.all
@@ -189,14 +259,14 @@
     platform: template
     value_template: >
       {{
-        (state_attr('vacuum.xiaomi_vacuum_cleaner', 'main_brush_left') | int  == 0) or
-        (state_attr('vacuum.xiaomi_vacuum_cleaner', 'side_brush_left') | int  == 0) or
-        (state_attr('vacuum.xiaomi_vacuum_cleaner', 'filter_left') | int  == 0) or
-        (state_attr('vacuum.xiaomi_vacuum_cleaner', 'sensor_dirty_left') | int  == 0)
+        ((state_attr('vacuum.rockrobo_vacuum_v1', 'main_brush_left') is not none) and (state_attr('vacuum.rockrobo_vacuum_v1', 'main_brush_left') | int  == 0)) or
+        ((state_attr('vacuum.rockrobo_vacuum_v1', 'side_brush_left') is not none) and (state_attr('vacuum.rockrobo_vacuum_v1', 'side_brush_left') | int  == 0)) or
+        ((state_attr('vacuum.rockrobo_vacuum_v1', 'filter_left') is not none) and (state_attr('vacuum.rockrobo_vacuum_v1', 'filter_left') | int  == 0)) or
+        ((state_attr('vacuum.rockrobo_vacuum_v1', 'sensor_dirty_left') is not none) and (state_attr('vacuum.rockrobo_vacuum_v1', 'sensor_dirty_left') | int  == 0))
       }}
   action:
     service: notify.all
     data_template:
       title: "Vacuum Maintenance"
-      message: "Maintenance aspirateur : {% if state_attr('vacuum.xiaomi_vacuum_cleaner', 'main_brush_left') | int  == 0 %}changer la brosse principale{% elif state_attr('vacuum.xiaomi_vacuum_cleaner', 'side_brush_left') | int  == 0 %}changer la petite brosse{% elif state_attr('vacuum.xiaomi_vacuum_cleaner', 'filter_left') | int  == 0 %}changer le filtre{% elif state_attr('vacuum.xiaomi_vacuum_cleaner', 'sensor_dirty_left') | int  == 0 %}nettoyer les capteurs{% endif %}"
+      message: "Maintenance aspirateur : {% if state_attr('vacuum.rockrobo_vacuum_v1', 'main_brush_left') | int  == 0 %}changer la brosse principale{% elif state_attr('vacuum.rockrobo_vacuum_v1', 'side_brush_left') | int  == 0 %}changer la petite brosse{% elif state_attr('vacuum.rockrobo_vacuum_v1', 'filter_left') | int  == 0 %}changer le filtre{% elif state_attr('vacuum.rockrobo_vacuum_v1', 'sensor_dirty_left') | int  == 0 %}nettoyer les capteurs{% endif %}"
 

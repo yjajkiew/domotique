@@ -34,7 +34,7 @@
 - alias: Trigger alarm away
   trigger:
   - platform: state
-    entity_id: binary_sensor.doorway_motion_sensor
+    entity_id: group.open_sensor
     from: 'off'
     to: 'on'
   condition: 
@@ -44,9 +44,30 @@
   action:
   - service: alarm_control_panel.alarm_trigger
     entity_id: alarm_control_panel.ha_alarm
-  - service: notify.mobile_app_oneplus_a5000
+  - service: notify.notify
     data:
-      message: 'Doorway motion detected'
+      message: 'Alarme déclenchée'
+  mode: restart
+  
+################
+# TRIGGER HOME #
+################
+- alias: Trigger alarm away
+  trigger:
+  - platform: state
+    entity_id: group.open_sensor
+    from: 'off'
+    to: 'on'
+  condition: 
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: armed_home
+  action:
+  - service: alarm_control_panel.alarm_trigger
+    entity_id: alarm_control_panel.ha_alarm
+  - service: notify.notify
+    data:
+      message: 'Alarme déclenchée'
   mode: restart
 
 ###################
@@ -62,6 +83,8 @@
   action:
   - service: script.turn_on
     entity_id: script.flash_bureau
+  - service: switch.turn_on
+    entity_id: switch.aeon_siren
       
 # alarm is disarmed
 - alias: Alarm disarmed
@@ -74,3 +97,5 @@
     entity_id: script.flash_bureau
   - service: light.turn_off
     entity_id: light.bureau_color
+  - service: switch.turn_off
+    entity_id: switch.aeon_siren

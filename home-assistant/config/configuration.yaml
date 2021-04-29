@@ -11,6 +11,7 @@ homeassistant:
     inputs: !include inputs.yaml
     integrations: !include integrations.yaml
     system: !include system.yaml
+    birthdays: !include birthdays.yaml
 
 person: # enable persons manager from UI
 group: !include groups.yaml

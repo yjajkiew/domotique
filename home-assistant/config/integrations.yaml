@@ -1,16 +1,11 @@
 ##################
 ## INTEGRATIONS ##
 ##################
-      
+
+# z-wave stick
 zwave:
   usb_path: /dev/serial/by-id/usb-0658_0200-if00
   network_key: !secret zwave_network_key
-
-# Xiaomi Robot Vacuum
-vacuum:
-  - platform: xiaomi_miio
-    host: !secret vacuum_host
-    token: !secret vacuum_token
 
 # Somfy API
 somfy:
@@ -24,11 +19,11 @@ tahoma:
 # Speedtest
 speedtestdotnet:
   scan_interval: 03:00
-  
+
+# Glances
 glances:
   - host: !secret glances_host
   - port: !secret glances_port
-
 
 # for google calendar
 google:
@@ -66,6 +61,8 @@ device_tracker:
 #    interval_seconds: 40
 # netgear : track devices (more reliable than nmap but changing state is not working)
   - platform: netgear
+    host: !secret netgear_main_ip
+    username: !secret netgear_user
     password: !secret netgear_password
     accesspoints: !secret netgear_accesspoints # routeur AP salon
     #devices: !secret netgear_devices

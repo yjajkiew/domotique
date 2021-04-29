@@ -21,7 +21,15 @@ covers_all_open:
     - cover.salon_3
     - cover.bureau_fenetre
     - cover.bureau_baie
-    
+
+open_sensor:
+  name: Capteurs d'ouverture
+  entities:
+    - binary_sensor.open_porte_principale
+    - binary_sensor.open_bureau_baie
+    - binary_sensor.open_terrasse
+    - binary_sensor.open_salon_porte
+
 person_all:
   name: Personnes
   entities:

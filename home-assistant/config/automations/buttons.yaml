@@ -59,7 +59,9 @@
   condition: []
   action:
   - service : light.turn_on
-    entity_id: light.master_bedroom
+    entity_id: 
+      - light.master_bedroom_yann
+      - light.master_bedroom_manon
   mode: single
   
 # trigger single press OFF
@@ -74,7 +76,9 @@
   condition: []
   action:
   - service : light.turn_off
-    entity_id: light.master_bedroom
+    entity_id: 
+      - light.master_bedroom_yann
+      - light.master_bedroom_manon
   mode: single
 
 # trigger long press START INCREASE
@@ -93,7 +97,7 @@
     data:
       variables:
         direction: up
-        light: light.master_bedroom
+        light: light.master_bedroom_manon
   mode: single
   
 # trigger long press START DECREASE
@@ -112,7 +116,7 @@
     data:
       variables:
         direction: down
-        light: light.master_bedroom
+        light: light.master_bedroom_manon
   mode: single
 
 # trigger long press STOP RAMP (up or down)

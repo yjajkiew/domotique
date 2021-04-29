@@ -4,9 +4,13 @@
     - 'time'
     - 'date'
     - 'date_time'
+    
+# seasons
 - platform: season
   type: astronomical
   name: Season
+  
+
 # System monitor
 - platform: systemmonitor
   resources:
@@ -23,13 +27,16 @@
     - type: throughput_network_out
       arg: eth0
     - type: last_boot
+
 # UpTime
 - platform: uptime
+
 # Filesize monitoring
 - platform: filesize
   file_paths:
   #  - /config/home-assistant_v2.db
     - /config/home-assistant.log
+
 # database monitoring
 - platform: sql
   db_url: !secret db_url
@@ -38,8 +45,10 @@
       query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
       column: 'value'
       unit_of_measurement: MB
+
 # hassio version
 - platform: version
+
 # netgear enhanced for main router
 - platform: netgear_enhanced
   host: !secret netgear_main_ip
@@ -54,7 +63,18 @@
 #  username: !secret netgear_user
 #  password: !secret netgear_password
 #  resources:
-    - check_app_fw
+#    - check_app_fw
+
+# enedis integration
+- platform: myEnedis
+  token: !secret enedis_token
+  code: !secret enedis_code
+  hc_cout: 0.1346
+  hp_cout: 0.1799
+  heures_creuses: "[['00:08', '07:08'], ['12:38', '13:38']]"
+  heuresCreusesON: true
+  scan_interval: 3600
+
 # templates
 - platform: template
   sensors:

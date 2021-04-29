@@ -20,12 +20,12 @@
   action:
   - data:
       brightness: 1
-    entity_id: light.master_bedroom
+    entity_id: light.master_bedroom_yann
     service: light.turn_on
   - delay: 00:00:10
   - data:
       brightness: 100
-      entity_id: light.master_bedroom
+      entity_id: light.master_bedroom_yann
       transition: 600
     service: light.turn_on
     
@@ -47,18 +47,46 @@
   action:
   - service: light.turn_off
     data:
-      entity_id: light.master_bedroom
+      entity_id: light.master_bedroom_yann
   - delay:
       seconds: 1
   - service: light.turn_on
     data:
-      entity_id: light.master_bedroom
+      entity_id: light.master_bedroom_yann
       brightness: 100
   - delay:
       seconds: 1
   - service: light.turn_off
     data:
       entity_id: light.master_bedroom
+      
+# Mac webcam ON > turn on office light
+- alias: Mac webcam ON > turn on office light
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.imac_camera_in_use
+    from: 'off'
+    to: 'on'
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: 
+       - light.bureau_guitares
+       - light.bureau_guirlande_yann
+       
+# Mac non active > turn off office light
+- alias: Mac non active > turn off office light
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.imac_active
+    from: 'on'
+    to: 'off'
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: 
+       - light.bureau_guitares
+       - light.bureau_guirlande_yann
 
 ##########      
 # SWITCH #
