@@ -24,6 +24,7 @@ comments: false
 | Description               |
 |:-------------------------------|
 | Hassio/HomeAssistant : thèmes et custom cards      |
+| Automatisation machine à laver (https://philhawthorne.com/making-dumb-dishwashers-and-washing-machines-smart-alerts-when-the-dishes-and-clothes-are-cleaned/) |
 
 
 
