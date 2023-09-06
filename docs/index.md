@@ -7,7 +7,7 @@ comments: true
 
 # Mon installation domotique avec Home Assistant
 
-![https://github.com/yjajkiew/domotique](https://img.shields.io/maintenance/yes/2021.svg?style=for-the-badge) ![GitHub last commit](https://img.shields.io/github/last-commit/yjajkiew/domotique?style=for-the-badge) ![GitHub stars](https://img.shields.io/github/stars/yjajkiew/domotique?style=for-the-badge) ![Twitter Follow](https://img.shields.io/twitter/follow/yann_dot_me?style=for-the-badge) 
+![https://github.com/yjajkiew/domotique](https://img.shields.io/maintenance/yes/2023.svg?style=for-the-badge) ![GitHub last commit](https://img.shields.io/github/last-commit/yjajkiew/domotique?style=for-the-badge) ![GitHub stars](https://img.shields.io/github/stars/yjajkiew/domotique?style=for-the-badge) ![Twitter Follow](https://img.shields.io/twitter/follow/yann_dot_me?style=for-the-badge) 
 
 <p align="center"><img src="/assets/domotique-yann-logo.png" /></p>
 
