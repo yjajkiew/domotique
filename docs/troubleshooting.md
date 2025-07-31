@@ -43,5 +43,22 @@ Home Assistant fonctionne correctement mais il n'enregistre pas les changements 
 
 La seule solution qui fonctionne chez moi est de désinstaller le plugin, de le réinstaller puis de redémarrer Home Assistant.
 
+## System is not ready with state setup
 
+Souvent cela m'arrive après un redémarrage forcé, type coupure de courant, de la VM qui héberge Home Assistant sur mon NAS.
+ - Si au démarrage de la VM celle-ci semble vraiment pas lancer home assistant après quelques minutes et vous invite à un prompt vide, lancez juste la commande : 
+```
+login
+```
+ - Lorsque le message "System is not ready with state setup" semble être en boucle juste demande à home assistant de se lancer peut suffire avec la commande :
+```
+banner
+```
+ - Dans le dernier cas lorsque le prompt **ha >** est présent on peut alors lancer ces commandes :
+```
+supervisor repair
+supervisor restart
+banner
+```
+   
 
