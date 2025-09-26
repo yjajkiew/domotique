@@ -32,3 +32,10 @@
     border-bottom: none !important;
   }
 }
+
+.nav-list .nav-list-item .nav-list-link {
+  color: white;
+}
+.nav-list .nav-list-item .nav-list-link.active {
+  color: #7253ed;
+}
