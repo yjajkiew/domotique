@@ -1,10 +1,18 @@
 #theme: jekyll-theme-leap-day
 remote_theme: pmarsceill/just-the-docs
 
-title: Domotique yann.me
+title: Mon installation domotique &#124; yann.me
 description: Description de mon installation domotique
 
 logo: "/assets/domotique-yann-logo.png"
+author: Yann Jajkiewicz
+social:
+  name: Yann Jajkiewicz
+  links:
+    - https://x.com/yann_dot_me
+    - https://www.instagram.com/yann.me
+    - https://www.linkedin.com/in/yanndotme/
+    - https://github.com/yjajkiew
 
 aux_links:
   "Retour au site yann.me":
