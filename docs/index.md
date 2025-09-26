@@ -3,6 +3,7 @@ layout: home
 title: Accueil
 menu: Accueil
 comments: true
+nav_order: 0
 ---
 
 # Mon installation domotique avec Home Assistant
